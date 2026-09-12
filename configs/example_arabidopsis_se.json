@@ -1,0 +1,14 @@
+{
+  "output": "../results",
+  "settings": {
+    "reference_index": "../references/arabidopsis/genome",
+    "rrna_index": "../references/arabidopsis/rrna",
+    "threads": {"conversion": 8, "cutadapt": 8, "rrna": 24, "alignment": 16, "sort": 4, "qc": 4, "compression": 8},
+    "trimming": {"approved": true, "adapter_r1": ["TGGAATTCTCGGGTGCCAAGG"], "adapter_r2": [], "poly_a": true, "random_clip": 0},
+    "fastqc": true,
+    "compress_raw": false
+  },
+  "samples": [
+    {"run": "example_arabidopsis_rep1", "sample": "arabidopsis_rep1", "reads": ["../data/raw/arabidopsis_rep1.fastq.gz"]}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "output": "../results",
+  "settings": {
+    "reference_index": "../references/wheat/genome",
+    "rrna_index": "../references/wheat/rrna",
+    "threads": {"conversion": 8, "cutadapt": 8, "rrna": 24, "alignment": 16, "sort": 4, "qc": 4, "compression": 8},
+    "trimming": {
+      "approved": true,
+      "adapter_r1": ["TGGAATTCTCGGGTGCCAAGG"],
+      "adapter_r2": ["GATCGTCGGACTGTAGAACTCTGAAC"],
+      "poly_a": false,
+      "random_clip": 4
+    },
+    "fastqc": true,
+    "compress_raw": false
+  },
+  "samples": [
+    {"run": "example_wheat_rep1", "sample": "wheat_rep1", "reads": ["../data/raw/wheat_rep1_1.fastq.gz", "../data/raw/wheat_rep1_2.fastq.gz"]}
+  ]
+}

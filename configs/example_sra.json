@@ -1,0 +1,13 @@
+{
+  "output": "../results",
+  "settings": {
+    "reference_index": "../references/maize/genome",
+    "threads": {"conversion": 8, "cutadapt": 8, "rrna": 24, "alignment": 16, "sort": 4, "qc": 4, "compression": 8},
+    "trimming": {"approved": true, "adapter_r1": ["TGGAATTCTCGGGTGCCAAGG"], "adapter_r2": ["GATCGTCGGACTGTAGAACTCTGAAC"], "poly_a": false, "random_clip": 4},
+    "fastqc": true,
+    "compress_raw": true
+  },
+  "samples": [
+    {"run": "example_maize_sra", "sample": "maize_rep1", "sra": "../data/raw/example.sra", "layout": "PAIRED"}
+  ]
+}

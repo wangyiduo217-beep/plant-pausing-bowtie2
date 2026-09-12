@@ -1,0 +1,14 @@
+name: plant-pausing-bowtie2
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pip
+  - setuptools>=68
+  - bowtie2=2.5.5
+  - samtools=1.24
+  - cutadapt=5.2
+  - sra-tools=3.4.1
+  - fastqc=0.12.1
+  - pigz=2.8
