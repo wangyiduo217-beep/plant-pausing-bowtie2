@@ -18,6 +18,7 @@ from plant_pausing_bowtie2.strand_model import (
     IndexedFasta,
     load_model_config,
     main,
+    parse_region,
     prepare_manifests,
 )
 
@@ -107,6 +108,11 @@ class StrandModelPreparationTests(unittest.TestCase):
         self.config_path.write_text(json.dumps(self.raw), encoding="utf-8")
         with self.assertRaises(ValueError):
             load_model_config(self.config_path)
+
+    def test_region_parser_accepts_commas_and_rejects_invalid_coordinates(self):
+        self.assertEqual(parse_region("3:9,141,194-9,207,074"), ("3", 9141194, 9207074))
+        with self.assertRaises(ValueError):
+            parse_region("3:20-10")
 
 
 if __name__ == "__main__":

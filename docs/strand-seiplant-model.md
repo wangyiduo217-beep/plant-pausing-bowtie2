@@ -163,6 +163,19 @@ It writes three raw BedGraph files:
 The minus-signed file is a visualization representation only. Statistical evaluation uses
 the original non-negative `minus` values.
 
+For a rapid browser-style figure before whole-genome inference, restrict prediction to a
+bounded region; commas in coordinates are optional:
+
+```bash
+python scripts/predict_genome.py configs/example_strand_model.json \
+  --species arabidopsis_thaliana --device cuda:0 --force \
+  --region 3:9141194-9207074
+```
+
+The region uses the same 1,024/128-bp inference and central-bin rule as a complete scan.
+It writes the standard track names, so a later chromosome or whole-genome run must use
+`--force` to replace this bounded result.
+
 ## Plot observed and predicted tracks
 
 ```bash

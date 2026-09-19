@@ -746,9 +746,33 @@ def _iter_inference_windows(chrom: str, length: int, window_bp: int,
         yield chrom, start, start + window_bp
 
 
+def _iter_region_windows(chrom: str, length: int, window_bp: int, step_bp: int,
+                         center_bp: int, region_start: int,
+                         region_end: int) -> Iterator[tuple[str, int, int]]:
+    flank = (window_bp - center_bp) // 2
+    first = max(0, ((region_start - flank - center_bp) // step_bp) * step_bp)
+    last = min(length - window_bp, math.ceil((region_end - flank) / step_bp) * step_bp)
+    for start in range(first, last + 1, step_bp):
+        output_start, output_end = start + flank, start + flank + center_bp
+        if output_end > region_start and output_start < region_end:
+            yield chrom, start, start + window_bp
+
+
+def parse_region(value: str) -> tuple[str, int, int]:
+    try:
+        chrom, coordinates = value.rsplit(":", 1)
+        start_text, end_text = coordinates.split("-", 1)
+        start, end = int(start_text.replace(",", "")), int(end_text.replace(",", ""))
+    except (ValueError, AttributeError) as exc:
+        raise ValueError("--region must have the form CHROM:START-END") from exc
+    if not chrom or start < 0 or end <= start:
+        raise ValueError("--region must have non-negative START and END > START")
+    return chrom, start, end
+
+
 def predict_species(config: dict, requested: Sequence[str] | None = None,
                     device_name: str | None = None, chromosomes: Sequence[str] | None = None,
-                    force: bool = False) -> dict:
+                    force: bool = False, region: tuple[str, int, int] | None = None) -> dict:
     np, torch, _, _ = _lazy_model_imports()
     settings, training = config["settings"], config["training"]
     results = {}
@@ -769,7 +793,9 @@ def predict_species(config: dict, requested: Sequence[str] | None = None,
         fasta = IndexedFasta(item["fasta"])
         allowed = [chrom for split in ("train", "validation", "test")
                    for chrom in item["chromosomes"][split]]
-        selected_chroms = list(chromosomes) if chromosomes else allowed
+        if region and chromosomes:
+            raise ValueError("Use either --region or --chromosome, not both")
+        selected_chroms = [region[0]] if region else (list(chromosomes) if chromosomes else allowed)
         unknown = set(selected_chroms) - set(allowed)
         if unknown:
             raise ModelWorkflowError(f"Chromosomes are outside configured nuclear set: {sorted(unknown)}")
@@ -798,7 +824,10 @@ def predict_species(config: dict, requested: Sequence[str] | None = None,
                 total_windows += len(batch_sequences); batch_sequences = []; batch_coordinates = []
             for chrom in selected_chroms:
                 length = fasta.index[chrom][0]
-                for coordinate in _iter_inference_windows(chrom, length, window_bp, step):
+                coordinates = (_iter_region_windows(chrom, length, window_bp, step, center,
+                                                     region[1], region[2]) if region else
+                               _iter_inference_windows(chrom, length, window_bp, step))
+                for coordinate in coordinates:
                     sequence = fasta.fetch(*coordinate)
                     if _ambiguous_fraction(sequence) > settings["max_ambiguous_fraction"]:
                         skipped_ambiguous += 1
@@ -814,6 +843,8 @@ def predict_species(config: dict, requested: Sequence[str] | None = None,
         summary = {"species": name, "checkpoint": str(checkpoint_path),
                    "checkpoint_sha256": _sha256(checkpoint_path), "window_bp": window_bp,
                    "step_bp": step, "center_bp": center, "chromosomes": selected_chroms,
+                   "region": ({"chrom": region[0], "start0": region[1], "end0": region[2]}
+                              if region else None),
                    "windows": total_windows, "skipped_ambiguous_windows": skipped_ambiguous,
                    "outputs": {key: {"path": str(path), "sha256": _sha256(path)}
                                for key, path in output_paths.items()},
@@ -906,6 +937,7 @@ def build_parser() -> argparse.ArgumentParser:
             child.add_argument("--device", help="PyTorch device, e.g. cuda:0 or cpu")
         if command == "predict":
             child.add_argument("--chromosome", action="append")
+            child.add_argument("--region", help="Optional bounded inference region, CHROM:START-END")
     plot = sub.add_parser("plot")
     plot.add_argument("config"); plot.add_argument("--species", required=True)
     plot.add_argument("--chrom", required=True); plot.add_argument("--start", type=int, required=True)
@@ -924,7 +956,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "train":
             _print_json(train_species(config, args.species, args.device, args.force))
         elif args.command == "predict":
-            _print_json(predict_species(config, args.species, args.device, args.chromosome, args.force))
+            region = parse_region(args.region) if args.region else None
+            _print_json(predict_species(config, args.species, args.device, args.chromosome,
+                                        args.force, region))
         elif args.command == "plot":
             if args.end <= args.start:
                 raise ValueError("--end must be greater than --start")
