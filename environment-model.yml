@@ -1,0 +1,14 @@
+name: plant-pausing-model
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - setuptools>=68
+  - pytorch>=2.2
+  - pytorch-cuda=12.1
+  - numpy>=1.26
+  - scipy>=1.11
+  - matplotlib>=3.8

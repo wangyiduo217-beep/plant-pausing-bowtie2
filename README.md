@@ -1,6 +1,6 @@
 # plant-pausing-bowtie2
 
-植物 GRO-seq 的可复用分析代码：**SRA/FASTQ → 去接头与协议剪切 → 可选 rRNA 过滤 → 基因组比对 → 排序、CSI 索引与基本质控 → 链特异性区间 → 滑窗 y 标签**。
+植物 GRO-seq 的可复用分析代码：**SRA/FASTQ → 去接头与协议剪切 → 可选 rRNA 过滤 → 基因组比对 → 排序、CSI 索引与基本质控 → 链特异性区间 → 滑窗 y 标签 → DNA 序列预测双链信号**。
 
 基于植物 pausing 项目实际运行的分析流程整理。本版提供单样本与顺序批处理入口，支持拟南芥、小麦、玉米等物种的自备参考索引。选择接头和剪切参数的依据是具体建库方法，不能仅凭物种套用配置。生产流程使用 HISAT2 的 GSE181488 应沿用其剪接比对方法。
 
@@ -114,6 +114,27 @@ results/<run>/
 本流程不做坐标去重。rRNA 的双端预过滤仅移除 concordant rRNA pairs，并非穷尽的污染去除。比对和基本质控完成后，仍需检查链方向、复杂度、生物学重复一致性与 pausing 标签，才能评估是否适合作为模型输入。详细参数及项目特异规则见 [分析方法](docs/methods.md)。
 
 当前标签构建方法及建模前尚需补充的负样本步骤见 [GRO-seq y 标签构建流程](docs/groseq-y-label-generation.md)。
+
+## 用 DNA 序列预测正负链 GRO-seq 信号
+
+[`configs/example_strand_model.json`](configs/example_strand_model.json) 定义拟南芥、小麦和玉米的物种内模型。每个物种单独训练；一个模型以 1,024 bp DNA 序列为输入，同时输出互不合并的 `y_plus` 和 `y_minus`。网络沿用 SeiPlant 的分层卷积、空洞卷积和 B 样条表示，并针对两个连续输出调整了预测头。
+
+模型使用独立 GPU 环境：
+
+```bash
+conda env create -f environment-model.yml
+conda activate plant-pausing-model
+python -m pip install --no-deps -e .
+
+plant-pausing-model plan configs/example_strand_model.json
+python scripts/prepare_model_data.py configs/example_strand_model.json
+python scripts/train_strand_model.py configs/example_strand_model.json \
+  --species arabidopsis_thaliana --device cuda:0
+python scripts/predict_genome.py configs/example_strand_model.json \
+  --species arabidopsis_thaliana --device cuda:0
+```
+
+正式方法、染色体划分、背景窗口规则、输出文件和绘图命令见 [双链 SeiPlant 建模流程](docs/strand-seiplant-model.md)。可直接用于论文修改的英文 Methods 草稿见 [SCI Methods](docs/sci-methods-strand-model.md)。
 
 ## 从 BAM 计算 y 标签
 

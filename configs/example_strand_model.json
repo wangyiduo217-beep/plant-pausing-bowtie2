@@ -1,0 +1,57 @@
+{
+  "output": "../results/strand_seiplant_v1",
+  "settings": {
+    "seed": 42,
+    "window_bp": 1024,
+    "label_step_bp": 512,
+    "negative_ratio": 1.0,
+    "max_ambiguous_fraction": 0.0,
+    "inference_step_bp": 128,
+    "inference_center_bp": 128
+  },
+  "training": {
+    "batch_size": 256,
+    "epochs": 30,
+    "patience": 5,
+    "learning_rate": 0.00001,
+    "weight_decay": 0.0,
+    "num_workers": 4,
+    "head_hidden": 256,
+    "amp": true
+  },
+  "species": {
+    "Arabidopsis thaliana": {
+      "slug": "arabidopsis_thaliana",
+      "fasta": "../references/arabidopsis_thaliana/genome.fa",
+      "positive_y": "../results/groseq_peak_y_v2_rrna_refiltered/labels/arabidopsis_thaliana.positive_windows.y.tsv.gz",
+      "mask": "../results/groseq_peak_y_v1/metadata/arabidopsis_thaliana.excluded_regions.bed",
+      "chromosomes": {
+        "train": ["1", "2", "5"],
+        "validation": ["4"],
+        "test": ["3"]
+      }
+    },
+    "Triticum aestivum": {
+      "slug": "triticum_aestivum",
+      "fasta": "../references/triticum_aestivum/genome.fa",
+      "positive_y": "../results/groseq_peak_y_v2_rrna_refiltered/labels/triticum_aestivum.positive_windows.y.tsv.gz",
+      "mask": "../results/groseq_peak_y_v1/metadata/triticum_aestivum.excluded_regions.bed",
+      "chromosomes": {
+        "train": ["1A", "1B", "1D", "2A", "2B", "2D", "5A", "5B", "5D", "6A", "6B", "6D", "7A", "7B", "7D"],
+        "validation": ["4A", "4B", "4D"],
+        "test": ["3A", "3B", "3D"]
+      }
+    },
+    "Zea mays": {
+      "slug": "zea_mays",
+      "fasta": "../references/zea_mays/genome.fa",
+      "positive_y": "../results/groseq_peak_y_v2_rrna_refiltered/labels/zea_mays.positive_windows.y.tsv.gz",
+      "mask": "../results/groseq_peak_y_v1/metadata/zea_mays.excluded_regions.bed",
+      "chromosomes": {
+        "train": ["1", "2", "3", "4", "5", "7", "9", "10"],
+        "validation": ["8"],
+        "test": ["6"]
+      }
+    }
+  }
+}

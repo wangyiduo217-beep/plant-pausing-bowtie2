@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plant-pausing-bowtie2"
-version = "0.2.0"
-description = "Reproducible alignment and strand-resolved y-label generation for plant GRO-seq"
+version = "0.3.0"
+description = "Reproducible alignment, y-label generation, and strand-resolved DNA-to-GRO-seq modeling"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
@@ -13,6 +13,7 @@ dependencies = []
 [project.scripts]
 plant-bowtie2 = "plant_pausing_bowtie2.cli:main"
 plant-groseq-y = "plant_pausing_bowtie2.y_labels:main"
+plant-pausing-model = "plant_pausing_bowtie2.strand_model:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
