@@ -4,6 +4,8 @@
 
 基于植物 pausing 项目实际运行的分析流程整理。本版提供单样本与顺序批处理入口，支持拟南芥、小麦、玉米等物种的自备参考索引。选择接头和剪切参数的依据是具体建库方法，不能仅凭物种套用配置。生产流程使用 HISAT2 的 GSE181488 应沿用其剪接比对方法。
 
+从高可信 BAM 构建正负链 GRO-seq 训练标签的完整步骤、公式、样本清单、输出字段和当前三物种结果见 [GRO-seq y 标签构建流程](docs/groseq-y-label-generation.md)。该标签流程以 1,024 bp 窗口和 512 bp 步长生成 `y_plus/y_minus`，目前的结果表仅包含正窗口。
+
 ## 快速开始
 
 实际分析在 Linux 运行；其他系统可使用 `plan` 检查命令。Python 代码仅使用标准库，生物信息工具通过环境安装。
@@ -101,6 +103,8 @@ results/<run>/
 基因组比对使用 Bowtie2 `--very-sensitive --end-to-end`；双端增加 `--no-mixed --no-discordant -X 1000 --dovetail`。CSI 支持小麦的长染色体。高可信 BAM 使用 `MAPQ >= 20` 和排除标志 `2820`，保留重复标记与细胞器比对记录。
 
 本流程不做坐标去重。rRNA 的双端预过滤仅移除 concordant rRNA pairs，并非穷尽的污染去除。比对和基本质控完成后，仍需检查链方向、复杂度、生物学重复一致性与 pausing 标签，才能评估是否适合作为模型输入。详细参数及项目特异规则见 [分析方法](docs/methods.md)。
+
+当前标签构建方法及建模前尚需补充的负样本步骤见 [GRO-seq y 标签构建流程](docs/groseq-y-label-generation.md)。
 
 ## 测试
 
