@@ -94,6 +94,8 @@ class StrandModelPreparationTests(unittest.TestCase):
             self.assertEqual(summary["splits"][split]["background"], 1)
             self.assertEqual(summary["splits"][split]["total"], 2)
             manifest = Path(summary["splits"][split]["manifest"])
+            cache = Path(summary["splits"][split]["sequence_cache"])
+            self.assertEqual(cache.stat().st_size, 2 * 1024)
             with gzip.open(manifest, "rt", encoding="utf-8") as stream:
                 rows = list(csv.DictReader(stream, delimiter="\t"))
             expected_chrom = {"train": "1", "validation": "4", "test": "3"}[split]

@@ -22,6 +22,13 @@ mask, and met the configured ambiguous-base threshold. A background-to-positive 
 1:1 was used independently within the training, validation, and test chromosome sets.
 Sampling and record shuffling used a fixed pseudorandom seed of 42.
 
+To prevent reference-genome input/output from limiting GPU utilization, retained windows
+were ordered by genomic coordinate and encoded once into unsigned-byte sequence arrays
+(`A=0`, `T=1`, `C=2`, `G=3`; one byte per base). These arrays were memory mapped during
+training, and minibatch indices were shuffled with a PyTorch generator initialized with
+seed 42. The sequence cache and its manifest were linked by row order and independently
+checksummed.
+
 ## Sequence encoding and data partitioning
 
 For every target window, the corresponding 1,024-bp sequence was extracted from the

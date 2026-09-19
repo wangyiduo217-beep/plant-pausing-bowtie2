@@ -91,7 +91,8 @@ train, validation, and test chromosome sets:
 2. remove windows overlapping the species mask or exceeding the ambiguous-base limit;
 3. sample background windows from the same 1,024/512-bp genomic grid without replacing
    positive coordinates;
-4. shuffle deterministically with seed 42;
+4. order retained windows by chromosome and coordinate and encode each base once into a
+   memory-mapped `uint8` sequence cache;
 5. write `train.tsv.gz`, `validation.tsv.gz`, and `test.tsv.gz` plus input hashes and counts.
 
 The background sample never crosses chromosome splits. Source is recorded as `positive`
@@ -127,6 +128,9 @@ results/strand_seiplant_v1/<species>/
     train.tsv.gz
     validation.tsv.gz
     test.tsv.gz
+    train.sequences.uint8
+    validation.sequences.uint8
+    test.sequences.uint8
     summary.json
   model/
     best.pt
@@ -135,6 +139,11 @@ results/strand_seiplant_v1/<species>/
     test_predictions.npz
     metrics.json
 ```
+
+Each cache stores one byte per base (`A=0`, `T=1`, `C=2`, `G=3`, other=4) in exactly
+the same row order as its manifest. It is memory mapped by data-loader workers, avoiding
+hundreds of thousands of random FASTA seeks in every epoch. Training batches are still
+shuffled deterministically by the PyTorch generator seeded with 42.
 
 ## Genome-wide prediction
 

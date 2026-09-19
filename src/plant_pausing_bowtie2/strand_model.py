@@ -333,6 +333,33 @@ def _write_manifest(path: Path, rows: list[dict]) -> None:
         writer.writerows(rows)
 
 
+def _sequence_codes(sequence: str) -> bytes:
+    table = getattr(_sequence_codes, "_table", None)
+    if table is None:
+        values = bytearray([4] * 256)
+        for base, code in ((b"A", 0), (b"T", 1), (b"C", 2), (b"G", 3)):
+            values[base[0]] = code
+        table = bytes(values)
+        _sequence_codes._table = table
+    return sequence.upper().encode("ascii").translate(table)
+
+
+def _write_sequence_cache(path: Path, rows: list[dict], fasta: IndexedFasta,
+                          window_bp: int) -> None:
+    """Write one byte/base in manifest order for fast memory-mapped training."""
+    temporary = path.with_name(path.name + ".building")
+    with temporary.open("wb", buffering=4 * 1024 * 1024) as stream:
+        for row in rows:
+            sequence = fasta.fetch(row["chrom"], row["start0"], row["end0"])
+            if len(sequence) != window_bp:
+                raise ModelWorkflowError(f"Short FASTA sequence for {row}")
+            stream.write(_sequence_codes(sequence))
+    expected = len(rows) * window_bp
+    if temporary.stat().st_size != expected:
+        raise ModelWorkflowError(f"Sequence-cache size mismatch: {temporary}")
+    temporary.replace(path)
+
+
 def select_species(config: dict, requested: Sequence[str] | None) -> list[tuple[str, dict]]:
     if not requested:
         return list(config["species"].items())
@@ -400,13 +427,19 @@ def prepare_manifests(config: dict, requested: Sequence[str] | None = None,
                     species_name=name,
                 )
                 rows = kept[split] + background
-                random.Random(seed + 100 + split_index).shuffle(rows)
+                chromosome_order = {chrom: index for index, chrom in enumerate(item["chromosomes"][split])}
+                rows.sort(key=lambda row: (chromosome_order[row["chrom"]], row["start0"], row["source"]))
                 manifest = destination / f"{split}.tsv.gz"
                 _write_manifest(manifest, rows)
+                sequence_cache = destination / f"{split}.sequences.uint8"
+                _write_sequence_cache(sequence_cache, rows, fasta, settings["window_bp"])
                 split_summary[split] = {
                     "positive": len(kept[split]), "background": len(background),
                     "total": len(rows), "background_rejections": rejected,
                     "manifest": str(manifest), "sha256": _sha256(manifest),
+                    "sequence_cache": str(sequence_cache),
+                    "sequence_cache_sha256": _sha256(sequence_cache),
+                    "sequence_cache_encoding": "one unsigned byte/base: A=0,T=1,C=2,G=3,other=4",
                 }
             summary = {
                 "schema_version": 1, "created_unix": int(time.time()),
@@ -526,6 +559,16 @@ def one_hot(sequence: str):
     return array
 
 
+def one_hot_codes(codes):
+    np, _, _, _ = _lazy_model_imports()
+    codes = np.asarray(codes, dtype=np.uint8)
+    valid = codes < 4
+    positions = np.nonzero(valid)[0]
+    array = np.zeros((4, len(codes)), dtype=np.float32)
+    array[codes[valid], positions] = 1.0
+    return array
+
+
 def _read_manifest(path: Path) -> list[dict]:
     with _open_text(path) as stream:
         rows = []
@@ -540,17 +583,34 @@ def _dataset_class():
     _, torch, _, _ = _lazy_model_imports()
 
     class GenomeDataset(torch.utils.data.Dataset):
-        def __init__(self, manifest: Path, fasta: Path):
+        def __init__(self, manifest: Path, sequence_cache: Path):
             self.rows = _read_manifest(manifest)
-            self.fasta = IndexedFasta(fasta)
+            self.sequence_cache = sequence_cache
+            if not self.rows:
+                raise ModelWorkflowError(f"Empty training manifest: {manifest}")
+            self.window_bp = self.rows[0]["end0"] - self.rows[0]["start0"]
+            expected = len(self.rows) * self.window_bp
+            if not sequence_cache.is_file() or sequence_cache.stat().st_size != expected:
+                raise ModelWorkflowError(f"Missing or invalid sequence cache: {sequence_cache}")
+            self._cache = None
+
+        def __getstate__(self):
+            state = self.__dict__.copy(); state["_cache"] = None
+            return state
+
+        def _sequences(self):
+            if self._cache is None:
+                import numpy as np
+                self._cache = np.memmap(self.sequence_cache, dtype=np.uint8, mode="r",
+                                        shape=(len(self.rows), self.window_bp))
+            return self._cache
 
         def __len__(self):
             return len(self.rows)
 
         def __getitem__(self, index):
             row = self.rows[index]
-            sequence = self.fasta.fetch(row["chrom"], row["start0"], row["end0"])
-            x = torch.from_numpy(one_hot(sequence))
+            x = torch.from_numpy(one_hot_codes(self._sequences()[index]))
             y = torch.tensor([row["y_plus"], row["y_minus"]], dtype=torch.float32)
             return x, y
 
@@ -610,7 +670,8 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
                 raise ModelWorkflowError(f"Missing manifest; run prepare first: {split}")
         device = torch.device(device_name or ("cuda" if torch.cuda.is_available() else "cpu"))
         GenomeDataset = _dataset_class()
-        datasets = {split: GenomeDataset(manifests / f"{split}.tsv.gz", Path(item["fasta"]))
+        datasets = {split: GenomeDataset(manifests / f"{split}.tsv.gz",
+                                         manifests / f"{split}.sequences.uint8")
                     for split in ("train", "validation", "test")}
         generator = torch.Generator().manual_seed(settings["seed"])
         loaders = {
