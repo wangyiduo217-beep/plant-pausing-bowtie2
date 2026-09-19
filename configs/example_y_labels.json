@@ -1,0 +1,275 @@
+{
+  "output": "../results/groseq_y_reproduced",
+  "settings": {
+    "window_bp": 1024,
+    "step_bp": 512,
+    "minimum_support": 2,
+    "threads": 8,
+    "jobs": 3,
+    "keep_intermediates": false
+  },
+  "species": {
+    "Arabidopsis thaliana": {
+      "slug": "arabidopsis_thaliana",
+      "fai": "../references/arabidopsis_thaliana/genome.fa.fai",
+      "mask": "../results/groseq_peak_y_v1/metadata/arabidopsis_thaliana.excluded_regions.bed",
+      "dataset_status": "article_analog_primary"
+    },
+    "Triticum aestivum": {
+      "slug": "triticum_aestivum",
+      "fai": "../references/triticum_aestivum/genome.fa.fai",
+      "mask": "../results/groseq_peak_y_v1/metadata/triticum_aestivum.excluded_regions.bed",
+      "dataset_status": "article_analog_primary"
+    },
+    "Zea mays": {
+      "slug": "zea_mays",
+      "fai": "../references/zea_mays/genome.fa.fai",
+      "mask": "../results/groseq_peak_y_v1/metadata/zea_mays.excluded_regions.bed",
+      "dataset_status": "article_analog_primary_rrna_refiltered"
+    }
+  },
+  "libraries": [
+    {
+      "srx": "SRX3638175",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE109974",
+      "group": "GSE109974_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR6661079"],
+      "bams": ["../data/processed/SRR6661079/SRR6661079.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX3638176",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE109974",
+      "group": "GSE109974_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR6661080"],
+      "bams": ["../data/processed/SRR6661080/SRR6661080.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX4388308",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE117014",
+      "group": "GSE117014_standard",
+      "layout": "SINGLE",
+      "runs": ["SRR7518304"],
+      "bams": ["../data/processed/SRR7518304/SRR7518304.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX4388309",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE117014",
+      "group": "GSE117014_standard",
+      "layout": "SINGLE",
+      "runs": ["SRR7518305"],
+      "bams": ["../data/processed/SRR7518305/SRR7518305.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX5557585",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE128698",
+      "group": "GSE128698_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR8767369"],
+      "bams": ["../data/processed/SRR8767369/SRR8767369.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX5557586",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE128698",
+      "group": "GSE128698_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR8767370"],
+      "bams": ["../data/processed/SRR8767370/SRR8767370.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX11651146",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE181488",
+      "group": "GSE181488_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR15347140"],
+      "bams": ["../data/processed/SRR15347140/SRR15347140.primary_mapq20.bam"],
+      "reverse_strand": true
+    },
+    {
+      "srx": "SRX11651147",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE181488",
+      "group": "GSE181488_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR15347141"],
+      "bams": ["../data/processed/SRR15347141/SRR15347141.primary_mapq20.bam"],
+      "reverse_strand": true
+    },
+    {
+      "srx": "SRX11651148",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE181488",
+      "group": "GSE181488_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR15347142"],
+      "bams": ["../data/processed/SRR15347142/SRR15347142.primary_mapq20.bam"],
+      "reverse_strand": true
+    },
+    {
+      "srx": "SRX11664624",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE181598",
+      "group": "GSE181598_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR15362139"],
+      "bams": ["../data/processed/SRR15362139/SRR15362139.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX11664631",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE181598",
+      "group": "GSE181598_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR15362138"],
+      "bams": ["../data/processed/SRR15362138/SRR15362138.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX1830041",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE83108",
+      "group": "GSE83108_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR3647034"],
+      "bams": ["../data/processed/SRR3647034/SRR3647034.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX1830042",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE83108",
+      "group": "GSE83108_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR3647035"],
+      "bams": ["../data/processed/SRR3647035/SRR3647035.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX2613510",
+      "species": "Arabidopsis thaliana",
+      "project": "GSE95301",
+      "group": "GSE95301_WT",
+      "layout": "SINGLE",
+      "runs": ["SRR5313797"],
+      "bams": ["../data/processed/SRR5313797/SRR5313797.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX11155086",
+      "species": "Triticum aestivum",
+      "project": "GSE178276",
+      "group": "GSE178276_v1",
+      "layout": "PAIRED",
+      "runs": ["SRR14825452", "SRR14825453", "SRR14825454", "SRR14825455", "SRR14825456", "SRR14825457"],
+      "bams": [
+        "../data/processed/SRR14825452/SRR14825452.primary_mapq20.bam",
+        "../data/processed/SRR14825453/SRR14825453.primary_mapq20.bam",
+        "../data/processed/SRR14825454/SRR14825454.primary_mapq20.bam",
+        "../data/processed/SRR14825455/SRR14825455.primary_mapq20.bam",
+        "../data/processed/SRR14825456/SRR14825456.primary_mapq20.bam",
+        "../data/processed/SRR14825457/SRR14825457.primary_mapq20.bam"
+      ],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX11155087",
+      "species": "Triticum aestivum",
+      "project": "GSE178276",
+      "group": "GSE178276_v1",
+      "layout": "PAIRED",
+      "runs": ["SRR14825458", "SRR14825459", "SRR14825460", "SRR14825461", "SRR14825462"],
+      "bams": [
+        "../data/processed/SRR14825458/SRR14825458.primary_mapq20.bam",
+        "../data/processed/SRR14825459/SRR14825459.primary_mapq20.bam",
+        "../data/processed/SRR14825460/SRR14825460.primary_mapq20.bam",
+        "../data/processed/SRR14825461/SRR14825461.primary_mapq20.bam",
+        "../data/processed/SRR14825462/SRR14825462.primary_mapq20.bam"
+      ],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13823254",
+      "species": "Triticum aestivum",
+      "project": "GSE178276",
+      "group": "GSE178276_v2",
+      "layout": "PAIRED",
+      "runs": ["SRR17655078", "SRR17655079"],
+      "bams": [
+        "../data/processed/SRR17655078/SRR17655078.primary_mapq20.bam",
+        "../data/processed/SRR17655079/SRR17655079.primary_mapq20.bam"
+      ],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13823255",
+      "species": "Triticum aestivum",
+      "project": "GSE178276",
+      "group": "GSE178276_v2",
+      "layout": "PAIRED",
+      "runs": ["SRR17655080", "SRR17655081"],
+      "bams": [
+        "../data/processed/SRR17655080/SRR17655080.primary_mapq20.bam",
+        "../data/processed/SRR17655081/SRR17655081.primary_mapq20.bam"
+      ],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13823256",
+      "species": "Triticum aestivum",
+      "project": "GSE178276",
+      "group": "GSE178276_v2",
+      "layout": "PAIRED",
+      "runs": ["SRR17655082", "SRR17655083"],
+      "bams": [
+        "../data/processed/SRR17655082/SRR17655082.primary_mapq20.bam",
+        "../data/processed/SRR17655083/SRR17655083.primary_mapq20.bam"
+      ],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13402909",
+      "species": "Zea mays",
+      "project": "PRJNA788565",
+      "group": "PRJNA788565_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR17223339"],
+      "bams": ["../results/maize_rrna_refilter_v1/SRR17223339/SRR17223339.nonrrna.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13402910",
+      "species": "Zea mays",
+      "project": "PRJNA788565",
+      "group": "PRJNA788565_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR17223338"],
+      "bams": ["../results/maize_rrna_refilter_v1/SRR17223338/SRR17223338.nonrrna.primary_mapq20.bam"],
+      "reverse_strand": false
+    },
+    {
+      "srx": "SRX13402911",
+      "species": "Zea mays",
+      "project": "PRJNA788565",
+      "group": "PRJNA788565_WT",
+      "layout": "PAIRED",
+      "runs": ["SRR17223337"],
+      "bams": ["../results/maize_rrna_refilter_v1/SRR17223337/SRR17223337.nonrrna.primary_mapq20.bam"],
+      "reverse_strand": false
+    }
+  ]
+}

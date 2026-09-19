@@ -1,6 +1,6 @@
 # plant-pausing-bowtie2
 
-植物 GRO-seq 的可复用 Bowtie2 处理代码：**SRA/FASTQ → 去接头与协议剪切 → 可选 rRNA 过滤 → 基因组比对 → 排序、CSI 索引与基本质控**。
+植物 GRO-seq 的可复用分析代码：**SRA/FASTQ → 去接头与协议剪切 → 可选 rRNA 过滤 → 基因组比对 → 排序、CSI 索引与基本质控 → 链特异性区间 → 滑窗 y 标签**。
 
 基于植物 pausing 项目实际运行的分析流程整理。本版提供单样本与顺序批处理入口，支持拟南芥、小麦、玉米等物种的自备参考索引。选择接头和剪切参数的依据是具体建库方法，不能仅凭物种套用配置。生产流程使用 HISAT2 的 GSE181488 应沿用其剪接比对方法。
 
@@ -59,6 +59,15 @@ plant-bowtie2 run configs/local.json --sample sample_rep1 --sample sample_rep2
 
 也可使用 `python -m plant_pausing_bowtie2 ...`。批处理按配置中的样本顺序执行，某个样本失败即停止并报告错误。
 
+仓库同时提供明确的脚本入口：
+
+```bash
+python scripts/run_alignment.py plan configs/local.json
+python scripts/run_alignment.py run configs/local.json
+```
+
+它们与 `plant-bowtie2` 命令使用同一套比对实现。
+
 ## 关键配置
 
 `settings.trimming` 定义共有协议；单个样本也可提供 `trimming` 对象覆盖对应字段。
@@ -106,6 +115,44 @@ results/<run>/
 
 当前标签构建方法及建模前尚需补充的负样本步骤见 [GRO-seq y 标签构建流程](docs/groseq-y-label-generation.md)。
 
+## 从 BAM 计算 y 标签
+
+[example_y_labels.json](configs/example_y_labels.json) 保存了本项目正式标签使用的22个SRX、34个SRR、单端/双端布局、GSE181488反向链规则和玉米去rRNA BAM入口。复制配置并核对本机参考、掩膜与BAM路径后，先查看完整计划：
+
+```bash
+plant-groseq-y plan configs/example_y_labels.json
+```
+
+分两步运行时：
+
+```bash
+python scripts/call_groseq_intervals.py configs/example_y_labels.json
+python scripts/build_groseq_y.py configs/example_y_labels.json
+```
+
+也可以一次完成：
+
+```bash
+python scripts/run_groseq_y.py configs/example_y_labels.json
+# 等价命令：plant-groseq-y run configs/example_y_labels.json
+```
+
+第一步按SRX汇总BAM。双端数据只使用R1，随后用HOMER `findPeaks -style groseq`生成链特异性区间。第二步按物种和链构建至少两个独立SRX支持的共识区间，再生成1,024 bp窗口、512 bp步长的`y_plus/y_minus`。输出包括：
+
+```text
+results/groseq_y_reproduced/
+  libraries/<SRX>/<SRX>.transcripts.bed
+  metadata/<SRX>.json
+  labels/<species>.consensus_intervals.bed
+  labels/<species>.positive_windows.y.tsv.gz
+  intervals_summary.json
+  groseq_y_summary.json
+  SHA256SUMS
+  logs/
+```
+
+脚本记录输入文件身份、实际参数、链方向、日志和校验值；相同输入可以安全复用，已有输出与当前配置不一致时会停止并要求使用新目录。当前只生成正窗口，负样本仍须在训练集划分前单独构建。
+
 ## 测试
 
 ```bash
@@ -115,7 +162,7 @@ python tests/smoke_real_tools.py
 
 第一条运行配置与命令构建等测试；第二条需要已安装的真实生物信息工具，使用隔离的小型合成参考和 reads。小样本测试用于验证代码行为，不能替代真实研究样本的全量质控。
 
-本版已通过 Linux 17 项测试和真实双端、单端小数据流程检查；具体结果及未覆盖范围见 [软件验证记录](docs/testing.md)。
+当前共22项自动测试；Windows运行时20项通过、2项Linux执行保护测试按设计跳过。比对部分通过真实双端/单端小数据流程检查，y构建部分已在22个真实SRX区间文件上回归并与正式三物种release逐字节一致。具体结果及未覆盖范围见 [软件验证记录](docs/testing.md)。
 
 ## 工具参考
 

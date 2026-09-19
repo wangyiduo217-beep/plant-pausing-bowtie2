@@ -5,6 +5,15 @@
 
 本方法借用了 *Cross-species prediction of histone modifications in plants via deep learning* 的固定窗口建模思路，但输入信号、区间调用器和标签定义均针对 GRO-seq 重新制定。因此应称为 article-analog 标签，不能表述为对该论文标签流程的逐项复现。
 
+仓库中的可执行实现为：
+
+- [`scripts/call_groseq_intervals.py`](../scripts/call_groseq_intervals.py)：从高可信BAM调用每个SRX的链特异性区间；
+- [`scripts/build_groseq_y.py`](../scripts/build_groseq_y.py)：构建跨SRX共识并计算滑窗y；
+- [`scripts/run_groseq_y.py`](../scripts/run_groseq_y.py)：依次运行以上两步；
+- [`configs/example_y_labels.json`](../configs/example_y_labels.json)：本项目22个SRX/34个SRR的配置示例。
+
+核心算法位于 [`src/plant_pausing_bowtie2/y_labels.py`](../src/plant_pausing_bowtie2/y_labels.py)。脚本执行前应先用 `plant-groseq-y plan` 检查展开后的路径、链方向和命令。
+
 ## 流程概览
 
 ```text
@@ -134,10 +143,11 @@ support >= 2 independent SRX
 对每个物种、每条链单独统计所有保留区间中观察到的最小和最大支持数。区间 \(i\) 的置信权重为：
 
 \[
-C_i = 0.1 + 0.9\frac{n_i-n_{\min}}{n_{\max}-n_{\min}}
+C_i = 0.1 + 0.9
+\frac{n_i/N-n_{\min}/N}{n_{\max}/N-n_{\min}/N}
 \]
 
-其中 \(n_i\) 是支持该区间的独立 SRX 数。当该链所有保留区间的支持数完全相同时，设 `confidence = 1.0`。实现中先写成 `support/N` 再在观察范围内缩放；由于同一物种的 \(N\) 是常数，化简后与上式相同。
+其中 \(n_i\) 是支持该区间的独立 SRX 数，\(N\) 是该物种纳入的独立SRX总数。当该链所有保留区间的支持数完全相同时，设 `confidence = 1.0`。程序保持原生产实现的运算顺序：先计算 `support/N`，再在观察范围内缩放。虽然 \(N\) 在代数上可以约去，但不能在代码中直接化简；二进制浮点误差会使少数恰好位于一位小数舍入边界的窗口发生变化。
 
 该权重衡量的是同一物种内部的重复支持强弱。因为各物种的独立文库数不同，0.8 等数值不应直接解释为跨物种校准后的概率。
 
