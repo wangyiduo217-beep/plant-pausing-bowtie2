@@ -116,6 +116,20 @@ validation chromosomes. The held-out test chromosomes are evaluated once after m
 selection. Reported metrics are MSE, MAE, Pearson correlation, and Spearman correlation,
 separately for plus and minus strands.
 
+When several GPUs are free, expose a group to one species and split each minibatch with
+PyTorch `DataParallel`:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python scripts/train_strand_model.py \
+  configs/example_strand_model.json --species arabidopsis_thaliana \
+  --device cuda:0 --data-parallel
+```
+
+An interrupted or intentionally rescaled run can continue from its best checkpoint with
+`--resume`. Version 1 checkpoints contain model weights but not Adam moments, so the
+optimizer is reinitialized at the configured learning rate and this fact is written to
+`metrics.json`. The checkpoint epoch and SHA-256 are also recorded.
+
 On the production RTX 3080 Ti, a real forward/backward smoke test at batch size 256 used
 approximately 3.2 GiB peak allocated GPU memory. This leaves headroom for CUDA workspace
 and makes three concurrent species-specific jobs practical on separate GPUs.

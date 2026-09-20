@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from plant_pausing_bowtie2.strand_model import (
     IndexedFasta,
+    build_parser,
     load_model_config,
     main,
     parse_region,
@@ -113,6 +114,14 @@ class StrandModelPreparationTests(unittest.TestCase):
         self.assertEqual(parse_region("3:9,141,194-9,207,074"), ("3", 9141194, 9207074))
         with self.assertRaises(ValueError):
             parse_region("3:20-10")
+
+    def test_multigpu_resume_flags_are_explicit(self):
+        args = build_parser().parse_args([
+            "train", str(self.config_path), "--species", "test_plant",
+            "--device", "cuda:0", "--data-parallel", "--resume",
+        ])
+        self.assertTrue(args.data_parallel)
+        self.assertTrue(args.resume)
 
 
 if __name__ == "__main__":

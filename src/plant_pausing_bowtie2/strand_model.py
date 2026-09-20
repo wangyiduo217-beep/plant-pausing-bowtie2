@@ -653,7 +653,8 @@ def _evaluate(model, loader, device):
 
 
 def train_species(config: dict, requested: Sequence[str] | None = None,
-                  device_name: str | None = None, force: bool = False) -> dict:
+                  device_name: str | None = None, force: bool = False,
+                  data_parallel: bool = False, resume: bool = False) -> dict:
     np, torch, nn, _ = _lazy_model_imports()
     settings, training = config["settings"], config["training"]
     results = {}
@@ -662,8 +663,10 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
         root = Path(config["output"]) / item["slug"]
         model_dir = root / "model"
         best_path = model_dir / "best.pt"
-        if best_path.exists() and not force:
-            raise ModelWorkflowError(f"Refusing to overwrite {best_path}; pass --force")
+        if best_path.exists() and not (force or resume):
+            raise ModelWorkflowError(f"Refusing to overwrite {best_path}; pass --force or --resume")
+        if resume and not best_path.exists():
+            raise ModelWorkflowError(f"Cannot resume because the checkpoint is missing: {best_path}")
         manifests = root / "manifests"
         for split in ("train", "validation", "test"):
             if not (manifests / f"{split}.tsv.gz").is_file():
@@ -686,15 +689,35 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
                 datasets["test"], batch_size=training["batch_size"], shuffle=False,
                 num_workers=training["num_workers"], pin_memory=device.type == "cuda"),
         }
-        model = build_model(training["head_hidden"]).to(device)
+        base_model = build_model(training["head_hidden"]).to(device)
+        start_epoch, resume_record, best_loss = 1, None, math.inf
+        if resume:
+            checkpoint = torch.load(best_path, map_location=device, weights_only=False)
+            # The spline buffer is initialized lazily in the architecture; give
+            # it its known 64x16 shape before loading an existing checkpoint.
+            base_model.spline.basis = torch.from_numpy(spline_basis(64, 16)).to(device)
+            base_model.load_state_dict(checkpoint["state_dict"])
+            start_epoch = int(checkpoint["epoch"]) + 1
+            best_loss = float(checkpoint["validation_mse"])
+            resume_record = {
+                "checkpoint": str(best_path), "checkpoint_sha256": _sha256(best_path),
+                "checkpoint_epoch": int(checkpoint["epoch"]),
+                "optimizer_state": "reinitialized because the v1 checkpoint stored model weights only",
+            }
+        if data_parallel:
+            if device.type != "cuda" or torch.cuda.device_count() < 2:
+                raise ModelWorkflowError("--data-parallel requires at least two visible CUDA devices")
+            model = nn.DataParallel(base_model)
+        else:
+            model = base_model
         optimizer = torch.optim.Adam(model.parameters(), lr=training["learning_rate"],
                                      weight_decay=training["weight_decay"])
         loss_function = nn.MSELoss()
         scaler = torch.amp.GradScaler("cuda", enabled=training["amp"] and device.type == "cuda")
         model_dir.mkdir(parents=True, exist_ok=True)
         history = []
-        best_loss, stale = math.inf, 0
-        for epoch in range(1, training["epochs"] + 1):
+        stale = 0
+        for epoch in range(start_epoch, training["epochs"] + 1):
             model.train(); total_loss = 0.0; count = 0
             for x, y in loaders["train"]:
                 x = x.to(device, non_blocking=True); y = y.to(device, non_blocking=True)
@@ -712,7 +735,8 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
             print(json.dumps({"species": name, **record}), flush=True)
             if val_loss < best_loss:
                 best_loss, stale = val_loss, 0
-                torch.save({"state_dict": model.state_dict(), "species": name,
+                stored_model = model.module if isinstance(model, nn.DataParallel) else model
+                torch.save({"state_dict": stored_model.state_dict(), "species": name,
                             "head_hidden": training["head_hidden"], "epoch": epoch,
                             "validation_mse": val_loss, "config": plan_model(config)}, best_path)
             else:
@@ -720,7 +744,7 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
                 if stale >= training["patience"]:
                     break
         checkpoint = torch.load(best_path, map_location=device, weights_only=False)
-        model.load_state_dict(checkpoint["state_dict"])
+        base_model.load_state_dict(checkpoint["state_dict"])
         metrics = {}
         for split in ("validation", "test"):
             observed, predicted = _evaluate(model, loaders[split], device)
@@ -731,6 +755,9 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
             writer = csv.DictWriter(stream, fieldnames=history[0], delimiter="\t", lineterminator="\n")
             writer.writeheader(); writer.writerows(history)
         metadata = {"species": name, "device": str(device), "torch": torch.__version__,
+                    "data_parallel": data_parallel,
+                    "visible_cuda_devices": torch.cuda.device_count() if device.type == "cuda" else 0,
+                    "resumed_from": resume_record,
                     "best_epoch": checkpoint["epoch"], "best_validation_mse": best_loss,
                     "metrics": metrics, "training": training, "seed": settings["seed"],
                     "checkpoint_sha256": _sha256(best_path)}
@@ -935,6 +962,11 @@ def build_parser() -> argparse.ArgumentParser:
             child.add_argument("--force", action="store_true")
         if command in {"train", "predict"}:
             child.add_argument("--device", help="PyTorch device, e.g. cuda:0 or cpu")
+        if command == "train":
+            child.add_argument("--data-parallel", action="store_true",
+                               help="Split each batch across all visible CUDA devices")
+            child.add_argument("--resume", action="store_true",
+                               help="Continue from the best existing model checkpoint")
         if command == "predict":
             child.add_argument("--chromosome", action="append")
             child.add_argument("--region", help="Optional bounded inference region, CHROM:START-END")
@@ -954,7 +986,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "prepare":
             _print_json(prepare_manifests(config, args.species, args.force))
         elif args.command == "train":
-            _print_json(train_species(config, args.species, args.device, args.force))
+            _print_json(train_species(config, args.species, args.device, args.force,
+                                      args.data_parallel, args.resume))
         elif args.command == "predict":
             region = parse_region(args.region) if args.region else None
             _print_json(predict_species(config, args.species, args.device, args.chromosome,
