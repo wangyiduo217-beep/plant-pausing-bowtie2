@@ -130,6 +130,22 @@ An interrupted or intentionally rescaled run can continue from its best checkpoi
 optimizer is reinitialized at the configured learning rate and this fact is written to
 `metrics.json`. The checkpoint epoch and SHA-256 are also recorded.
 
+For a direct experimental-track comparison, `plot_bam_vs_prediction.py` reads the
+production high-confidence BAMs in the y-label configuration. It keeps R1 from paired-end
+libraries, applies each library's validated RNA-strand orientation, combines SRRs within
+an SRX, converts coverage to CPM per base, and then gives every independent SRX equal
+weight. Observed coverage and predictions are summarized over the same 128-bp prediction
+segments:
+
+```bash
+python scripts/plot_bam_vs_prediction.py configs/example_y_labels.json \
+  configs/example_strand_model.json --species arabidopsis_thaliana \
+  --chrom 3 --start 9141194 --end 9207074 --output results/arabidopsis_bam_vs_prediction
+```
+
+The command writes PNG and PDF figures, an aligned TSV table, and JSON provenance listing
+every SRX, SRR, BAM, strand rule, normalization denominator, and regional read count.
+
 On the production RTX 3080 Ti, a real forward/backward smoke test at batch size 256 used
 approximately 3.2 GiB peak allocated GPU memory. This leaves headroom for CUDA workspace
 and makes three concurrent species-specific jobs practical on separate GPUs.
