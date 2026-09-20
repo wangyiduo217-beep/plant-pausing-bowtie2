@@ -816,6 +816,10 @@ def predict_species(config: dict, requested: Sequence[str] | None = None,
         device = torch.device(device_name or ("cuda" if torch.cuda.is_available() else "cpu"))
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
         model = build_model(checkpoint["head_hidden"]).to(device)
+        # The spline basis is created lazily during a normal forward pass.  A
+        # saved checkpoint already contains the fixed 64x16 buffer, so give
+        # the fresh inference model the same shape before loading its state.
+        model.spline.basis = torch.from_numpy(spline_basis(64, 16)).to(device)
         model.load_state_dict(checkpoint["state_dict"]); model.eval()
         fasta = IndexedFasta(item["fasta"])
         allowed = [chrom for split in ("train", "validation", "test")
