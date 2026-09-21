@@ -696,7 +696,16 @@ def train_species(config: dict, requested: Sequence[str] | None = None,
             # The spline buffer is initialized lazily in the architecture; give
             # it its known 64x16 shape before loading an existing checkpoint.
             base_model.spline.basis = torch.from_numpy(spline_basis(64, 16)).to(device)
-            base_model.load_state_dict(checkpoint["state_dict"])
+            state_dict = checkpoint["state_dict"]
+            # In a first-run DataParallel checkpoint the persistent buffer on
+            # the root module can remain empty because replicas initialize the
+            # fixed basis during forward passes.  Reconstruct that deterministic
+            # buffer while preserving every learned parameter in the checkpoint.
+            saved_basis = state_dict.get("spline.basis")
+            if saved_basis is not None and saved_basis.numel() == 0:
+                state_dict = dict(state_dict)
+                state_dict["spline.basis"] = base_model.spline.basis
+            base_model.load_state_dict(state_dict)
             start_epoch = int(checkpoint["epoch"]) + 1
             best_loss = float(checkpoint["validation_mse"])
             resume_record = {
