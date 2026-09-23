@@ -946,9 +946,13 @@ def plot_region(config: dict, species_key: str, chrom: str, start: int, end: int
     axes[1].fill_between(minus[0], minus[1], 0, step="mid", color="#9775fa", alpha=0.8,
                          label="minus prediction")
     axes[1].set_ylabel("Predicted y"); axes[1].set_xlabel(f"Genomic coordinate on {chrom} (bp)")
-    for axis in axes:
+    plotted_values = (
+        (*observed[1], *observed[2]),
+        (*plus[1], *minus[1]),
+    )
+    for axis, values in zip(axes, plotted_values):
         axis.axhline(0, color="black", linewidth=0.7); axis.set_xlim(start, end)
-        limit = max(abs(value) for values in axis.collections for value in values.get_datalim(axis.transData).intervaly)
+        limit = max((abs(value) for value in values if math.isfinite(value)), default=1.0)
         axis.set_ylim(-max(1.0, limit), max(1.0, limit)); axis.legend(frameon=False, ncol=2, loc="upper right")
         axis.spines[["top", "right"]].set_visible(False)
     output_path = Path(output); output_path.parent.mkdir(parents=True, exist_ok=True)
