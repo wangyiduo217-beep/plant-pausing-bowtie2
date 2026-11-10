@@ -1,0 +1,13 @@
+species	scientific_name	model	reference	scope	strand	n_windows	n_observations	positive_n	negative_n	prevalence	AUROC	AUPRC_AP	PR_trapezoid_AUC
+arabidopsis	Arabidopsis thaliana	strand_seiplant_v1	full	complete formal old-model test set	plus	45066	45066	14119	30947	0.31329605467536503	0.8361016937829593	0.7305064418975681	0.7304840363085469
+arabidopsis	Arabidopsis thaliana	strand_seiplant_v1	full	complete formal old-model test set	minus	45066	45066	14354	30712	0.31851062885545645	0.8375242759251311	0.7386670482545401	0.7386506898302716
+arabidopsis	Arabidopsis thaliana	strand_seiplant_v1	full	complete formal old-model test set	micro	45066	90132	28473	61659	0.31590334176541074	0.8361384780897965	0.7334607485448235	0.7334509152778599
+arabidopsis	Arabidopsis thaliana	strand_seiplant_v1	full	complete formal old-model test set	macro	45066	90132	28473	61659	0.31590334176541074	0.8368129848540452	0.7345867450760541	0.7345673630694092
+wheat	Triticum aestivum	strand_seiplant_v1	full	complete formal old-model test set	plus	98656	98656	25125	73531	0.25467280246513135	0.9093855467328871	0.8012511933139117	0.8012432808345252
+wheat	Triticum aestivum	strand_seiplant_v1	full	complete formal old-model test set	minus	98656	98656	25139	73517	0.25481470969834574	0.9070458217894696	0.7944181307128325	0.7944102091874365
+wheat	Triticum aestivum	strand_seiplant_v1	full	complete formal old-model test set	micro	98656	197312	50264	147048	0.25474375608173855	0.9070435291422456	0.7949382555346756	0.7949341926326656
+wheat	Triticum aestivum	strand_seiplant_v1	full	complete formal old-model test set	macro	98656	197312	50264	147048	0.25474375608173855	0.9082156842611784	0.797834662013372	0.7978267450109808
+maize	Zea mays	strand_seiplant_v1	full	complete formal old-model test set	plus	49786	49786	13529	36257	0.27174306029807577	0.8763854905093116	0.7429390507245345	0.7429219531542112
+maize	Zea mays	strand_seiplant_v1	full	complete formal old-model test set	minus	49786	49786	13606	36180	0.273289679829671	0.879577443315703	0.7568831608804233	0.7568688600779835
+maize	Zea mays	strand_seiplant_v1	full	complete formal old-model test set	micro	49786	99572	27135	72437	0.27251637006387336	0.8776942730781843	0.74818135967662	0.7481729639871553
+maize	Zea mays	strand_seiplant_v1	full	complete formal old-model test set	macro	49786	99572	27135	72437	0.27251637006387336	0.8779814669125072	0.7499111058024789	0.7498954066160973

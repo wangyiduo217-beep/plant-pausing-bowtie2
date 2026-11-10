@@ -1,0 +1,88 @@
+{
+  "model": "strand_seiplant_v1",
+  "repeats_retained": true,
+  "species_library_counts": {
+    "arabidopsis": 14,
+    "wheat": 5,
+    "maize": 3
+  },
+  "coordinate_convention": "0-based half-open windows; midpoint0=(start0+end0-1)/2",
+  "files": [
+    {
+      "file": "data/regional/arabidopsis.regional_plot_data.tsv.gz",
+      "bytes": 3517982,
+      "sha256": "12c75e481c8b04ae939084641f886320ca49c82dc62aae17c4db858ed22c840c",
+      "rows": 45066,
+      "columns": [
+        "window_index",
+        "chrom",
+        "start0",
+        "end0",
+        "midpoint0",
+        "region",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "prediction_plus",
+        "prediction_minus",
+        "x_plus",
+        "x_minus",
+        "y_plus",
+        "y_minus"
+      ]
+    },
+    {
+      "file": "data/regional/wheat.regional_plot_data.tsv.gz",
+      "bytes": 6516908,
+      "sha256": "100b8a9720750b99d9c3a0b6b1fe44466725444d310605e0ccdff36a1cd24795",
+      "rows": 98656,
+      "columns": [
+        "window_index",
+        "chrom",
+        "start0",
+        "end0",
+        "midpoint0",
+        "region",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "prediction_plus",
+        "prediction_minus",
+        "x_plus",
+        "x_minus",
+        "y_plus",
+        "y_minus"
+      ]
+    },
+    {
+      "file": "data/regional/maize.regional_plot_data.tsv.gz",
+      "bytes": 3439335,
+      "sha256": "7cbf889c0cdd73cf543590dafd7cfab760946d88a20038869bca9a5952edf8f3",
+      "rows": 49786,
+      "columns": [
+        "window_index",
+        "chrom",
+        "start0",
+        "end0",
+        "midpoint0",
+        "region",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "prediction_plus",
+        "prediction_minus",
+        "x_plus",
+        "x_minus",
+        "y_plus",
+        "y_minus"
+      ]
+    },
+    {
+      "file": "data/regional/expected_statistics_log2p1.csv",
+      "bytes": 646,
+      "sha256": "eebcdbad981145c172f07c601f1565c7c2a45d2533ada05f25d4500906198556"
+    },
+    {
+      "file": "data/regional/expected_regional_statistics_log2p1.tsv",
+      "bytes": 7268,
+      "sha256": "1d632c569a8ae73b14c84f400683f4fb50a38872c7d732d9cde58cea2b16dcb9"
+    }
+  ]
+}

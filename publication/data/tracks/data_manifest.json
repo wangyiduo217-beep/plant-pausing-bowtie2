@@ -1,0 +1,75 @@
+{
+  "model": "strand_seiplant_v1",
+  "repeats_retained": true,
+  "files": [
+    {
+      "file": "data/tracks/arabidopsis.selected_track.csv",
+      "bytes": 46897,
+      "sha256": "359257d449c32f38be5c030aaa1f1fdcaf96b9a17a684b3258c536c9cbae3f1c",
+      "rows": 311,
+      "columns": [
+        "start0",
+        "end0",
+        "gro_log2p1_plus",
+        "prediction_plus",
+        "gro_log2p1_minus",
+        "prediction_minus",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "valid",
+        "Nbp",
+        "input_start0",
+        "prediction_origin"
+      ]
+    },
+    {
+      "file": "data/tracks/wheat.selected_track.csv",
+      "bytes": 89458,
+      "sha256": "723445f17d2a385eb780b52cbc3f3b5cdafdd794e69c2ec236337aee1075bcef",
+      "rows": 624,
+      "columns": [
+        "start0",
+        "end0",
+        "gro_log2p1_plus",
+        "prediction_plus",
+        "gro_log2p1_minus",
+        "prediction_minus",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "valid",
+        "Nbp",
+        "input_start0",
+        "prediction_origin"
+      ]
+    },
+    {
+      "file": "data/tracks/maize.selected_track.csv",
+      "bytes": 89317,
+      "sha256": "6ed01b5c74d4a514039597550114f25980537c7ed9b9ab0a78e41d986f186a78",
+      "rows": 625,
+      "columns": [
+        "start0",
+        "end0",
+        "gro_log2p1_plus",
+        "prediction_plus",
+        "gro_log2p1_minus",
+        "prediction_minus",
+        "mean_cpm_plus",
+        "mean_cpm_minus",
+        "valid",
+        "Nbp",
+        "input_start0",
+        "prediction_origin"
+      ]
+    },
+    {
+      "file": "data/tracks/selected_regions.csv",
+      "bytes": 1105,
+      "sha256": "a089524e02165e473d51501f8fbecde10812735e34fbdc93402d30658dab7b52"
+    }
+  ],
+  "input_window_bp": 1024,
+  "input_step_bp": 128,
+  "display_bin_bp": 128,
+  "missing_prediction": "NA/invalid input, not score zero"
+}

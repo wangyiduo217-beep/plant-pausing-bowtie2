@@ -1,0 +1,7 @@
+# Python ROC/PR figure; the other current figures use standard R + Cairo.
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+hilearn==0.2.2
+reportlab>=4.0
+pypdf>=4.0

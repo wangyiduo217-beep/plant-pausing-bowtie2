@@ -1,0 +1,96 @@
+{
+  "annotation_scope": "Matched Ensembl Plants release 63, protein-coding transcripts with CDS, one transcript per gene: prefer Ensembl_canonical; fallback longest CDS, then transcript length, then lexical transcript ID.",
+  "priority_high_to_low": [
+    "five_prime_utr",
+    "CDS",
+    "three_prime_utr",
+    "unclassified_coding_exon",
+    "intron",
+    "upstream_lt1kb",
+    "upstream_1_3kb",
+    "downstream_le1kb",
+    "distal"
+  ],
+  "category_order": [
+    "upstream_1_3kb",
+    "upstream_lt1kb",
+    "five_prime_utr",
+    "CDS",
+    "intron",
+    "three_prime_utr",
+    "downstream_le1kb",
+    "distal"
+  ],
+  "category_labels": [
+    "Upstream (1-3 kb)",
+    "Upstream (<1 kb)",
+    "5' UTR",
+    "CDS",
+    "Intron",
+    "3' UTR",
+    "Downstream (<=1 kb)",
+    "Distal"
+  ],
+  "point_definition": "midpoint0 = (start0 + end0 - 1) / 2; a 1024-bp window has midpoint start0+511.5 in 0-based base coordinates.",
+  "coordinate_system": "GTF 1-based closed features converted to 0-based half-open intervals; point containment start0 <= midpoint0 < end0.",
+  "flank_definition": "Intervals are relative to canonical transcript boundaries and genomic strand. + strand: upstream [txStart-1000,txStart), [txStart-3000,txStart-1000), downstream [txEnd,txEnd+1000). - strand reverses direction: upstream [txEnd,txEnd+1000), [txEnd+1000,txEnd+3000), downstream [txStart-1000,txStart). Chromosome edges clipped.",
+  "CDS_definition": "Annotated canonical CDS plus annotated start_codon and stop_codon, so the coding region includes its stop codon.",
+  "intron_definition": "Gaps strictly between successive merged canonical transcript exons; residual exon segments are never treated as introns.",
+  "distal_definition": "Outside the eight reference categories relative to selected canonical protein-coding transcripts; this is not equivalent to intergenic relative to all annotated noncoding genes.",
+  "overlap_resolution": "Gene-body features take priority over nearby-gene flanks; listed global feature priority resolves overlaps. Both predicted strands use the same region assignment.",
+  "unclassified_exon_rule": "Any canonical coding-transcript exon segments outside annotated CDS/start/stop/5UTR/3UTR remain an explicit unclassified_coding_exon audit category, never forced into CDS/intron/distal.",
+  "statistics": "Pearson r main figure and Spearman rho supplemental table; both calculated from all windows within each region on x=log2(1+mean SRX CPM), y=log2(1+raw predicted score). n<3 or constant inputs produce NA.",
+  "error_bars": "None: one frozen model per species and no independent biological/model replicates of each coefficient. Test windows are not treated as biological replicates.",
+  "per_species_reference": [
+    {
+      "species": "arabidopsis",
+      "species_name": "Arabidopsis thaliana",
+      "assembly": "TAIR10 / GCA_000001735.1",
+      "annotation_file": "Arabidopsis_thaliana.TAIR10.63.gtf.gz",
+      "annotation_gzip_sha256": "865e4129d57814ce2746d42d08b154899e3ae0b0bf603d7ba16a2dde35b67e48",
+      "annotation_uncompressed_sha256": "addb33b3e1b792af04026d8822215eebc59359b50d2514d4b1f66e9e5e3f7464",
+      "annotation_download_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-63/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.63.gtf.gz",
+      "n_test_windows": 45066,
+      "test_chromosome_lengths": {
+        "3": 23459830
+      },
+      "selected_coding_transcripts": 5455,
+      "genes_without_canonical_fallback": 0,
+      "unclassified_coding_exon_test_windows": 0
+    },
+    {
+      "species": "wheat",
+      "species_name": "Triticum aestivum",
+      "assembly": "IWGSC RefSeq v1.0 / GCA_900519105.1",
+      "annotation_file": "Triticum_aestivum.IWGSC.63.gtf.gz",
+      "annotation_gzip_sha256": "4bb48bb01fa6d44c79b50f99952cdd09c2dc4870eb769db62eaf262cff20e820",
+      "annotation_uncompressed_sha256": "155d6973e7b215f6cdd702b81db13ef0e26329dedccbf0cf28cfd5a38f3e2e89",
+      "annotation_download_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-63/gtf/triticum_aestivum/Triticum_aestivum.IWGSC.63.gtf.gz",
+      "n_test_windows": 98656,
+      "test_chromosome_lengths": {
+        "3A": 750843639,
+        "3B": 830829764,
+        "3D": 615552423
+      },
+      "selected_coding_transcripts": 16417,
+      "genes_without_canonical_fallback": 0,
+      "unclassified_coding_exon_test_windows": 0
+    },
+    {
+      "species": "maize",
+      "species_name": "Zea mays",
+      "assembly": "Zm-B73-REFERENCE-NAM-5.0 / GCA_902167145.1",
+      "annotation_file": "Zea_mays.Zm-B73-REFERENCE-NAM-5.0.63.gtf.gz",
+      "annotation_gzip_sha256": "e8cdc7fd5e09364643e6f7e4e6d6f203545545c247d97c43ae964ea709ca7bdf",
+      "annotation_uncompressed_sha256": "a7376eada3366287e1a7018eee2193ff2eb3a8250b366a5c98bd4fd873852c28",
+      "annotation_download_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-63/gtf/zea_mays/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.63.gtf.gz",
+      "n_test_windows": 49786,
+      "test_chromosome_lengths": {
+        "6": 181357234
+      },
+      "selected_coding_transcripts": 3412,
+      "genes_without_canonical_fallback": 0,
+      "unclassified_coding_exon_test_windows": 0
+    }
+  ]
+}

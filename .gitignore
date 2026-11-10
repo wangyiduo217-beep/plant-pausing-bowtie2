@@ -52,3 +52,8 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Selected, complete publication plotting inputs are intentionally versioned.
+!publication/data/
+!publication/data/**
+publication/generated/

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plant-pausing-bowtie2"
-version = "0.3.0"
+version = "0.3.1"
 description = "Reproducible alignment, y-label generation, and strand-resolved DNA-to-GRO-seq modeling"
 readme = "README.md"
 requires-python = ">=3.10"
