@@ -36,7 +36,7 @@ id_rsa*
 id_ed25519*
 *credentials*
 *token*
-configs/local*.json
+model/configs/local*.json
 
 # Python/editor/build files
 __pycache__/
@@ -54,11 +54,17 @@ dist/
 Thumbs.db
 
 # Selected, complete publication plotting inputs are intentionally versioned.
-!publication/data/
-!publication/data/**
-publication/generated/
+!figure/data/
+!figure/data/**
+!model/data/
+model/data/*
+!model/data/masks/
+!model/data/masks/**
+figure/results/
+model/results/
+reproducibility/acceptance/
 
 # Small verified real-DNA inference examples are intentionally shared.
-!examples/real_dna/*.fa
+!model/examples/real_dna/*.fa
 *.pt
 *.pth

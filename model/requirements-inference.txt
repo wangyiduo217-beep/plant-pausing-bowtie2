@@ -1,0 +1,3 @@
+# Install CPU PyTorch first using the command in model/docs/pretrained-quickstart.md.
+numpy>=1.26,<3
+scipy>=1.11,<2

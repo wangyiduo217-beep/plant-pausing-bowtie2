@@ -11,8 +11,8 @@ libraries. The repository and Python package name remain
 
 | Material | License and scope |
 | --- | --- |
-| Original code in `src/`, `scripts/`, `tests/`, R plotting code, configuration and associated documentation | [MIT](../LICENSE) |
-| The three pretrained GROPlant checkpoint assets identified in `publication/metadata/pretrained_models.json` | [CC BY 4.0](../LICENSES/CC-BY-4.0.txt) |
+| Original code in `model/src/`, `model/scripts/`, `model/tests/`, `figure/scripts/`, `figure/plotting/`, the root installation checker, configuration and associated documentation | [MIT](../LICENSE) |
+| The three pretrained GROPlant checkpoint assets identified in `model/metadata/pretrained_models.json` | [CC BY 4.0](../LICENSES/CC-BY-4.0.txt) |
 | Original project-produced plotting/evaluation tables, bootstrap results, figures and previews; original example predictions and dataset curation | [CC BY 4.0](../LICENSES/CC-BY-4.0.txt), to the extent the contributors hold applicable rights |
 | Third-party reference DNA, original experimental data, annotations, dependencies and incorporated upstream material | Their original terms and notices, described below; this project does not relicense third-party rights |
 
@@ -42,7 +42,7 @@ GROPlant is claimed.
   for incorporated or adapted upstream material.
 - HiLearn 0.2.2 is an external Apache-2.0 dependency. Its own license remains
   applicable; GROPlant does not redistribute it under MIT or CC BY.
-- The FASTA records in `examples/real_dna/*.fa` are extracts of the listed
+- The FASTA records in `model/examples/real_dna/*.fa` are extracts of the listed
   Ensembl Plants reference assemblies. They are not newly authored DNA and are
   not relicensed as original GROPlant content. Source URLs, assembly accessions,
   genomic coordinates and source identities are in the example manifest.
@@ -51,7 +51,7 @@ GROPlant is claimed.
   conditions can remain applicable.
 - Original sequencing experiments and annotations retain their source
   attribution. Sample accessions and assembly provenance are recorded in
-  `publication/metadata/samples.tsv` and `model_identity.json`.
+  `model/metadata/samples.tsv` and `model_identity.json`.
 - Font binaries are not distributed. Use an appropriately licensed installed
   font; Arial is the requested publication style and Liberation Sans is a
   supported validation fallback.

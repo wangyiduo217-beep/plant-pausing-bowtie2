@@ -1,9 +1,10 @@
-# Fresh-download acceptance for GROPlant
+# Installation and reproduction checks for GROPlant
 
 This check covers the workflows distributed with the repository: pretrained
 CPU inference, all six R figure families, HiLearn ROC/PR, and the identities and
 scientific values of the bundled inputs. It does not retrain the models or
-process the original FASTQ/BAM collections.
+process the original FASTQ/BAM collections. All commands below run from the
+repository root and use the `model/` and `figure/` layout introduced in 0.4.0.
 
 ## 1. Obtain a new copy
 
@@ -29,7 +30,7 @@ For Windows/Linux CPU PyTorch:
 ```bash
 python -m pip install --upgrade pip setuptools wheel
 python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -r requirements-inference.txt -r requirements-publication.txt -c requirements-acceptance-lock.txt
+python -m pip install -r model/requirements-inference.txt -r figure/requirements.txt -c reproducibility/requirements-acceptance-lock.txt
 python -m pip install --no-deps -e .
 python -m pip check
 ```
@@ -58,7 +59,7 @@ Keep the Python venv active for the Python commands and pass the R environment's
 `bin/Rscript` to `--rscript`. Adding that R `bin` directory to PATH also makes
 its font-discovery tools available to Python plotting.
 
-`reproducibility/R-linux-64-explicit.txt` records its exact package URLs for
+`figure/reproducibility/R-linux-64-explicit.txt` records its exact package URLs for
 Linux; it is not a Windows/macOS environment file.
 
 Arial is the requested publication font. The independent Linux acceptance
@@ -70,13 +71,13 @@ rendered and inspected. Font binaries are not bundled in the repository.
 ## 4. Run the complete check
 
 ```bash
-python scripts/acceptance_check.py --font "DejaVu Sans" --require-isolated-env
+python check_installation.py --font "DejaVu Sans" --require-isolated-env
 ```
 
 If Rscript is not on PATH:
 
 ```bash
-python scripts/acceptance_check.py --rscript "/absolute/path/to/Rscript" --font "DejaVu Sans" --require-isolated-env
+python check_installation.py --rscript "/absolute/path/to/Rscript" --font "DejaVu Sans" --require-isolated-env
 ```
 
 For a Windows installation with Arial, use `--font "Arial"` and the actual
@@ -108,7 +109,7 @@ Successful completion prints:
 PASS: all acceptance checks completed; 72 real DNA sequences / 144 strand scores checked.
 ```
 
-The exit code must be zero. `results/acceptance/summary.json` must contain
+The exit code must be zero. `reproducibility/acceptance/summary.json` must contain
 `"passed": true`, and every recorded step must pass. Logs are saved beside
 that summary. The isolated-environment flag is recorded in the summary.
 
@@ -116,16 +117,16 @@ that summary. The isolated-environment flag is recorded in the summary.
 
 | Output | Location |
 | --- | --- |
-| Checkpoints | `results/strand_seiplant_v1/<species>/model/best.pt` |
-| Real DNA predictions and per-species comparison JSON | `results/pretrained_example/` |
-| Six R figure families | `publication/generated/correlations/`, `tracks/`, `regional_bars/`, `dual_axis_violins/`, `deciles/`, `frequency/` |
-| ROC/PR figures and metrics | `publication/generated/roc_pr/` |
-| Complete acceptance summary and step logs | `results/acceptance/` |
+| Checkpoints | `model/results/strand_seiplant_v1/<species>/model/best.pt` |
+| Real DNA predictions and per-species comparison JSON | `model/results/pretrained_example/` |
+| Six R figure families | `figure/results/correlations/`, `tracks/`, `regional_bars/`, `dual_axis_violins/`, `deciles/`, `frequency/` |
+| ROC/PR figures and metrics | `figure/results/roc_pr/` |
+| Complete acceptance summary and step logs | `reproducibility/acceptance/` |
 
 The R output contains A4 proofs and 183-mm-wide vector PDFs plus 600-dpi PNGs.
 The default decile layout groups both strands in three species panels; the
 frequency module also creates a logarithmic-y detail view. The optional
-six-panel decile layout is described in `publication/plotting/README.md` and
+six-panel decile layout is described in `figure/plotting/README.md` and
 was checked separately.
 
 CPU predictions are compared against unchanged historical answers using
@@ -138,7 +139,12 @@ independently recomputes its bins from all raw window values.
 
 ## Verification record
 
-The [GROPlant v0.3.3 release](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/groplant-v0.3.3-20261112)
-provides the fresh-download acceptance report. It distinguishes newly
-installed dependencies, a new public source download, newly downloaded or
-reused verified weights, the actual font, and any host/platform limits.
+The [GROPlant v0.4.0 release](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/groplant-v0.4.0-20261112)
+provides the regression check for this reorganized layout, identifying its
+exact source commit and output paths. This check reuses the independent
+dependency environment and verified checkpoint cache established for
+[v0.3.3](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/groplant-v0.3.3-20261112).
+The earlier release preserves the evidence of fresh dependency installation
+and public weight downloads. Reports distinguish new source downloads from
+reused dependencies or verified weights, and record the actual font and
+platform limits. The steps above also support a new user's fresh installation.

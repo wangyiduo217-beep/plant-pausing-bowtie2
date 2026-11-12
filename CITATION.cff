@@ -4,7 +4,7 @@ title: "GROPlant: plant GRO-seq sequence models and reproducible figures"
 type: software
 authors:
   - name: "GROPlant contributors"
-version: "0.3.3"
+version: "0.4.0"
 date-released: "2026-11-12"
 repository-code: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"
 url: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"
