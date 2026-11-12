@@ -2,7 +2,7 @@
 
 Code for plant GRO-seq processing, experimental consensus labels, species-specific DNA-to-GRO-seq models, and the selected publication figures.
 
-**Selected analysis: `strand_seiplant_v1`, repeat sequences retained, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX.** Wheat uses the original **five-library** model. The model implementation is unchanged; this update makes the selected experiment and its current plotting inputs explicit. Package version: **0.3.1**.
+**Selected analysis: `strand_seiplant_v1`, repeat sequences retained, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX.** Wheat uses the original **five-library** model. The model implementation is unchanged; this update makes the selected experiment and its current plotting inputs explicit. Package version: **0.3.2**.
 
 | Species | Independent SRX | Held-out test chromosomes | Test windows |
 |---|---:|---|---:|
@@ -29,8 +29,27 @@ publication/preview/            Example figures for browsing
 docs/publication-model.md       Architecture, labels, training, prediction, identity
 docs/publication-figures.md     Figure definitions, units, and ROC/PR area conventions
 docs/reference-and-attribution.md  Reference implementation and third-party notices
-tests/                         Automated workflow, label, and preparation checks
+examples/real_dna/              Real DNA inputs and archived answers for inference checks
+tests/                         Automated workflow, label, preparation and inference-interface checks
 ```
+
+## Try the trained model on real DNA
+
+Pretrained checkpoints for all three species are available from the
+[model download release](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/strand-seiplant-v1-pretrained-20261112). Each is approximately 310 MB.
+The repository includes **24 real held-out DNA windows per species**, their
+coordinates and archived expected predictions. The check actually runs the
+network; it does not read precomputed predictions as its output.
+
+Follow the [CPU installation and quick start](docs/pretrained-quickstart.md), then:
+
+```bash
+python scripts/download_pretrained.py --species arabidopsis_thaliana
+python scripts/check_pretrained_example.py --species arabidopsis_thaliana
+```
+
+Use `--species all` to check all three species. To predict your own 1,024-bp
+FASTA sequences, use `scripts/predict_fasta.py` as explained in the guide.
 
 ## Reproduce the current figures
 
@@ -90,7 +109,7 @@ python scripts/predict_genome.py configs/publication_v1_model.json \
   --species triticum_aestivum --device cuda:0
 ```
 
-The model guide distinguishes retraining from exact reconstruction of the frozen results. Model weights are identified by hashes, but **are not hosted in this repository**; no unavailable weight download is implied. The complete figure inputs support exact evaluation/plot reproduction without those weights.
+The model guide distinguishes retraining from exact reconstruction of the frozen results. Pretrained weights are available as [release assets](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/strand-seiplant-v1-pretrained-20261112), with download and source hashes recorded in `publication/metadata/pretrained_models.json`. The complete figure inputs also support evaluation/plot reproduction without downloading weights.
 
 ## Earlier processing workflow
 

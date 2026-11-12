@@ -1,0 +1,85 @@
+{
+  "model_version": "strand_seiplant_v1",
+  "independent_SRX": [
+    14,
+    5,
+    3
+  ],
+  "created_utc": "2026-11-12T08:05:47.398180+00:00",
+  "torch_version": "2.6.0+cu124",
+  "sanitization": "Removed config containing machine-specific paths; all state_dict tensors and fixed buffers preserved exactly. No retraining or numerical conversion.",
+  "models": [
+    {
+      "slug": "arabidopsis_thaliana",
+      "species": "Arabidopsis thaliana",
+      "filename": "arabidopsis_thaliana.best.pt",
+      "source_checkpoint_sha256": "da6972626359783b550452ef52301a00e4b8c58c1f1fb3292e80df677c73f299",
+      "asset_sha256": "0b5925188c988e5cdf9202b35a848c9b2c8c031848ac5b5e5226602ec1160713",
+      "bytes": 309862439,
+      "epoch": 12,
+      "validation_mse": 0.030995050445199013,
+      "head_hidden": 256,
+      "state_dict_entries": 39,
+      "all_tensors_and_buffers_exactly_equal": true,
+      "safe_weights_only_load": true,
+      "top_level_fields": [
+        "state_dict",
+        "species",
+        "head_hidden",
+        "epoch",
+        "validation_mse",
+        "source_checkpoint_sha256",
+        "model_version"
+      ],
+      "config_removed": true
+    },
+    {
+      "slug": "triticum_aestivum",
+      "species": "Triticum aestivum",
+      "filename": "triticum_aestivum.best.pt",
+      "source_checkpoint_sha256": "567e3553013e45f2c5148d0dbcf46771d825c6d2e3b4689cdd92bd47d3ef89cf",
+      "asset_sha256": "094f52e281b168de52d29b824572459cd7f9cf0aebcb31e49124464adf3357b8",
+      "bytes": 309862310,
+      "epoch": 10,
+      "validation_mse": 0.023118315264582634,
+      "head_hidden": 256,
+      "state_dict_entries": 39,
+      "all_tensors_and_buffers_exactly_equal": true,
+      "safe_weights_only_load": true,
+      "top_level_fields": [
+        "state_dict",
+        "species",
+        "head_hidden",
+        "epoch",
+        "validation_mse",
+        "source_checkpoint_sha256",
+        "model_version"
+      ],
+      "config_removed": true
+    },
+    {
+      "slug": "zea_mays",
+      "species": "Zea mays",
+      "filename": "zea_mays.best.pt",
+      "source_checkpoint_sha256": "778b474634aa41fa8c28a761b8b51933830fc308a1c6fa188e58f840503fcd5a",
+      "asset_sha256": "f63463cb998d6651e93b5875a6f51ce6af2c0e84fd927a390555faccf55b28a7",
+      "bytes": 309861859,
+      "epoch": 8,
+      "validation_mse": 0.06271202862262726,
+      "head_hidden": 256,
+      "state_dict_entries": 39,
+      "all_tensors_and_buffers_exactly_equal": true,
+      "safe_weights_only_load": true,
+      "top_level_fields": [
+        "state_dict",
+        "species",
+        "head_hidden",
+        "epoch",
+        "validation_mse",
+        "source_checkpoint_sha256",
+        "model_version"
+      ],
+      "config_removed": true
+    }
+  ]
+}

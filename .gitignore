@@ -57,3 +57,8 @@ Thumbs.db
 !publication/data/
 !publication/data/**
 publication/generated/
+
+# Small verified real-DNA inference examples are intentionally shared.
+!examples/real_dna/*.fa
+*.pt
+*.pth

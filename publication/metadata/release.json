@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "release_identity": "strand_seiplant_v1_repeat_retained_14_5_3",
-  "package_version": "0.3.1",
+  "package_version": "0.3.2",
   "date": "2026-11-10",
   "model_version": "strand_seiplant_v1",
   "repeat_sequences_retained": true,
@@ -17,7 +17,7 @@
   ],
   "model_weights_in_repository": false,
   "files_sha256": {
-    "CITATION.cff": "bd813a01b222fc87f149e8c3eebe6c686d1eae39513ca8bef803133035f0d34b",
+    "CITATION.cff": "f8fbb07467a4424f8247455d73eb119e4833deeb2c74c97793ea31e4175cc068",
     "configs/publication_v1_labels.json": "7dc89cdaeffb6725f51b2cfa13682e3ddbdee8b6e7d7364572124d30e4ea8c76",
     "configs/publication_v1_model.json": "24ec53a50fe68b7acfac5785fd999d083d5a0a175dc36e6cfd61f54dba527c51",
     "publication/data/masks/arabidopsis_thaliana.excluded_regions.bed": "bf6dc59cf5a80be0d521d26c2092fde83cfc604c77bdb7418dc4a0df7d9c2acf",
@@ -42,7 +42,7 @@
     "publication/data/tracks/maize.selected_track.csv": "6ed01b5c74d4a514039597550114f25980537c7ed9b9ab0a78e41d986f186a78",
     "publication/data/tracks/selected_regions.csv": "a089524e02165e473d51501f8fbecde10812735e34fbdc93402d30658dab7b52",
     "publication/data/tracks/wheat.selected_track.csv": "723445f17d2a385eb780b52cbc3f3b5cdafdd794e69c2ec236337aee1075bcef",
-    "publication/metadata/model_identity.json": "2cdeb865ff3852160ef0af348bcf6433779c898c56e151b816cc72f58ef60bf9",
+    "publication/metadata/model_identity.json": "44bd076647ccb3a5879f82faa70da76f8a2557bce0fdb55ebe82a401ce3780ae",
     "publication/metadata/samples.tsv": "bea2981103a3652466b996108d6003be134459f63163d5ffef1c3988e602995a",
     "publication/plotting/README.md": "989b3926a86bddea2af26d1fceb2cb2b3342bf70c10ea0c86dc620963bda8718",
     "publication/plotting/correlations/config.R": "39d0e0d1ec9caa033160cabcf3c493572abd44434423247736862cf1d772189d",
@@ -58,7 +58,30 @@
     "requirements-publication.txt": "f54ef9a1185a5f89e3b6b75ae602bcfe29be4798c54a86088c4a13e79ebbf44c",
     "scripts/plot_publication_roc_pr.py": "f9c04c43ebeaf041132ea35e6e08bf5bf0f0fb5c3a214bc33c89d5acca256741",
     "src/plant_pausing_bowtie2/strand_model.py": "466e4958e20679a066e3433a1b71d9d2860c5d4ac2ae9bbe81f9002ea101878d",
-    "src/plant_pausing_bowtie2/y_labels.py": "7a94aaaf48c622a3a86a82521bc2a96f536a04ecb905b21d2260f911abc2f5b2"
+    "src/plant_pausing_bowtie2/y_labels.py": "7a94aaaf48c622a3a86a82521bc2a96f536a04ecb905b21d2260f911abc2f5b2",
+    "examples/real_dna/zea_mays.fa": "18baf34fdf47fdcf4b3f4257f24306cacd76d29d208aa7b8d03b309d1536897f",
+    "src/plant_pausing_bowtie2/pretrained.py": "2720ec99bb89b8d4e8a95f00792f93f5dcd830bd6190e83a926d690946fc067c",
+    "scripts/predict_fasta.py": "408a4b983a546566bd34d84fe8d56efc246a9d051a1fa1b7ba2ecd3d3a26da4f",
+    "tests/test_pretrained.py": "5fc6026d9d02b7a61de93bdb838ff3296c0774b547b86e77f74e52cfbfa5555e",
+    "requirements-inference.txt": "7d4c694bd8d8cf3b03c0ab47e77bf9b080a385817b54f97174b0366e322e320e",
+    "examples/real_dna/triticum_aestivum.expected.tsv": "f1a9bd978b4f8c1e24135a9b745df8b4a33122eeca2969bdbc0a57e74b806352",
+    "docs/publication-model.md": "4836d3f553d0ca0812910880783314b58bf1e1fa30b5335d5c3e640d602b2406",
+    "examples/real_dna/arabidopsis_thaliana.fa": "898f2a41d7d24d7c98ff119d4e322a787a31c01dc253f398e2fb55eb32aa7e88",
+    "publication/metadata/pretrained_models.json": "3fb8e6959912acf8919846ebfb8484f2668c401f7dfc79619046b1873f0e4027",
+    "examples/real_dna/README.md": "965f54b6448bf90f793bfbeea6ff750793943d3fea594c9ddf5ca759f2a1e0d6",
+    "scripts/download_pretrained.py": "16f4de9d3af89ccbc23f75a1f38c05ef5f7d4ca0c35dceaad648c936a2de7e91",
+    "publication/metadata/pretrained_validation.json": "87e34d22079156fbab216b7ca87d51ab98d5f20732892102be01cd768969f1bb",
+    "examples/real_dna/triticum_aestivum.fa": "8a9a2de293d000f06fb3fa5e92e54c6a68866cdbdf21e3ccfc9cbf64dd96469b",
+    "README.md": "4c45198babc3108b17a00b9eba31799f7b1f5b9e9ad7aebda72c00f441a91312",
+    "src/plant_pausing_bowtie2/__init__.py": "8f5d14afeb8159da08626101ac4990f8caa575fd870b99107d28e19edeca9ce3",
+    "scripts/check_pretrained_example.py": "d803d95b4e936cc015f72f0fa9b566adf16cc53745b96ae53fdeee04a9c18913",
+    "examples/real_dna/manifest.json": "8472a7bb8e89a9a1970725ce5a4edd1d72adc0203d4ea646779677a29974faaf",
+    "pyproject.toml": "5550c68f94cbcb5158cfc3bdd840557403bc11428b28cf79fd06aad0e850f8d5",
+    "examples/real_dna/arabidopsis_thaliana.expected.tsv": "7cfe68e253599ad559aaf583b2d3de40534e69ea68315843a6b648368fd1d854",
+    "publication/metadata/pretrained_weight_validation.json": "ce9ed82662bb4eb38273303143b1231630f496074e6a7d0afddc4711fcf7d013",
+    "docs/pretrained-quickstart.md": "6eeb429f9f816c556c03d7d3c30ad3666c36a459b9a1dd0dce67d56c2ce46ca9",
+    "examples/real_dna/zea_mays.expected.tsv": "c05b01e96d3cd0aba2d66aa3b42c3710665977bd29e398014a9c15ba2935216e",
+    ".gitignore": "71ac21f51d452c1c35a7f5ae13c60eb1e3338c7fc1632acea755d66bf1e697a8"
   },
   "validation": {
     "model_and_label_core_unchanged": true,
@@ -66,5 +89,13 @@
     "HiLearn_0_2_2_actual_execution": true,
     "HiLearn_metrics_match_selected_reference_at_1e_12": true
   },
-  "upstream_repository_base_commit": "cf3347c554e92d0f3ef31edfa5b28172995cb362"
+  "upstream_repository_base_commit": "cf3347c554e92d0f3ef31edfa5b28172995cb362",
+  "pretrained_supplement": {
+    "date": "2026-11-12",
+    "tag": "strand-seiplant-v1-pretrained-20261112",
+    "download_manifest": "publication/metadata/pretrained_models.json",
+    "examples": "examples/real_dna",
+    "validation": "publication/metadata/pretrained_validation.json",
+    "scientific_model_unchanged": true
+  }
 }

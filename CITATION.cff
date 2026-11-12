@@ -4,7 +4,7 @@ title: "Plant GRO-seq sequence-to-signal models and reproducible figures"
 type: software
 authors:
   - name: "plant-pausing-bowtie2 contributors"
-version: "0.3.1"
-date-released: "2026-11-10"
+version: "0.3.2"
+date-released: "2026-11-12"
 repository-code: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"
 url: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"

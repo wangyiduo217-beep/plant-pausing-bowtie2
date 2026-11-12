@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "model_version": "strand_seiplant_v1",
+  "scope": "Pretrained export and real-DNA inference; no retraining or new performance evaluation.",
+  "environment": {
+    "python": "3.10.21",
+    "pytorch": "2.6.0+cu124",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "inference_device": "cpu",
+    "threads": 2,
+    "batch_size": 1,
+    "precision": "float32 without autocast"
+  },
+  "source_checkpoints_match_archived_sha256": true,
+  "export_preserves_all_39_state_dict_entries_per_model_exactly": true,
+  "real_dna": {
+    "sequences_per_species": 24,
+    "total_sequences": 72,
+    "total_strand_scores": 144,
+    "window_bp": 1024,
+    "source_manifest_and_sequence_cache_verified": true,
+    "all_sequences_independently_match_indexed_reference": true
+  },
+  "historical_predictions": {
+    "unchanged": true,
+    "comparison_atol": 0.0002,
+    "comparison_rtol": 0.001,
+    "per_species": {
+      "arabidopsis_thaliana": {
+        "max_absolute_error": 4.443526268005371e-05,
+        "max_relative_error": 0.0005815963948609858,
+        "n_scores": 48
+      },
+      "triticum_aestivum": {
+        "max_absolute_error": 0.00010938942432403564,
+        "max_relative_error": 0.0008670183862255245,
+        "n_scores": 48
+      },
+      "zea_mays": {
+        "max_absolute_error": 7.635354995727539e-05,
+        "max_relative_error": 0.0009609347688048915,
+        "n_scores": 48
+      }
+    }
+  },
+  "independent_original_implementation_check": {
+    "sequences_per_species": 2,
+    "total_strand_scores": 12,
+    "original_checkpoint_vs_export_vs_new_CLI_exactly_equal": true,
+    "max_absolute_difference": 0.0
+  },
+  "installation_scope": "An isolated venv uses existing production dependencies via system-site-packages. This is not a fresh download/install of every dependency or a Windows inference verification."
+}

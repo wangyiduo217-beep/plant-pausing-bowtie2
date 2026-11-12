@@ -239,10 +239,13 @@ or min-max normalization is applied to the saved quantitative predictions.
 
 This repository provides executable code, configuration templates, the small
 coordinate masks, documented accessions/identities and the packaged figure
-inputs described in the publication index. It does **not** bundle full reference
-FASTA files, raw reads, processed BAMs, complete training sequence caches or a
-publicly downloadable model checkpoint. Checkpoint hashes identify the archived
-weights used for the displayed results; they are not download links. Label and
+inputs described in the publication index. Full reference FASTA files, raw reads, processed BAMs and complete training sequence
+caches are not bundled. Pretrained inference checkpoints are now available as
+[release assets](https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/strand-seiplant-v1-pretrained-20261112).
+The [CPU quick start](pretrained-quickstart.md) uses bundled real DNA examples.
+Original checkpoint hashes identify the archived production files; the download
+manifest separately records the sanitized inference-file hashes. All model
+tensors are unchanged, including the fixed B-spline buffer. Label and
 manifest hashes similarly identify archived files. Fresh gzip files may have
 different container metadata, even when their decompressed rows agree.
 

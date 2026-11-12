@@ -548,8 +548,10 @@
   "production_framework": "PyTorch2.6.0+cu124",
   "checkpoint_availability": {
     "weights_in_repository": false,
-    "download_url": null,
-    "statement": "Checkpoint SHA-256 values identify the archived production weights used for the displayed results. This code release does not provide a public checkpoint download."
+    "weights_available_for_download": true,
+    "download_url": "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2/releases/tag/strand-seiplant-v1-pretrained-20261112",
+    "download_manifest": "publication/metadata/pretrained_models.json",
+    "statement": "Pretrained inference checkpoints are available as release assets, not Git source blobs. All original model tensors are preserved; machine-specific config is omitted. experiments[].checkpoint_sha256 identifies the original source; pretrained_models.json identifies both source and downloadable asset."
   },
   "input_availability": {
     "reference_genomes": "Public source URLs and checksums provided; not bundled.",
@@ -557,7 +559,8 @@
     "processed_BAMs": "Path templates in the label configuration; not bundled.",
     "masks": "The three small archived rRNA/organellar BED files are bundled, including the intentionally empty maize BED.",
     "full_training_labels_and_sequence_caches": "Not bundled; archived hashes and per-split counts recorded.",
-    "plot_data": "Separate publication plotting inputs are included where documented; they do not replace the training inputs."
+    "plot_data": "Separate publication plotting inputs are included where documented; they do not replace the training inputs.",
+    "real_DNA_inference_examples": "examples/real_dna: 24 real held-out 1024-bp sequences per species, coordinates, archived predictions and source identities."
   },
   "evaluation_definitions": {
     "training_target_metrics": "Observed consensus-derived y label versus predicted score, separately by reference strand.",
