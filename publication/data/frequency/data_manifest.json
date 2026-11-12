@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "model_version": "strand_seiplant_v1",
+  "independent_SRX": [
+    14,
+    5,
+    3
+  ],
+  "repeat_sequences_retained": true,
+  "files": {
+    "frequency_summary.csv": {
+      "bytes": 1686,
+      "sha256": "63dd55d5409d883aedd4b4d865b9b5f34386d5f9113a1aab66f093dbed1b8ecb"
+    },
+    "true_signal_frequency_bins.csv": {
+      "bytes": 28605,
+      "sha256": "1a648dbef7c8c6d6e7c22aeb492fc9e1e48b85eb0c3c1dbdefd208c68c29e22b"
+    }
+  }
+}

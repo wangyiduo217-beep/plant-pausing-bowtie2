@@ -1,0 +1,24 @@
+{
+  "python": "3.10.21",
+  "platform": "Linux",
+  "venv_isolated": true,
+  "include_system_site_packages": false,
+  "installation": "New task-specific venv and new conda R environment; packages installed from public indexes. No inherited system-site-packages.",
+  "font_family_for_acceptance": "DejaVu Sans",
+  "packages": {
+    "pip": "26.3",
+    "setuptools": "84.2.1",
+    "wheel": "0.48.0",
+    "torch": "2.6.0+cpu",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.9",
+    "hilearn": "0.2.2",
+    "reportlab": "5.1.0",
+    "pypdf": "7.0.1"
+  },
+  "all_model_dependencies_imported_from_new_venv": true,
+  "torch_cuda_runtime": null,
+  "R": "R version 4.4.3 (2025-02-28)\nCairo=TRUE",
+  "pip_check": "No broken requirements found."
+}

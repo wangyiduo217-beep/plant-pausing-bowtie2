@@ -39,3 +39,29 @@ The ROC chance reference is the grey diagonal. The native HiLearn PR diagonal op
 ## Runtime and fonts
 
 R figures require standard R and Cairo, with Arial available for the selected typography. The Python ROC/PR dependencies are in `requirements-publication.txt`; `--font-family` and `--font-file` allow an installed font choice. Fonts are not redistributed. The actual family is written in the reproduction record. Default ordinary text is 7 pt and panel letters are 8 pt. PDF/SVG exports preserve editable vector elements; inspect the regenerated output at its final publication size.
+
+## CPM deciles and signal frequency
+
+`publication/plotting/deciles/` redraws the supplied group statistics. For each
+species and strand separately, CPM=0 forms a separate group and positive CPM
+windows are sorted into ten equal-count groups (sizes differ by at most one).
+Ties are resolved by chromosome, start0, end0 and original window index; tied
+CPM values may span adjacent groups. Zero-group correlations are NA. Both
+experiment and prediction are transformed by log2(1+value) before Pearson r.
+
+Intervals are the 2.5/97.5 percentiles of 1,000 chromosome-stratified paired
+100-kb block-bootstrap replicates, with seed 20261110. Occupied physical blocks
+are sampled with replacement within chromosomes; one draw supplies weights
+for both strands and all groups. Original rank groups remain fixed. The
+replicate arrays and definitions are included. Rerendering does not resample.
+The grouped layout keeps strands separate; Q1 in opposite strands need not
+cover the same absolute CPM interval. Bootstrap intervals describe uncertainty
+conditional on the fixed model/test population, not biological replicates or
+training/library-selection uncertainty. Range restriction affects within-group r.
+
+`publication/plotting/frequency/` independently bins all raw test-window CPMs
+after log2(1+CPM), with fixed width 0.25 over 0–12. Each percentage denominator
+is every window in that species/strand panel, including zeros. The first bin
+contains both zero and low positive values; the exact zero count is annotated
+separately. The log-y detail view changes the display axis only. Percentages
+sum to 100%; missing regions are not filled with synthetic zeros.

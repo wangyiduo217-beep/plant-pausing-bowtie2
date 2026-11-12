@@ -10,7 +10,7 @@ These scripts reproduce the current **`strand_seiplant_v1`** results with repeat
 
 The defaults use 7 pt ordinary text, 8 pt panel letters and 600 dpi PNG exports. Both a 183 mm wide figure and an A4 proof are exported. The PDFs retain vector graphics.
 
-## Run all four R figure families
+## Run all six R figure families
 
 From the repository root:
 
@@ -36,6 +36,8 @@ ROC/PR has a separate Python entry point, `scripts/plot_publication_roc_pr.py`; 
 | `tracks/` | `run_tracks.R` | `publication/generated/tracks/` | The current extended track examples alongside the complete-test correlations |
 | `regional_bars/` | `run_regional_bars.R` | `publication/generated/regional_bars/` | Region-specific Pearson correlation by strand; Spearman is configurable |
 | `dual_axis_violins/` | `run_dual_axis_violins.R` | `publication/generated/dual_axis_violins/` | Experimental and predicted distributions grouped within each region, with independent y-axes |
+| `deciles/` | `run_decile_correlations.R` | `publication/generated/deciles/` | Separate plus/minus Pearson estimates and 95% block-bootstrap intervals within nonzero CPM deciles; grouped strands by default |
+| `frequency/` | `run_signal_frequency.R` | `publication/generated/frequency/` | Complete experimental-signal frequencies, including zeros, with linear-percent and log-y exports |
 
 For example:
 
@@ -99,6 +101,50 @@ All observations are used to calculate the histogram-based, reflected Gaussian d
 
 ## Data and reproducibility
 
-The three complete regional tables are stored once in `publication/data/regional/` and shared by correlations, regional bars and violins. The small extended-track tables are in `publication/data/tracks/`. Those directories contain schemas, relative filenames and SHA-256 manifests. They contain actual frozen plotting inputs, not simulated or subsampled examples. BAM/FASTQ files, genome FASTA files, model checkpoints, font binaries and machine-specific execution logs are not required to reproduce these plots and are not included here.
+### CPM deciles and grouped strands
+
+The default decile figure is the latest three-panel layout: each species panel
+shows plus-strand points at the left and minus-strand points at the right within
+each Q1-Q10 category. Each species/strand was ranked independently; the strands
+are not pooled and shared Q labels do not imply equal absolute CPM cutoffs.
+The 60 Pearson estimates, confidence intervals and group sizes are unchanged.
+Zero-CPM counts are shown separately with correlations marked NA.
+
+The script reads the archived `publication/data/deciles/group_statistics.csv`.
+It does not rerun the 1,000 chromosome-stratified, paired 100-kb block-bootstrap
+replicates. The draw archives and full statistical definitions are included in
+that data directory. Both quantities use `log2(1 + value)` before Pearson.
+
+For the original six-panel layout, in R:
+
+```r
+Sys.setenv(GROSEQ_DECILE_LAYOUT = "sixpanel")
+source("publication/plotting/deciles/run_decile_correlations.R", encoding = "UTF-8")
+Sys.unsetenv("GROSEQ_DECILE_LAYOUT")
+```
+
+The default grouped export is 183 x 115 mm, the six-panel export 183 x 183 mm;
+each also has a separate A4 proof with its explanatory caption. No page scaling
+changes the 7-pt text or 8-pt panel letters.
+
+### Experimental signal frequency
+
+The frequency entry reads the complete shared regional window tables and
+independently recomputes 48 fixed bins per species/strand panel. The x value is
+`log2(1 + mean SRX CPM)`, the bin width is 0.25, and the range is 0-12. The y value
+is each bin's window count divided by all windows in the panel, times 100%.
+All windows and experimental zeros are retained. The first bin includes low
+positive values as well as zeros; the exact zero count is separately annotated.
+The recomputed table is checked against the archived 288-bin reference.
+
+The default also exports `true_signal_frequency_logY_detail`, with unchanged
+percentages and denominators and a logarithmic y axis. Empty bins are not drawn
+on the log axis. Set `MAKE_LOG_Y <- FALSE` in its `config.R` to skip that view.
+Both variants export a 183 x 165 mm figure and an A4 captioned proof, as PDF and
+600-dpi PNG.
+
+### Shared data
+
+The three complete regional tables are stored once in `publication/data/regional/` and shared by correlations, regional bars, violins and signal-frequency plots. The small extended-track tables are in `publication/data/tracks/`; frozen decile summaries/draws and frequency references are in `publication/data/deciles/` and `publication/data/frequency/`. Those directories contain schemas, relative filenames and SHA-256 manifests. They contain actual frozen plotting inputs, not simulated or subsampled examples. BAM/FASTQ files, genome FASTA files, model checkpoints, font binaries and machine-specific execution logs are not required to reproduce these plots and are not included here.
 
 The scientific data and plotting methods are preserved from the current result scripts. Migration changes are limited to project-relative input/output paths, a shared input representation, configurable installed fonts, current zero-minimum defaults and the all-figure entry point. Generated settings, fitted coordinates, retained row indices and recomputed statistics accompany the outputs. The release's default R workflow is checked from an external working directory in a fresh R process.

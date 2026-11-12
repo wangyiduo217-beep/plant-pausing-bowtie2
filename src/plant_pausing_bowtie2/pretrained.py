@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import http.client
 import json
 import math
 import os
@@ -15,6 +16,8 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -25,6 +28,8 @@ SPECIES = {
 }
 FIELDS = ("sequence_id", "prediction_plus", "prediction_minus")
 WINDOW_BP = 1024
+DOWNLOAD_CHUNK_BYTES = 4 * 1024 * 1024
+DOWNLOAD_ATTEMPTS = 3
 
 
 class PretrainedError(RuntimeError):
@@ -90,8 +95,77 @@ def verify_checkpoint(path: Path, item: dict) -> None:
         raise PretrainedError("Checkpoint size or SHA-256 differs from the published model: " + str(path))
 
 
+def _download_to_temporary(output, item: dict) -> str:
+    """Bounded range requests prevent proxy truncation of long responses.
+
+    Only complete, correctly positioned ranges are appended. A server that
+    ignores the initial Range header may return a single full response. Once
+    ranges have begun, a full response is rejected rather than concatenated.
+    Every transfer still requires the final published byte count and SHA-256.
+    """
+    offset = 0
+    url = item["url"]
+    while offset < item["bytes"]:
+        end = min(offset + DOWNLOAD_CHUNK_BYTES, item["bytes"]) - 1
+        for attempt in range(DOWNLOAD_ATTEMPTS):
+            output.seek(offset)
+            output.truncate(offset)
+            request = urllib.request.Request(url, headers={
+                "User-Agent": "plant-pausing-bowtie2-pretrained",
+                "Accept-Encoding": "identity",
+                "Range": "bytes={}-{}".format(offset, end),
+            })
+            try:
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    status = getattr(response, "status", 200)
+                    if status == 206:
+                        expected = "bytes {}-{}/{}".format(offset, end, item["bytes"])
+                        if response.headers.get("Content-Range") != expected:
+                            raise PretrainedError("Download returned an incorrect Content-Range")
+                        block = response.read(end - offset + 2)
+                        expected_size = end - offset + 1
+                        if len(block) < expected_size:
+                            raise http.client.IncompleteRead(b"", expected_size - len(block))
+                        if len(block) != expected_size:
+                            raise PretrainedError("Download range exceeds its declared byte count")
+                        output.write(block)
+                        offset = end + 1
+                        # Reuse a verified HTTPS CDN redirect while it remains valid.
+                        final_url = response.geturl()
+                        if urllib.parse.urlsplit(final_url).scheme == "https":
+                            url = final_url
+                        break
+                    if status != 200 or offset != 0:
+                        raise PretrainedError("Server stopped honoring byte ranges or returned an unexpected status")
+                    count = 0
+                    for block in iter(lambda: response.read(1024 * 1024), b""):
+                        count += len(block)
+                        if count > item["bytes"]:
+                            raise PretrainedError("Download exceeds the published checkpoint size")
+                        output.write(block)
+                    if count != item["bytes"]:
+                        raise http.client.IncompleteRead(b"", item["bytes"] - count)
+                    return "full_response"
+            except urllib.error.HTTPError as exc:
+                # Refresh an expired signed CDN URL; never publish partial bytes.
+                if exc.code == 403 and url != item["url"]:
+                    url = item["url"]
+                elif exc.code != 429 and not 500 <= exc.code <= 599:
+                    raise PretrainedError("Checkpoint request failed with HTTP " + str(exc.code)) from exc
+                if attempt + 1 == DOWNLOAD_ATTEMPTS:
+                    raise PretrainedError("Checkpoint request failed after three attempts") from exc
+                time.sleep(0.5 * (attempt + 1))
+            except (OSError, http.client.IncompleteRead) as exc:
+                if attempt + 1 == DOWNLOAD_ATTEMPTS:
+                    raise PretrainedError("Checkpoint transfer was interrupted after three attempts") from exc
+                time.sleep(0.5 * (attempt + 1))
+        else:
+            raise PretrainedError("Checkpoint transfer exhausted its retry limit")
+    return "verified_http_ranges"
+
+
 def download_checkpoint(root: Path, item: dict, force: bool = False) -> dict:
-    """Stream to a temporary file; publish locally only after size/hash checks."""
+    """Download with bounded retries; publish locally only after size/hash checks."""
     target = checkpoint_path(root, item)
     if target.exists():
         try:
@@ -105,24 +179,15 @@ def download_checkpoint(root: Path, item: dict, force: bool = False) -> dict:
     fd, temporary_name = tempfile.mkstemp(prefix=target.name + ".", suffix=".partial", dir=str(target.parent))
     temporary = Path(temporary_name)
     try:
-        digest = hashlib.sha256()
-        count = 0
-        request = urllib.request.Request(item["url"], headers={"User-Agent": "plant-pausing-bowtie2-pretrained"})
         with os.fdopen(fd, "wb") as output:
-            with urllib.request.urlopen(request, timeout=120) as response:
-                for chunk in iter(lambda: response.read(1024 * 1024), b""):
-                    count += len(chunk)
-                    if count > item["bytes"]:
-                        raise PretrainedError("Download exceeds the published checkpoint size")
-                    digest.update(chunk)
-                    output.write(chunk)
-        if count != item["bytes"] or digest.hexdigest() != item["sha256"]:
+            transport = _download_to_temporary(output, item)
+        if temporary.stat().st_size != item["bytes"] or sha256_file(temporary) != item["sha256"]:
             raise PretrainedError("Downloaded checkpoint failed size/SHA-256 verification")
         os.replace(str(temporary), str(target))
     finally:
         if temporary.exists():
             temporary.unlink()
-    return {"path": str(target), "sha256": item["sha256"], "status": "downloaded_and_verified"}
+    return {"path": str(target), "sha256": item["sha256"], "status": "downloaded_and_verified", "transport": transport}
 
 
 def read_fasta(path: Path) -> list[tuple[str, str]]:

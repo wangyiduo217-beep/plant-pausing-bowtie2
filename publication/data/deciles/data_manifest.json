@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "model_version": "strand_seiplant_v1",
+  "independent_SRX": [
+    14,
+    5,
+    3
+  ],
+  "repeat_sequences_retained": true,
+  "files": {
+    "arabidopsis.block_bootstrap.npz": {
+      "bytes": 157064,
+      "sha256": "6508daa6c1c9b82456e862de45de20f7133db0c47499c28ed344c719396efe59"
+    },
+    "group_statistics.csv": {
+      "bytes": 15404,
+      "sha256": "cf9893592cb5d972ca02f5a3248e8e21b84a0048277b568e7ce51abe26ca48cb"
+    },
+    "high_minus_low_correlation_difference.csv": {
+      "bytes": 1229,
+      "sha256": "c15ed034f102de2add5d8e2bc87cfc073cdc6b52498047049ecc9301ce0563f5"
+    },
+    "maize.block_bootstrap.npz": {
+      "bytes": 161411,
+      "sha256": "3eb7066c92ce339da4dd8350d450c73174ab06145daccf55c8d9f52ad4a0233c"
+    },
+    "overall_correlation_reference.csv": {
+      "bytes": 466,
+      "sha256": "7bce5c192a73da2649e4625ad6686280ecbdd044f3897c7c69b4b9ce5dc4d799"
+    },
+    "wheat.block_bootstrap.npz": {
+      "bytes": 203648,
+      "sha256": "00bcaca10aafa242a6e2415a20246bbb8e7f254b9ec9c0276204f5a4e94bff39"
+    },
+    "zero_signal_prediction_summary.csv": {
+      "bytes": 978,
+      "sha256": "42e967507c4d59036b243d3d7c66eb720431a5fd32e328be4f4bd666068bfc14"
+    }
+  }
+}

@@ -1,1 +1,3 @@
 * text=auto eol=lf
+publication/data/deciles/*.csv -text
+publication/data/frequency/*.csv -text

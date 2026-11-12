@@ -1,8 +1,10 @@
-# Plant GRO-seq: sequence-to-signal models and reproducible figures
+# GROPlant
+
+DNA sequence models for plant GRO-seq scores and reproducible research figures.
 
 Code for plant GRO-seq processing, experimental consensus labels, species-specific DNA-to-GRO-seq models, and the selected publication figures.
 
-**Selected analysis: `strand_seiplant_v1`, repeat sequences retained, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX.** Wheat uses the original **five-library** model. The model implementation is unchanged; this update makes the selected experiment and its current plotting inputs explicit. Package version: **0.3.2**.
+**Selected analysis: `strand_seiplant_v1`, repeat sequences retained, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX.** Wheat uses the original **five-library** model. The model implementation is unchanged; this update makes the selected experiment and its current plotting inputs explicit. Package version: **0.3.3**. GROPlant is the display name; the frozen model identity remains `strand_seiplant_v1`.
 
 | Species | Independent SRX | Held-out test chromosomes | Test windows |
 |---|---:|---|---:|
@@ -33,6 +35,73 @@ examples/real_dna/              Real DNA inputs and archived answers for inferen
 tests/                         Automated workflow, label, preparation and inference-interface checks
 ```
 
+## Start from a fresh download
+
+Download this repository using **Code → Download ZIP**, extract it, and open a
+terminal in the extracted folder. Alternatively:
+
+```bash
+git clone https://github.com/wangyiduo217-beep/plant-pausing-bowtie2.git
+cd plant-pausing-bowtie2
+```
+
+Use Python 3.10 or 3.11. Create a new environment without inherited packages:
+
+```bash
+python -m venv .venv
+```
+
+Activate it with `.venv\Scripts\Activate.ps1` in Windows PowerShell, or
+`source .venv/bin/activate` on Linux/macOS. Then install:
+
+```bash
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-inference.txt -r requirements-publication.txt -c requirements-acceptance-lock.txt
+python -m pip install --no-deps -e .
+```
+
+The PyTorch CPU command above targets Windows/Linux. Install R 4.2.1 or later
+with Cairo support for the R plots; no extra CRAN packages are needed. Use
+Arial for the requested publication typography, or an installed DejaVu Sans
+or Liberation Sans fallback. See the [complete acceptance guide](docs/acceptance.md) for
+platform details, output locations and the tested environment.
+
+## Verify the installation and results
+
+From the repository root:
+
+```bash
+python scripts/acceptance_check.py --font "DejaVu Sans" --require-isolated-env
+```
+
+This checks the software and input files, downloads/verifies all three
+checkpoints, predicts all 72 bundled real DNA sequences, validates decile and
+frequency inputs, and generates six R figure families plus the Python ROC/PR
+figure. If `Rscript` is not on PATH, add `--rscript "FULL/PATH/TO/Rscript"`.
+The three weights total about 930 MB; already verified files are reused.
+The downloader uses small HTTP ranges with bounded retries to tolerate
+interrupted connections, and checks the complete size and SHA-256 before use.
+
+Successful individual checks report:
+
+| Check | Expected result |
+| --- | --- |
+| `python -m unittest discover -s tests -v` | Ends with `OK`; Windows skips the two Linux execution-guard tests |
+| `python scripts/verify_publication_inputs.py` | Reports `193,508 complete windows` verified |
+| `python scripts/check_pretrained_example.py --species all` | Each species reports `passed: true`, 24 sequences and 48 strand scores |
+| R plotting entry point | Completes all six figure families and writes PDFs/PNGs under `publication/generated/` |
+| Full acceptance entry point | Exits with code 0 and writes a summary with every step passed |
+
+For the example score comparisons, all 144 scores must satisfy
+`abs(actual - expected) <= 0.0002 + 0.001 * abs(expected)`. Archived expected
+predictions are not rewritten to make the check pass. These selected sequences
+check functionality; they are not a new performance benchmark.
+
+The acceptance scope is the distributed inference and figure-reproduction
+workflows. Full retraining and processing the original FASTQ/BAM collections
+require separately obtained data and are described below.
+
 ## Try the trained model on real DNA
 
 Pretrained checkpoints for all three species are available from the
@@ -55,7 +124,7 @@ FASTA sequences, use `scripts/predict_fasta.py` as explained in the guide.
 
 The **complete plotting inputs are included**. Plot-only reproduction does not need FASTQ, BAM, a genome FASTA, a GPU, or trained checkpoints. All 193,508 held-out test windows are retained; no low-prediction threshold is applied to the primary correlation plots.
 
-### Correlations, tracks, regional correlations, and dual-axis violins
+### Six R figure families
 
 Install R with Cairo graphics support. In R, from the repository root:
 
@@ -70,6 +139,8 @@ Current conventions:
 - **Correlations:** same-strand, same 1,024-bp test windows; x = `log2(1 + mean SRX CPM)`, y = `log2(1 + predicted score)`. Each SRX is normalized independently before averaging. Axes start at zero; the line is ordinary least squares. Filtering is an optional exploratory setting, with default threshold **0**.
 - **Tracks:** raw 0-1 window scores, 1,024-bp inputs and 128-bp sliding step. Scores are displayed on the central 128 bp. Experimental endpoint-CPM tracks and predictions have different units. Selected loci illustrate agreement and are not the whole-test evaluation.
 - **Regional correlations:** the original eight region assignments and test windows, with strands kept separate. The assignment uses the window midpoint and the canonical protein-coding transcript reference.
+- **CPM deciles:** zero CPM is listed separately; positive windows are ranked into ten equally sized groups independently for each species and strand. The default puts both strands beside each other in each species panel. Points and 100-kb block-bootstrap intervals use the frozen supplied statistics; rerendering does not rerun bootstrap.
+- **Signal frequency:** all formal windows, including zeros; fixed-width 0.25 bins of `log2(1 + mean CPM)` and percentages of the full panel population. A logarithmic-y detail view is also provided.
 - **Violin plots:** paired experiment/prediction distributions. Green uses the left `log2(1 + mean CPM)` axis (0-4); orange uses the right `log2(1 + score)` axis (0-1). Densities use **all** windows; the experimental viewport alone is zoomed. Arrows report the fraction above its limit. No min-max normalization is applied.
 
 Arial is requested at 7 pt, with 8-pt panel letters. Install a properly licensed font locally; font binaries are not included. A substituted font can change layout and should be checked before submission.
@@ -128,4 +199,10 @@ Model/preparation tests do not replace biological quality control or GPU retrain
 
 The sequence architecture was developed with reference to [SeiPlant](https://github.com/compbioNJU/SeiPlant), associated with Lv *et al.*, *Cross-species prediction of histone modifications in plants via deep learning*, Genome Biology (2026), [doi:10.1186/s13059-025-03929-4](https://doi.org/10.1186/s13059-025-03929-4). Its model task and pretrained weights differ from this GRO-seq application. This repository follows its readable installation/training/prediction/plotting organization and documents the adaptations explicitly.
 
-See [references and third-party notices](docs/reference-and-attribution.md). The repository has no project-wide license grant; third-party license terms remain applicable. This code archive is not itself a peer-reviewed publication.
+Original code and associated documentation: **[MIT](LICENSE)**.
+Pretrained GROPlant weights and original generated figures/data:
+**[CC BY 4.0](LICENSES/CC-BY-4.0.txt)**. Copyright (c) 2026 GROPlant contributors.
+See [license scope and attribution](docs/licensing.md) and
+[third-party notices](docs/reference-and-attribution.md). Reference DNA,
+upstream code, experimental sources and dependencies retain their original
+terms. No GROPlant manuscript DOI or peer-reviewed-publication status is claimed.

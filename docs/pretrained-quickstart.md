@@ -1,4 +1,4 @@
-# Run the pretrained GRO-seq models on real DNA
+# Run pretrained GROPlant on real DNA
 
 This example loads our trained **strand_seiplant_v1** models and performs actual
 DNA-to-score inference. The model version retains repeats and uses **14 / 5 / 3
@@ -11,6 +11,7 @@ Use Python 3.10 or 3.11 in a separate environment. From the downloaded repositor
 root, run:
 
 ```bash
+python -m pip install --upgrade pip setuptools wheel
 python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
 python -m pip install -r requirements-inference.txt
 python -m pip install --no-deps -e .

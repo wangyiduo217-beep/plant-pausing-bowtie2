@@ -67,7 +67,7 @@ class PretrainedTests(unittest.TestCase):
         target = checkpoint_path(self.root, item)
         target.parent.mkdir(parents=True)
         target.write_bytes(b"previous file")
-        with patch("urllib.request.urlopen", return_value=io.BytesIO(b"bad download")):
+        with patch("urllib.request.urlopen", side_effect=lambda *args, **kwargs: io.BytesIO(b"bad download")), patch("time.sleep"):
             with self.assertRaises(PretrainedError):
                 download_checkpoint(self.root, item, force=True)
         self.assertEqual(target.read_bytes(), b"previous file")

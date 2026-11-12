@@ -1,0 +1,7 @@
+﻿species,strand,comparison,delta_pearson_r,ci95_low,ci95_high,valid_replicates,interpretation
+arabidopsis,plus,Q10 minus Q1 among CPM-positive windows,-0.023405032878204314,-0.08106521182715588,0.04000509219935289,1000,Exploratory conditional association; not a causal coverage effect.
+arabidopsis,minus,Q10 minus Q1 among CPM-positive windows,-0.08655908573535481,-0.14139515437306108,-0.029452721951529242,1000,Exploratory conditional association; not a causal coverage effect.
+wheat,plus,Q10 minus Q1 among CPM-positive windows,0.052191919188507886,-0.011080416195736928,0.12277767055120165,1000,Exploratory conditional association; not a causal coverage effect.
+wheat,minus,Q10 minus Q1 among CPM-positive windows,0.01253164453255633,-0.05449535085910346,0.07889509091088698,1000,Exploratory conditional association; not a causal coverage effect.
+maize,plus,Q10 minus Q1 among CPM-positive windows,0.04358257454846721,-0.019551726310244717,0.11778901533527025,1000,Exploratory conditional association; not a causal coverage effect.
+maize,minus,Q10 minus Q1 among CPM-positive windows,0.14622545745462145,0.07858174557755304,0.20020102193508535,1000,Exploratory conditional association; not a causal coverage effect.

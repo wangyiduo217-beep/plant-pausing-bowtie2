@@ -50,5 +50,10 @@
       "best_epoch": 8,
       "all_tensors_and_buffers_exactly_equal_to_source": true
     }
-  }
+  },
+  "display_name": "GROPlant",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "GROPlant contributors; retain the model identity, release and source attribution; indicate changes.",
+  "license_scope_document": "docs/licensing.md"
 }

@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "Please cite the archived code version and the methodological references listed in the README. This repository has no associated manuscript DOI."
-title: "Plant GRO-seq sequence-to-signal models and reproducible figures"
+title: "GROPlant: plant GRO-seq sequence models and reproducible figures"
 type: software
 authors:
-  - name: "plant-pausing-bowtie2 contributors"
-version: "0.3.2"
+  - name: "GROPlant contributors"
+version: "0.3.3"
 date-released: "2026-11-12"
 repository-code: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"
 url: "https://github.com/wangyiduo217-beep/plant-pausing-bowtie2"

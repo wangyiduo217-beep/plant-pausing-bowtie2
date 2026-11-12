@@ -59,10 +59,13 @@ The [official plotting documentation](https://hilearn.readthedocs.io/en/latest/p
 describes its interfaces. The dependency's license remains its own and is not a
 project-wide license declaration for this repository.
 
-## Project-wide licensing status
+## GROPlant licensing
 
-This snapshot does not provide a project-wide `LICENSE` file or an SPDX license
-declaration for the newly authored project code. This provenance document does
-not add a license grant or change existing third-party terms. The MIT and
-Apache-2.0 references above identify the corresponding upstream materials and
-dependency only.
+The original project code and associated documentation are licensed under MIT
+(Copyright (c) 2026 GROPlant contributors). The project's pretrained weights
+and original generated figures/data are licensed under CC BY 4.0. The complete
+scope and attribution instructions are in [licensing.md](licensing.md).
+
+Third-party reference DNA, original experiments and dependencies retain their
+own terms. The upstream SeiPlant MIT notice is preserved in
+`LICENSES/SeiPlant-MIT.txt`; the external HiLearn package remains Apache-2.0.

@@ -129,7 +129,7 @@ def main():
         fig.text((x + 23.5) / width, 71.8 / height, f"{name} HiLearn ROC and PR",
                  ha="center", fontsize=7, fontweight="bold")
         fig.text((x + 23.5) / width, 67.9 / height,
-                 f"{n:,} test windows; two strands pooled", ha="center", fontsize=7)
+                 f"{n:,} windows; strands pooled", ha="center", fontsize=7)
         fig.text((x - 10.5) / width, 71.8 / height, "abc"[index],
                  fontsize=8, fontweight="bold")
         full_auc, full_ap = exact_metrics(truth, score)
@@ -172,10 +172,11 @@ def main():
     for row, sentence in enumerate(caption):
         page.drawString(13.5 * mm, (175 - row * 5) * mm, sentence)
     page.showPage(); page.save(); buffer.seek(0)
-    a4 = PdfReader(buffer).pages[0]
+    # pypdf 7 requires a writer-owned page before merging content.
+    writer = PdfWriter()
+    a4 = writer.add_page(PdfReader(buffer).pages[0])
     a4.merge_transformed_page(PdfReader(stem.with_suffix(".pdf")).pages[0],
                               Transformation().translate(tx=13.5 * mm, ty=192 * mm))
-    writer = PdfWriter(); writer.add_page(a4)
     with (output / "three_species_ROC_PR_A4.pdf").open("wb") as handle:
         writer.write(handle)
     (output / "reproduction.json").write_text(json.dumps({

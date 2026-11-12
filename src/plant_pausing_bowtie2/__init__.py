@@ -1,6 +1,6 @@
 """Reproducible Bowtie2 processing for plant nascent-transcription reads."""
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 
 from .workflow import run_sample
 

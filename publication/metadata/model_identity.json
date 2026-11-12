@@ -572,7 +572,10 @@
     "doi": "10.1186/s13059-025-03929-4",
     "repository": "https://github.com/compbioNJU/SeiPlant",
     "consulted_commit": "1c88cfcfc67c37c4b9f5deb56175a09b8ffdd853",
-    "license": "Upstream SeiPlant MIT notice must be retained for incorporated/adapted portions; this file does not assign a new project-wide license."
+    "license": "Original GROPlant code: MIT. Retain the upstream SeiPlant MIT notice in LICENSES/SeiPlant-MIT.txt for incorporated/adapted portions. See docs/licensing.md."
   },
-  "reproduction_limit": "These hashes identify archived files and the selected model; fresh training is not claimed bitwise identical. Different gzip headers or software/hardware execution can alter file hashes even where scientific content is equivalent."
+  "reproduction_limit": "These hashes identify archived files and the selected model; fresh training is not claimed bitwise identical. Different gzip headers or software/hardware execution can alter file hashes even where scientific content is equivalent.",
+  "display_name": "GROPlant",
+  "code_license": "MIT",
+  "pretrained_weight_license": "CC-BY-4.0"
 }
