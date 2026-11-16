@@ -1,6 +1,16 @@
 # Current figure previews
 
-All previews use repeat-retained `strand_seiplant_v1`, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX. The full editable figures are regenerated under `figure/results/`.
+## GROPlant study overview
+
+![GROPlant study overview: three plant species, nascent transcription and strand-resolved GRO-seq signal](groplant_framework.png)
+
+Panel a from the author-supplied `Figure 1. GROseq_combined_v2_A4.pdf`, rendered at 300 dpi with its original labels and artwork. It illustrates the biological data workflow: Arabidopsis, wheat and maize; nascent transcription by RNA polymerase II; and plus/minus-strand GRO-seq signals from single-end reads or read 1. The DNA-to-score neural network is shown in panel b of the source figure and is not part of this crop.
+
+[Source checksum and extraction details](groplant_framework.source.json) record the original PDF and the exact crop. This preview is extracted from the supplied figure; the plotting commands below do not regenerate it.
+
+## Evaluation previews
+
+The following results use repeat-retained `strand_seiplant_v1`, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX. The full editable result figures are regenerated under `figure/results/`.
 
 ## Complete-test correlations
 

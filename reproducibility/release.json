@@ -23,7 +23,7 @@
     "LICENSE": "645a0342b26ccabd56f79945dc00fb4c036c0c60eeb5652329fcb8e519d48aa1",
     "LICENSES/CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
     "LICENSES/SeiPlant-MIT.txt": "e3689dfe2618a1cb8b77d633c3585729446e570d221b8c26095096f20dce498a",
-    "README.md": "4b95e5c75ea8c7fa78444ea005d6ab69d14c3886d8e84384ee0a78c70a7b2739",
+    "README.md": "c7edc2cf9fdffb92aafba6a9c2bea7ffb20204296a09a09ef9dbce2817a2333a",
     "check_installation.py": "14b9a33d099bada774ce39f3e098de9d0c44735aa2b9f766294355cef572b119",
     "docs/acceptance.md": "dca8f5d4d5d6e7fc7b7364f019e4d29f719a7e78e2923785c88e6c11105c877d",
     "docs/licensing.md": "3a93986e16cf39000a1ec9454409cbb98993cef8dfb072bb3ba6d9ac1c252316",
@@ -79,10 +79,12 @@
     "figure/plotting/run_all.R": "8e5b99019afd5ce0edd8d6f99a74d3c093638ec8d00ef5328c61e72234d1c93d",
     "figure/plotting/tracks/config.R": "1bac33f3556a02159777e0ddba18253a49194eaae6ecd60453fa00b99391fff9",
     "figure/plotting/tracks/run_tracks.R": "4aaa0f459813fdc0887cb2f97edb4c59763ee2e3ce44d1ba786bfcb2fdc89fa3",
-    "figure/preview/README.md": "1e962c9accbda19392142a1ff634930d0a887507e86310f1781b434dc5712ca9",
+    "figure/preview/README.md": "bdb9c683b0ebfa55127c43aff52d02d25a29e0a2a60eccf50f674c136ec7461a",
     "figure/preview/arabidopsis_dual_axis_violins.png": "182aa6abd5736c4e1234aa7ad131c543a9c196efe8488e0d4b82166723fa6275",
     "figure/preview/correlations.png": "62fdd7ef4fe5d630e48ead9fc05306914980f5c902bde04fe73ef34689e93026",
     "figure/preview/deciles_grouped.png": "bcf6af6d81878e3e86f5817a27c3384ae0441c3b3901aedbacb5590bc6eebced",
+    "figure/preview/groplant_framework.png": "6e5cdaeedbc8a65e1237921ff67c7ab14534c4bd6f8f102b8ab47d7f6cc7b76d",
+    "figure/preview/groplant_framework.source.json": "ef2af1770e16ec2ce2f7dffa5e8a169b06bbd322289bac0d225d97c015622978",
     "figure/preview/roc_pr.png": "54658dfcaed19cfff5d42a291e263e3d8e2a294873d1f3234f2c5907dec747c5",
     "figure/preview/signal_frequency.png": "57aa2013db5f47e7733c5927ca83eb59453533717ca13570d866ff114d6c2630",
     "figure/preview/signal_frequency_logY.png": "12f1e2841dd8f1c6a7140c2537ace93461d9bcc4c41c390370c5cf42c26f9887",
@@ -206,5 +208,12 @@
     "previous_package_version": "0.3.3",
     "previous_source_commit": "5800bbde78d2accbfe884f01fce302c41d70e892",
     "scientific_model_and_data_unchanged": true
+  },
+  "homepage_update": {
+    "date": "2026-11-16",
+    "base_commit": "0b38a9480e4952b6ff3b80a12f568c1d46f5c78b",
+    "schematic": "figure/preview/groplant_framework.png",
+    "figure_provenance": "figure/preview/groplant_framework.source.json",
+    "scope": "Homepage documentation and the supplied Figure 1 panel a preview; model code, weights and scientific data unchanged."
   }
 }
