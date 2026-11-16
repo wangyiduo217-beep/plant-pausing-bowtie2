@@ -16,15 +16,16 @@ used to reproduce the research figures.
 
 ## Schematic Diagram
 
-![GROPlant study overview: three plant species, nascent transcription and strand-resolved GRO-seq signal](figure/preview/groplant_framework.png)
+![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](figure/preview/groplant_framework.png)
 
-**Figure 1a.** Biological data workflow for GROPlant: GRO-seq datasets from
-Arabidopsis, wheat and maize capture nascent transcription by RNA polymerase II
-and provide plus- and minus-strand signals from single-end reads or read 1.
-This panel is extracted from the original study figure; its
-[source and extraction details](figure/preview/groplant_framework.source.json)
-are recorded alongside the image. The DNA-to-score network is documented in the
-[model methods](model/docs/publication-model.md).
+**Figure 1a–b. GROPlant data workflow and model architecture.**
+**(a)** GRO-seq datasets from Arabidopsis, wheat and maize capture nascent
+transcription by RNA polymerase II and provide strand-resolved signals.
+**(b)** A 1,024-bp one-hot DNA input passes through convolutional and residual
+blocks, fixed B-spline pooling and a regression head to produce two raw 0–1
+window scores, one per strand. Both panels are reproduced from the original
+study figure. See the [model methods](model/docs/publication-model.md) and
+[source and extraction details](figure/preview/groplant_framework.source.json).
 
 ## Key Features
 
@@ -163,15 +164,7 @@ The earlier alignment, trimming and interval-calling workflows are described in
 the [processing guide](model/docs/legacy-pipeline-guide.md) and
 [label-generation methods](model/docs/groseq-y-label-generation.md).
 
-## Results and Plotting
-
-![Complete-test correlations for Arabidopsis, wheat and maize](figure/preview/correlations.png)
-
-All **193,508 held-out test windows** are included in the plotting data.
-Primary correlations use same-strand values with
-`x = log2(1 + mean SRX CPM)` and `y = log2(1 + predicted score)`; each SRX is
-normalized independently before averaging. No low-prediction threshold is
-applied to these primary plots.
+## Plotting Code
 
 The [figure gallery](figure/preview/README.md) includes correlation, ROC/PR,
 paired-violin, CPM-decile and signal-frequency previews. The

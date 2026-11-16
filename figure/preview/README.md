@@ -1,10 +1,10 @@
 # Current figure previews
 
-## GROPlant study overview
+## GROPlant framework
 
-![GROPlant study overview: three plant species, nascent transcription and strand-resolved GRO-seq signal](groplant_framework.png)
+![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](groplant_framework.png)
 
-Panel a from the author-supplied `Figure 1. GROseq_combined_v2_A4.pdf`, rendered at 300 dpi with its original labels and artwork. It illustrates the biological data workflow: Arabidopsis, wheat and maize; nascent transcription by RNA polymerase II; and plus/minus-strand GRO-seq signals from single-end reads or read 1. The DNA-to-score neural network is shown in panel b of the source figure and is not part of this crop.
+Panels a and b from the author-supplied `Figure 1. GROseq_combined_v2_A4.pdf`, rendered together at 300 dpi with their original labels and artwork. Panel a illustrates the biological data workflow: Arabidopsis, wheat and maize; nascent transcription by RNA polymerase II; and plus/minus-strand GRO-seq signals from single-end reads or read 1. Panel b shows the complete sequence model: a 1,024-bp one-hot DNA input, convolutional and residual blocks, fixed B-spline pooling and a regression head that produces two raw 0–1 window scores, one per strand.
 
 [Source checksum and extraction details](groplant_framework.source.json) record the original PDF and the exact crop. This preview is extracted from the supplied figure; the plotting commands below do not regenerate it.
 

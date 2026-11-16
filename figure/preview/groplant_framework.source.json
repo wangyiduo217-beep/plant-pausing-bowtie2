@@ -2,8 +2,8 @@
   "source_file": "Figure 1. GROseq_combined_v2_A4.pdf",
   "source_sha256": "3015283a98a4bbf10f035c0d80ba88b56285f2b5d9c032897f0e2e2ba787dae9",
   "source_page": 1,
-  "source_panel": "a",
-  "description": "Plant GRO-seq datasets, nascent transcription and strand-resolved signal; panel b neural network is excluded.",
+  "source_panel": "a-b",
+  "description": "Complete plant GRO-seq biological data workflow (panel a) and DNA-to-score model architecture (panel b).",
   "extracted_on": "2026-11-16",
   "renderer": "Poppler pdftoppm",
   "dpi": 300,
@@ -11,14 +11,14 @@
     "x": 154,
     "y": 91,
     "width": 2150,
-    "height": 371
+    "height": 1160
   },
   "image_file": "groplant_framework.png",
   "image_size_pixels": [
     2150,
-    371
+    1160
   ],
-  "image_sha256": "6e5cdaeedbc8a65e1237921ff67c7ab14534c4bd6f8f102b8ab47d7f6cc7b76d",
+  "image_sha256": "25e1e126962203a0907bc5d1ba1c1d5bb4cc0e06b5820a83aae9e009e7020984",
   "content_changes": "PDF rendered and cropped only; original panel labels and artwork retained.",
   "license": "CC-BY-4.0",
   "attribution": "GROPlant contributors"
