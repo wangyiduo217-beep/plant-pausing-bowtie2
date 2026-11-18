@@ -166,6 +166,12 @@ the [processing guide](model/docs/legacy-pipeline-guide.md) and
 
 ## Plotting Code
 
+The selected final **cross-species radar and genomic-track figure** now includes
+its [complete plotting scripts and individual-panel commands](figure/plotting/radar_tracks/README.md),
+[eight exact input files](figure/data/radar_tracks/README.md), and
+[original A4 PDF](figure/preview/radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf).
+It can be redrawn without models, a GPU or raw sequencing files.
+
 The [figure gallery](figure/preview/README.md) includes correlation, ROC/PR,
 paired-violin, CPM-decile and signal-frequency previews. The
 [plotting guide](figure/plotting/README.md) provides editable settings and individual

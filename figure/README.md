@@ -11,6 +11,8 @@ FASTQ/BAM files, a full reference genome or a GPU.
 | Content | Location |
 | --- | --- |
 | Ready-to-view result figures | [preview/README.md](preview/README.md) |
+| Selected final cross-species radar + tracks, full figure and panels a-f | [plotting/radar_tracks/README.md](plotting/radar_tracks/README.md) |
+| Exact inputs for the final radar/track figure | [data/radar_tracks/](data/radar_tracks/) |
 | Full window values and region assignments | [data/regional/](data/regional/) |
 | Selected genomic tracks | [data/tracks/](data/tracks/) |
 | ROC/PR inputs and reference metrics | [data/roc/](data/roc/) |
@@ -22,6 +24,8 @@ FASTQ/BAM files, a full reference genome or a GPU.
 
 The R families are complete-test correlations, extended tracks, regional
 correlations, dual-axis violins, CPM-decile correlations and signal frequencies.
+The selected final cross-species radar/track composite has a separate entry point;
+its eight plotting inputs and original A4 reference PDF are now included.
 The decile default places both strands side by side in each species panel.
 Frequency plots include linear-percent and logarithmic-y views.
 
@@ -33,6 +37,14 @@ publication typography, or set `GROSEQ_FONT_FAMILY` to another installed font.
 
 ```bash
 Rscript --vanilla figure/plotting/run_all.R
+```
+
+For the selected final composite (not included in the legacy six-family runner):
+
+```bash
+Rscript --vanilla figure/plotting/radar_tracks/plot_radar_tracks_composite.R
+Rscript --vanilla figure/plotting/radar_tracks/plot_components.R --component all
+python figure/scripts/verify_radar_tracks_inputs.py
 ```
 
 For the Python ROC/PR figure:

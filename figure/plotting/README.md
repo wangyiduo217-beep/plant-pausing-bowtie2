@@ -30,6 +30,16 @@ ROC/PR has a separate Python entry point, `figure/scripts/plot_publication_roc_p
 
 ## Individual figure families
 
+The selected final **cross-species radar and track composite** is additionally
+available in [radar_tracks/](radar_tracks/README.md). Its dedicated commands recreate
+the A4 figure with caption, separate artwork, and panels a-f from eight supplied
+input files. It is intentionally separate from the legacy six-family `run_all.R`.
+
+```sh
+Rscript --vanilla figure/plotting/radar_tracks/plot_radar_tracks_composite.R
+Rscript --vanilla figure/plotting/radar_tracks/plot_components.R --component all
+```
+
 | Directory | Entry point | Output directory | Content |
 | --- | --- | --- | --- |
 | `correlations/` | `run_plots.R` | `figure/results/correlations/` | All formal test windows, two strands, density-colored points and an OLS line |

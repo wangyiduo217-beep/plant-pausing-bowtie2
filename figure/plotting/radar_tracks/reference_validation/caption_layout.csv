@@ -1,0 +1,14 @@
+"line","text","y_mm","font_pt","leading_pt"
+1,"a-c, Radar profiles for input DNA from Arabidopsis thaliana, Zea mays and Triticum aestivum. Pearson r compares log2(1 + experimental mean",65.7,8,10
+2,"CPM) with log2(1 + raw model score), pooling both strands across all formal test windows. Micro AUROC pools strand-specific labels and raw",62.1722222222222,8,10
+3,"scores (HiLearn 0.2.2; seed 42). Positive 1,024-bp windows overlap a same-strand consensus region by at least 1 bp; consensus requires at least",58.6444444444444,8,10
+4,"two distinct SRX experiments. Micro Jaccard at the 85th percentile (J85) is sum(TP)/sum(TP + FP + FN), pooling strand counts. High-signal",55.1166666666667,8,10
+5,"windows strictly exceed thresholds computed independently for each signal, target species and strand. Pooled metrics do not average",51.5888888888889,8,10
+6,"strand-specific metrics; n counts strand-window pairs, not biological replicates. Axes show unrescaled values on a common 0-1 display scale, with",48.0611111111111,8,10
+7,"0.25 grid steps; polygon area is not a composite score. Coral red and deep indigo indicate same-species and cross-species models. Circles,",44.5333333333333,8,10
+8,"triangles and squares identify Arabidopsis, maize and wheat source models. d-f, Selected 100-kb regions. Experimental tracks are coral red and",41.0055555555556,8,10
+9,"cross-species predictions are deep indigo, irrespective of strand. Experimental tracks show log2(1 + mean CPM) in 128-bp bins after per-SRX",37.4777777777778,8,10
+10,"normalization and equal averaging. Raw predictions use 1,024-bp inputs at 128-bp steps and are displayed over the central 128 bp. Regional r",33.95,8,10
+11,"uses log2(1+x) for both full-window mean CPM and raw scores across common valid 1,024-bp inputs. Own-model r refers to the same-species",30.4222222222222,8,10
+12,"prediction. Invalid DNA windows remain gaps. Coordinates are 0-based, end-exclusive. Regions were selected conditionally on local performance",26.8944444444444,8,10
+13,"and are illustrative; a-c summarize all formal test windows.",23.3666666666667,8,10

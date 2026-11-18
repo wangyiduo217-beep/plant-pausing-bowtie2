@@ -10,6 +10,20 @@ Panels a and b from the author-supplied `Figure 1. GROseq_combined_v2_A4.pdf`, r
 
 ## Evaluation previews
 
+### Selected final cross-species radar and genomic tracks
+
+![Final cross-species radar and track composite](radar_tracks/GROseq_radar_tracks_with_legend_preview.png)
+
+[Original final A4 PDF with caption](radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf) ·
+[183 x 210 mm artwork PDF](radar_tracks/GROseq_radar_tracks_artwork_183x210mm.pdf) ·
+[Reproduce the full figure or individual panels](../plotting/radar_tracks/README.md) ·
+[Exact plotting inputs](../data/radar_tracks/README.md)
+
+Panels a-c combine pooled Pearson r, micro AUROC and P85 micro Jaccard without
+normalization. Panels d-f retain the three selected 100-kb genomic examples.
+These reference PDFs are the original selected files; rerunning the scripts writes
+to `figure/results/radar_tracks/` and does not overwrite these references.
+
 The following results use repeat-retained `strand_seiplant_v1`, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX. The full editable result figures are regenerated under `figure/results/`.
 
 ## Complete-test correlations

@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "reference_comparisons": [
+    {
+      "file": "GROseq_radar_tracks_with_legend_A4.pdf",
+      "pixel_identical_at_144dpi": true,
+      "changed_pixels": 0,
+      "content_stream_identical": true,
+      "reference_sha256": "cfe1fe2cea83bf4072327133c18ce5c0147404e8fbd92f25222320bb6ac93a0a",
+      "regenerated_sha256": "7a0026c6784c5ca25e2cee83893f4ea7f88d7d6635734248074adaa633f33539"
+    },
+    {
+      "file": "GROseq_radar_tracks_artwork_183x210mm.pdf",
+      "pixel_identical_at_144dpi": true,
+      "changed_pixels": 0,
+      "content_stream_identical": true,
+      "reference_sha256": "1b5bd3d66388e2cbfe311e98b0896835278b7cc9ce2db81fe4ee33fe86644719",
+      "regenerated_sha256": "3c849d17a3ccd16aacde0a07540891d267a6b8d61d1c6c545306c72b44bcf196"
+    }
+  ],
+  "pdf_count": 11,
+  "pdfs": [
+    {
+      "file": "figures/GROseq_radar_tracks_artwork_183x210mm.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 209.9999940660265,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "3c849d17a3ccd16aacde0a07540891d267a6b8d61d1c6c545306c72b44bcf196"
+    },
+    {
+      "file": "figures/GROseq_radar_tracks_with_legend_A4.pdf",
+      "pages": 1,
+      "width_mm": 209.9999940660265,
+      "height_mm": 297.0000023735894,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "7a0026c6784c5ca25e2cee83893f4ea7f88d7d6635734248074adaa633f33539"
+    },
+    {
+      "file": "components/panel_a_radar_arabidopsis.pdf",
+      "pages": 1,
+      "width_mm": 62.999998219807935,
+      "height_mm": 98.00000440809461,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "025c7508760783ff2679fa2821f9d3202df92796fbbe021d09ff436b1808e65e"
+    },
+    {
+      "file": "components/panel_b_radar_maize.pdf",
+      "pages": 1,
+      "width_mm": 62.999998219807935,
+      "height_mm": 98.00000440809461,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "0bfca8ddc97906c4e0c92be1e180f506779e8161eed6240c515539fd87e04b80"
+    },
+    {
+      "file": "components/panel_c_radar_wheat.pdf",
+      "pages": 1,
+      "width_mm": 62.999998219807935,
+      "height_mm": 98.00000440809461,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "345d0d2bd553a2440626a79f6e370bc60eda375a833ffc1bbb71cc6a7a3cce3e"
+    },
+    {
+      "file": "components/panel_d_tracks_arabidopsis.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 28.000000105963814,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "1a45d6819386db4cf8fbc14ca288d920f276d2fb62934b5c242e7c8b79cbbdd0"
+    },
+    {
+      "file": "components/panel_e_tracks_maize.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 28.000000105963814,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "353f5ef00bec5edfc2dd7c4a9ef9fea3e1f69c5b73316e35edf01dd898958194"
+    },
+    {
+      "file": "components/panel_f_tracks_wheat.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 28.000000105963814,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "0acdb812aa4c9c128a6f491ef2a9bd302fd6d7f195500feeb0b9c6382d0f07f0"
+    },
+    {
+      "file": "components/radar_panels_a_c.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 143.99999593098957,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "65d222ce4f5a9d6dea76bfa9f5bdf7cc6ea60fd4a785129d59cbdfc5479bc958"
+    },
+    {
+      "file": "components/shared_radar_legend.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 22.00000027550591,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "59da74095165ccbc7207fbf5f0b9ffc4279488bfdaab9bff50fb0c7befe47d8a"
+    },
+    {
+      "file": "components/track_panels_d_f.pdf",
+      "pages": 1,
+      "width_mm": 183.00000559488933,
+      "height_mm": 89.99999745686848,
+      "all_fonts_Arial_embedded": true,
+      "vector_only": true,
+      "text_within_page": true,
+      "sha256": "831db887a4c6d6a2349f34de5b3aae5ddf1e1620cb76a2d8a6282ca625cebe42"
+    }
+  ],
+  "original_validation_tables_equal": true,
+  "all_eight_inputs_byte_identical": true,
+  "actual_commands_succeeded": true,
+  "platform": "Windows / R 4.2.1 / Cairo / installed Arial",
+  "visual_QA": "Passed: original and regenerated composites pixel-identical at 144 dpi; all component PDF renders visually inspected, no clipped labels or missing data."
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "groplant_radar_tracks_plot_inputs_v1",
+  "source_figure": "GROseq_radar_tracks_with_legend_A4.pdf",
+  "source_figure_sha256": "cfe1fe2cea83bf4072327133c18ce5c0147404e8fbd92f25222320bb6ac93a0a",
+  "source_date": "2026-11-16",
+  "plot_inputs_byte_identical": true,
+  "files": [
+    {
+      "path": "auroc.csv",
+      "bytes": 3579,
+      "sha256": "387a272f6be84925049b731f7dc6952520d2820750e03b8ed3d2dd1f74f3301d"
+    },
+    {
+      "path": "correlation.csv",
+      "bytes": 1572,
+      "sha256": "dfc168361bf3b9fd1688fb1d53e3018afa166c00eb821147cb06fecc806b91ef"
+    },
+    {
+      "path": "peak_overlap.csv",
+      "bytes": 5110,
+      "sha256": "bfdf82872d15e2d5b85ecf2599bc74a4dfa86a3ac6899a487afa1059c2d51969"
+    },
+    {
+      "path": "regions/arabidopsis_3_003700000_003800000.tracks.csv.gz",
+      "bytes": 76489,
+      "sha256": "bfe928048b0b671b8c683da69753c5bdb6bd66af5d068130e36d3b9d3ceb8e02"
+    },
+    {
+      "path": "regions/maize_6_119800000_119900000.tracks.csv.gz",
+      "bytes": 63972,
+      "sha256": "5c39a57f023a0dd7a070277aadd1f3bd5b269b58179722aaac20a137f40e1542"
+    },
+    {
+      "path": "regions/wheat_3A_675800000_675900000.tracks.csv.gz",
+      "bytes": 57762,
+      "sha256": "615fb84cb5c76b6ec33e32ed77aebd9688f4088edd79ad5bdd16b31a3a7ead7a"
+    },
+    {
+      "path": "track_selected.csv",
+      "bytes": 4246,
+      "sha256": "1425f4304703c98e36c09bfa247527e8956734fca6bc1f071c9d44670c0763c5"
+    },
+    {
+      "path": "track_y_limits.csv",
+      "bytes": 361,
+      "sha256": "a5fd0fe36ab53344518a63a186c54ec494c1f56905fca1701d823961c0e30d2c"
+    }
+  ],
+  "scope": "Exact inputs to the final composite. Aggregate metrics are frozen plotting summaries, not all genome-wide raw measurements."
+}

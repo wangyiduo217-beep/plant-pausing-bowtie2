@@ -1,0 +1,4 @@
+"target_species","experimental_ymin","experimental_ymax","shared_across","transform"
+"arabidopsis",0,3,"display_rank 1 and 2; primary strands","log2(1 + central 128 bp mean CPM)"
+"maize",0,4,"display_rank 1 and 2; primary strands","log2(1 + central 128 bp mean CPM)"
+"wheat",0,1.6,"display_rank 1 and 2; primary strands","log2(1 + central 128 bp mean CPM)"

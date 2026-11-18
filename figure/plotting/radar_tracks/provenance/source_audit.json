@@ -1,0 +1,41 @@
+{
+  "schema": "groseq_final_figure_source_audit_v1",
+  "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+  "final_pdf_sha256": "cfe1fe2cea83bf4072327133c18ce5c0147404e8fbd92f25222320bb6ac93a0a",
+  "original_plot_script_sha256": "5e8a566301b8f8763ec03da8d5cd96fc0f6972750741394156483122c1cabea2",
+  "plotting_inputs_byte_identical": true,
+  "plotting_input_files": 8,
+  "plotting_input_total_bytes": 213091,
+  "data_scope": "Exact summary tables and selected-window experimental/prediction values used to draw the approved figure; not a rerun of genome-wide evaluation or inference.",
+  "original_independent_audit_status": "passed (historical release evidence; not this package rerun)",
+  "modifications": [
+    "Configurable output/data directories and repository layout discovery",
+    "Define-only mode with no writes",
+    "Shared drawing functions support selected panel indices; component PDFs use translation only",
+    "Generated input-integrity paths relative to DATA_DIR"
+  ],
+  "parser_checks": {
+    "R_4_2_1_main_define_only_exit_code": 0,
+    "R_4_2_1_components_parse_exit_code": 0
+  },
+  "pdf_reproduction_status": "Passed; see reproduction_check.json for this actual repository-layout rerun and visual inspection.",
+  "runtime_dependencies": [
+    "R with grid and Cairo graphics",
+    "Arial family installed by the user; no font binaries redistributed"
+  ],
+  "audit_dependencies_optional": [
+    "Python",
+    "numpy",
+    "pypdf",
+    "pdfplumber"
+  ],
+  "no_gpu_or_model_needed": true,
+  "no_upstream_output_modified": true,
+  "relevant_caveats": [
+    "Track correlations use full 1024 bp mean CPM, not the displayed central128 CPM.",
+    "The AUROC plotted field is HiLearn_AUROC, not full_exact_AUROC.",
+    "Peak overlap file retains 85/90/95; this figure uses 85. Selection metadata includes P90 diagnostics; these do not define the radar P85 values.",
+    "Legacy line_color values in peak_overlap.csv are preserved data provenance, while the approved plotting script supplies final coral/indigo colors.",
+    "Global metrics and local selected examples represent different evaluation scopes."
+  ]
+}

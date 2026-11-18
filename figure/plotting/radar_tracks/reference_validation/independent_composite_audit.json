@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "data_files_byte_identical": 8,
+  "prior_pdfs_unchanged": 3,
+  "statistics_unchanged": 27,
+  "track_records_unchanged_except_panels": 9,
+  "radar_vertices_correct": 27,
+  "approved_radar_values_unchanged": true,
+  "local_correlations_recomputed": [
+    {
+      "target": "arabidopsis",
+      "source": "arabidopsis",
+      "r": 0.7107986014569978,
+      "valid_windows": 774
+    },
+    {
+      "target": "arabidopsis",
+      "source": "maize",
+      "r": 0.6580802076313705,
+      "valid_windows": 774
+    },
+    {
+      "target": "arabidopsis",
+      "source": "wheat",
+      "r": 0.6359689398962579,
+      "valid_windows": 774
+    },
+    {
+      "target": "maize",
+      "source": "maize",
+      "r": 0.8977730495935033,
+      "valid_windows": 774
+    },
+    {
+      "target": "maize",
+      "source": "wheat",
+      "r": 0.8316744712045582,
+      "valid_windows": 774
+    },
+    {
+      "target": "maize",
+      "source": "arabidopsis",
+      "r": 0.5858745196064528,
+      "valid_windows": 774
+    },
+    {
+      "target": "wheat",
+      "source": "wheat",
+      "r": 0.8373343376572947,
+      "valid_windows": 708
+    },
+    {
+      "target": "wheat",
+      "source": "maize",
+      "r": 0.7322923628954208,
+      "valid_windows": 708
+    },
+    {
+      "target": "wheat",
+      "source": "arabidopsis",
+      "r": 0.6148206401125186,
+      "valid_windows": 708
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "GROseq_radar_tracks_artwork_183x210mm.pdf",
+      "dimensions_mm": [
+        183.0,
+        209.99999999999994
+      ],
+      "pages": 1,
+      "embedded_fonts": [
+        "/SJYADY+ArialMT",
+        "/FTJKYK+Arial-BoldMT",
+        "/NDQQDO+Arial-ItalicMT"
+      ],
+      "vector_only": true,
+      "text_within_page": true,
+      "all_text_black": true,
+      "metric_display_values_checked": 27,
+      "track_rectangles_per_row": [
+        426,
+        774,
+        774,
+        249,
+        774,
+        770,
+        227,
+        708,
+        708
+      ],
+      "track_vector_geometry_preserved_up_to_translation": true,
+      "sha256": "1b5bd3d66388e2cbfe311e98b0896835278b7cc9ce2db81fe4ee33fe86644719"
+    },
+    {
+      "file": "GROseq_radar_tracks_with_legend_A4.pdf",
+      "dimensions_mm": [
+        209.99999999999994,
+        297.0000000000001
+      ],
+      "pages": 1,
+      "embedded_fonts": [
+        "/CQFEEE+ArialMT",
+        "/PMQYNY+Arial-BoldMT",
+        "/NDQQDO+Arial-ItalicMT"
+      ],
+      "vector_only": true,
+      "text_within_page": true,
+      "all_text_black": true,
+      "metric_display_values_checked": 27,
+      "track_rectangles_per_row": [
+        426,
+        774,
+        774,
+        249,
+        774,
+        770,
+        227,
+        708,
+        708
+      ],
+      "track_vector_geometry_preserved_up_to_translation": true,
+      "sha256": "cfe1fe2cea83bf4072327133c18ce5c0147404e8fbd92f25222320bb6ac93a0a"
+    }
+  ]
+}

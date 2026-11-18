@@ -1,3 +1,6 @@
 * text=auto eol=lf
 figure/data/deciles/*.csv -text
 figure/data/frequency/*.csv -text
+# Preserve the exact checked final-figure input bytes across platforms.
+figure/data/radar_tracks/*.csv -text
+figure/plotting/radar_tracks/provenance/original_plot_radar_tracks_composite.R -text
