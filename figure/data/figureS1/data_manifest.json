@@ -1,0 +1,41 @@
+{
+  "inputs": [
+    {
+      "path": "figure/data/regional/arabidopsis.regional_plot_data.tsv.gz",
+      "sha256": "12c75e481c8b04ae939084641f886320ca49c82dc62aae17c4db858ed22c840c",
+      "bytes": 3517982
+    },
+    {
+      "path": "figure/data/figureS1/association_across_eight_categories.tsv",
+      "sha256": "4dec1b40374977df2942efa450de7d9c7cb0081f29e5f226701238adbdd41154",
+      "bytes": 915
+    },
+    {
+      "path": "figure/data/regional/maize.regional_plot_data.tsv.gz",
+      "sha256": "7cbf889c0cdd73cf543590dafd7cfab760946d88a20038869bca9a5952edf8f3",
+      "bytes": 3439335
+    },
+    {
+      "path": "figure/data/figureS1/previous_regional_correlations.tsv",
+      "sha256": "9f2005554177f75fa8b228bd99a594c93fb821eef866c3f3e8db10a9c8de1ea5",
+      "bytes": 7317
+    },
+    {
+      "path": "figure/data/figureS1/regional_correlation_and_mean_signal.tsv",
+      "sha256": "2462dda21c40180db07a3ae8722dc995335402559739a7447c4ebdfb08670cad",
+      "bytes": 9861
+    },
+    {
+      "path": "figure/data/regional/wheat.regional_plot_data.tsv.gz",
+      "sha256": "100b8a9720750b99d9c3a0b6b1fe44466725444d310605e0ccdff36a1cd24795",
+      "bytes": 6516908
+    },
+    {
+      "path": "figure/data/figureS1/region_definition.json",
+      "sha256": "cd45d7854a7f758898c7e429945bc8a613226587a6a95b1a19b4e5723eebe853",
+      "bytes": 11126
+    }
+  ],
+  "total_test_windows": 193508,
+  "summary_rows": 48
+}

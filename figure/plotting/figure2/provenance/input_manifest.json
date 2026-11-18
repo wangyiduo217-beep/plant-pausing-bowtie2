@@ -1,0 +1,63 @@
+{
+  "schema": "groseq_final_figure_plotting_inputs_v1",
+  "scope": "Exact plotting inputs, not genome-wide per-window evaluation arrays",
+  "files": [
+    {
+      "path": "auroc.csv",
+      "sha256": "387a272f6be84925049b731f7dc6952520d2820750e03b8ed3d2dd1f74f3301d",
+      "bytes": 3579,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/auroc.csv"
+    },
+    {
+      "path": "correlation.csv",
+      "sha256": "dfc168361bf3b9fd1688fb1d53e3018afa166c00eb821147cb06fecc806b91ef",
+      "bytes": 1572,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/correlation.csv"
+    },
+    {
+      "path": "peak_overlap.csv",
+      "sha256": "bfdf82872d15e2d5b85ecf2599bc74a4dfa86a3ac6899a487afa1059c2d51969",
+      "bytes": 5110,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/peak_overlap.csv"
+    },
+    {
+      "path": "track_selected.csv",
+      "sha256": "1425f4304703c98e36c09bfa247527e8956734fca6bc1f071c9d44670c0763c5",
+      "bytes": 4246,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/track_selected.csv"
+    },
+    {
+      "path": "track_y_limits.csv",
+      "sha256": "a5fd0fe36ab53344518a63a186c54ec494c1f56905fca1701d823961c0e30d2c",
+      "bytes": 361,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/track_y_limits.csv"
+    },
+    {
+      "path": "regions/arabidopsis_3_003700000_003800000.tracks.csv.gz",
+      "sha256": "bfe928048b0b671b8c683da69753c5bdb6bd66af5d068130e36d3b9d3ceb8e02",
+      "bytes": 76489,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/regions/arabidopsis_3_003700000_003800000.tracks.csv.gz"
+    },
+    {
+      "path": "regions/maize_6_119800000_119900000.tracks.csv.gz",
+      "sha256": "5c39a57f023a0dd7a070277aadd1f3bd5b269b58179722aaac20a137f40e1542",
+      "bytes": 63972,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/regions/maize_6_119800000_119900000.tracks.csv.gz"
+    },
+    {
+      "path": "regions/wheat_3A_675800000_675900000.tracks.csv.gz",
+      "sha256": "615fb84cb5c76b6ec33e32ed77aebd9688f4088edd79ad5bdd16b31a3a7ead7a",
+      "bytes": 57762,
+      "source_release": "GROseq_雷达图与tracks正式组图_20261116",
+      "source_member": "data/regions/wheat_3A_675800000_675900000.tracks.csv.gz"
+    }
+  ],
+  "paths_relative_to": "Resolved DATA_DIR (--data-dir, local data/, or figure/data/figure2/)"
+}

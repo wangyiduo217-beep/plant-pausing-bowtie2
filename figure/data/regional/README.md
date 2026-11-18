@@ -1,6 +1,6 @@
-# Complete test-window inputs
+# Shared full-window inputs for Figures S1 and S2
 
-The three `*.regional_plot_data.tsv.gz` files are lossless real plotting inputs from `strand_seiplant_v1`, with repeats retained and 14/5/3 SRX libraries for Arabidopsis/wheat/maize. They contain 45,066/98,656/49,786 rows. The same files support correlations, regional bars, the selected regional-signal figure and decile verification.
+The three `*.regional_plot_data.tsv.gz` files are lossless real plotting inputs from `strand_seiplant_v1`, with repeats retained and 14/5/3 SRX libraries for Arabidopsis/wheat/maize. They contain 45,066/98,656/49,786 rows. The same files support Figure S1 regional statistics, Figure S2 decile verification, and consistency checks against Figure 1 ROC inputs. This shared directory is retained once to avoid duplicating 193,508 window records.
 
 | Column | Meaning |
 | --- | --- |

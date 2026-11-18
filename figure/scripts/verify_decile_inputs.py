@@ -34,7 +34,7 @@ def close(actual, expected, label, tolerance=1e-12):
 
 
 def check_repository(root, reconstruct=False):
-    deciles = root / "figure/data/deciles"
+    deciles = root / "figure/data/figureS2"
     rows = table(deciles / "group_statistics.csv")
     groups = {(r["species"], r["strand"], int(r["group_id"])): r for r in rows}
     require(len(rows) == len(groups) == 66, "Expected 66 unique group rows")

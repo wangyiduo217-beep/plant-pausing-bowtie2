@@ -1,0 +1,44 @@
+{
+  "relocation": "figure/plotting/figure1",
+  "status": "passed",
+  "execution": "CPU only; no training, model inference, or attribution jobs",
+  "two_step_numeric_redraw_and_assembly": true,
+  "selected_pdf_render_comparisons": [
+    {
+      "name": "figure1",
+      "original": "figure/preview/figure1/GROseq_combined_v2_A4.pdf",
+      "rebuilt": "figure/results/figure1/GROseq_combined_v2_A4.pdf",
+      "dpi": 160,
+      "identical_pixels": true,
+      "changed_components": 0,
+      "max_component_difference": 0
+    },
+    {
+      "name": "figure1_source",
+      "original": "figure/plotting/figure1/assets/source_figure2_tracks_correlations.pdf",
+      "rebuilt": "figure/results/figure1_source/GROseq_v1_tracks_OLS_correlations_A4.pdf",
+      "dpi": 160,
+      "identical_pixels": true,
+      "changed_components": 0,
+      "max_component_difference": 0
+    }
+  ],
+  "standalone_panel_count": 14,
+  "roc_pr_default_paths_resolve": true,
+  "roc_pr_native_curves_recomputed_from_saved_labels_scores": [
+    {
+      "species": "arabidopsis",
+      "all_six_curve_arrays_exact": true
+    },
+    {
+      "species": "wheat",
+      "all_six_curve_arrays_exact": true
+    },
+    {
+      "species": "maize",
+      "all_six_curve_arrays_exact": true
+    }
+  ],
+  "readme_relative_links_verified": true,
+  "source_panels_internal_numeric_assertions_passed": true
+}

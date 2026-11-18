@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the distributed-model and figure acceptance checks; no training is started."""
+"""Check pretrained CPU inference and figure inputs; optionally reproduce four final figures."""
 from __future__ import annotations
 
 import argparse
@@ -8,7 +8,6 @@ import json
 import os
 from pathlib import Path
 import platform
-import shutil
 import subprocess
 import sys
 import time
@@ -18,7 +17,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument('--rscript', default='Rscript', help='Rscript executable or absolute path')
-    parser.add_argument('--font', default='Arial', help='An installed font; the independent Linux check uses DejaVu Sans')
+    parser.add_argument('--font', default='Arial', help='Legacy option; final figures require Arial when --figures is used')
+    parser.add_argument('--figures', action='store_true', help='Also reproduce Figure 1, Figure 2, Figure S1 and Figure S2')
+    parser.add_argument('--figure-python', default=sys.executable, help='Python executable for the separate final-figure environment')
+    parser.add_argument('--font-dir', type=Path, help='Directory containing licensed Arial TTF files for final figures')
     parser.add_argument('--output-dir', type=Path, help='Default: <root>/reproducibility/acceptance')
     parser.add_argument('--require-isolated-env', action='store_true', help='Require a venv with system-site-packages disabled')
     args = parser.parse_args()
@@ -28,9 +30,10 @@ def main():
     cfg = Path(sys.prefix)/'pyvenv.cfg'
     config_text = cfg.read_text(encoding='utf-8').lower() if cfg.is_file() else ''
     isolated = sys.prefix != sys.base_prefix and 'include-system-site-packages = false' in config_text
-    report = {'schema_version': 1, 'scope': 'Published checkpoint inference and all supplied figure workflows; excludes raw-read processing and retraining.',
+    report = {'schema_version': 2, 'scope': 'Published checkpoint CPU inference and bundled figure-input verification; final-figure reproduction is opt-in. Excludes raw-read processing and retraining.',
               'python': platform.python_version(), 'platform': platform.system(),
-              'venv_without_system_site_packages': isolated, 'font_family': args.font,
+              'venv_without_system_site_packages': isolated, 'figures_requested': args.figures,
+              'font_family': 'Arial' if args.figures else None,
               'packages': {}, 'steps': [], 'passed': False}
     for name in ['plant-pausing-bowtie2','pip','setuptools','torch','numpy','scipy','matplotlib','hilearn','reportlab','pypdf']:
         try:
@@ -50,16 +53,13 @@ def main():
 
     if args.require_isolated_env and not isolated:
         return fail('Use a virtual environment created without --system-site-packages.')
-    rscript = shutil.which(args.rscript)
-    if rscript is None:
-        return fail('Rscript was not found. Install R with Cairo, or provide --rscript /path/to/Rscript.')
+    if args.figures and args.font != 'Arial':
+        return fail('The four final figures require Arial; provide licensed Arial via --font-dir and install it for R/Cairo.')
     env = os.environ.copy()
-    env['PATH'] = str(Path(rscript).resolve().parent) + os.pathsep + env.get('PATH', '')
     env['PYTHONPATH'] = str(root/'model/src')
     env['PYTHONDONTWRITEBYTECODE'] = '1'
     env['CUDA_VISIBLE_DEVICES'] = ''
     env['MPLBACKEND'] = 'Agg'
-    env['GROSEQ_FONT_FAMILY'] = args.font
     env['OMP_NUM_THREADS'] = '2'
     env['MKL_NUM_THREADS'] = '2'
     python = sys.executable
@@ -67,13 +67,20 @@ def main():
         ('dependency_consistency', [python,'-m','pip','check']),
         ('software_tests', [python,'-m','unittest','discover','-s',str(root/'model/tests'),'-v']),
         ('complete_publication_inputs', [python,str(root/'figure/scripts/verify_publication_inputs.py')]),
+        ('selected_final_input_identities', [python,str(root/'figure/scripts/verify_selected_final_inputs.py')]),
+        ('figure2_radar_track_inputs', [python,str(root/'figure/scripts/verify_radar_tracks_inputs.py')]),
+        ('figureS1_regional_inputs', [python,str(root/'figure/plotting/figureS1/verify_region_inputs.py')]),
         ('decile_inputs', [python,str(root/'figure/scripts/verify_decile_inputs.py')]),
         ('pretrained_downloads_and_checksums', [python,str(root/'model/scripts/download_pretrained.py'),'--species','all']),
         ('all_real_dna_cpu_predictions', [python,str(root/'model/scripts/check_pretrained_example.py'),'--species','all','--device','cpu','--threads','2','--force']),
-        ('R_cairo_available', [rscript,'--vanilla','-e','stopifnot(capabilities("cairo")); cat(R.version.string, " Cairo=TRUE\\n")']),
-        ('four_R_figure_families', [rscript,'--vanilla',str(root/'figure/plotting/run_all.R')]),
-        ('HiLearn_ROC_PR', [python,str(root/'figure/plotting/roc_pr/plot_publication_roc_pr.py'),'--font-family',args.font]),
     ]
+    if args.figures:
+        figure_command = [python, str(root/'figure/plotting/reproduce_all.py'),
+                          '--python', args.figure_python, '--rscript', args.rscript,
+                          '--report-dir', str(output/'final_figures')]
+        if args.font_dir:
+            figure_command += ['--font-dir', str(args.font_dir.resolve())]
+        commands.append(('four_selected_final_figures', figure_command))
     started_all = time.monotonic()
     for name, command in commands:
         print('RUN: '+name, flush=True)
@@ -95,11 +102,18 @@ def main():
         report['inference'][species] = item['comparison']
         if not item['comparison']['passed']:
             return fail('CPU comparison did not pass for '+species)
-    report['generated_files'] = sorted(p.relative_to(root).as_posix() for p in (root/'figure/results').rglob('*') if p.is_file())
+    if args.figures:
+        figure_summary = json.loads((output/'final_figures/summary.json').read_text(encoding='utf-8'))
+        if not figure_summary['passed']:
+            return fail('Final figure reproduction did not pass.')
+        report['final_figures'] = figure_summary
+    else:
+        report['final_figures'] = {'requested': False, 'status': 'not run'}
     report['seconds'] = round(time.monotonic()-started_all,3)
     report['passed'] = True
     save()
-    print('PASS: all acceptance checks completed; 72 real DNA sequences / 144 strand scores checked.')
+    print('PASS: model and input checks completed; 72 real DNA sequences / 144 strand scores checked.')
+    print('Final figures: '+('all four reproduced and structurally checked.' if args.figures else 'not requested; use --figures to reproduce them.'))
     print('Summary: '+str(summary))
     return 0
 

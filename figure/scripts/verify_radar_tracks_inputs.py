@@ -116,7 +116,7 @@ def verify(data_dir, rendered_dir=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parents[1] / 'data/radar_tracks')
+    parser.add_argument('--data-dir', type=Path, default=Path(__file__).resolve().parents[1] / 'data/figure2')
     parser.add_argument('--rendered-dir', type=Path)
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()

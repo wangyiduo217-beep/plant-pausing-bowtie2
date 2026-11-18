@@ -1,0 +1,34 @@
+{
+  "relocation": "figure/plotting/figure2",
+  "status": "passed",
+  "execution": "R 4.2.1; CPU only; original frozen numeric plotting data",
+  "selected_pdf_render_comparisons": [
+    {
+      "name": "figure2",
+      "original": "figure/preview/figure2/GROseq_radar_tracks_with_legend_A4.pdf",
+      "rebuilt": "figure/results/figure2/figures/GROseq_radar_tracks_with_legend_A4.pdf",
+      "dpi": 144,
+      "identical_pixels": true,
+      "changed_components": 0,
+      "max_component_difference": 0
+    },
+    {
+      "name": "figure2_artwork",
+      "original": "figure/preview/figure2/GROseq_radar_tracks_artwork_183x210mm.pdf",
+      "rebuilt": "figure/results/figure2/figures/GROseq_radar_tracks_artwork_183x210mm.pdf",
+      "dpi": 144,
+      "identical_pixels": true,
+      "changed_components": 0,
+      "max_component_difference": 0
+    }
+  ],
+  "single_panel_count": 6,
+  "component_pdf_count": 9,
+  "composite_pdf_count": 2,
+  "numeric_verifier_passed": true,
+  "validated_metric_values": 27,
+  "local_correlations_recomputed": 9,
+  "input_files_verified": 8,
+  "readme_relative_links_verified": true,
+  "composite_and_components_visually_inspected": true
+}

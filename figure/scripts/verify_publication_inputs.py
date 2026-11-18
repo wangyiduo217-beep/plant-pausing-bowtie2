@@ -33,7 +33,7 @@ def main():
             rows = list(csv.DictReader(handle, delimiter="\t"))
         assert len(rows) == n
         assert [int(r["window_index"]) for r in rows] == list(range(1, n + 1))
-        with np.load(ROOT / "figure/data/roc" / f"{key}.full_input.npz", allow_pickle=False) as data:
+        with np.load(ROOT / "figure/data/figure1/roc_inputs" / f"{key}.full_input.npz", allow_pickle=False) as data:
             assert data["predicted"].shape == data["labels_full"].shape == (n, 2)
             np.testing.assert_array_equal(data["labels_full"], data["overlap_bp"] > 0)
             np.testing.assert_array_equal(data["truth"], data["labels_full"].ravel(order="C"))

@@ -18,7 +18,7 @@ used to reproduce the research figures.
 
 ## Schematic Diagram
 
-![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](figure/preview/groplant_framework.png)
+![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](figure/preview/figure1/groplant_framework.png)
 
 **Figure 1a–b. GROPlant data workflow and model architecture.**
 **(a)** GRO-seq datasets from Arabidopsis, wheat and maize capture nascent
@@ -27,7 +27,7 @@ transcription by RNA polymerase II and provide strand-resolved signals.
 blocks, fixed B-spline pooling and a regression head to produce two raw 0–1
 window scores, one per strand. Both panels are reproduced from the original
 study figure. See the [model methods](model/docs/publication-model.md) and
-[source and extraction details](figure/preview/groplant_framework.source.json).
+[source and extraction details](figure/preview/figure1/groplant_framework.source.json).
 
 ## Key Features
 
@@ -37,8 +37,8 @@ study figure. See the [model methods](model/docs/publication-model.md) and
   plus/minus scores learned from experimental-consensus overlap targets.
 - **A runnable real DNA test:** 72 sequences, genomic coordinates, reference
   assembly identities and archived predictions for checking a new installation.
-- **Reproducible results:** four selected final figures with panel exports,
-  complete held-out evaluation inputs, four supporting R figure families and Python ROC/PR plotting.
+- **Reproducible results:** Figures 1, 2, S1 and S2 with panel exports,
+  complete held-out evaluation inputs and documented reproduction commands.
 - **Documented training:** source code, selected configurations, sample accessions,
   chromosome splits and methods for preparing labels, training and genome scanning.
 
@@ -172,12 +172,12 @@ the [processing guide](model/docs/legacy-pipeline-guide.md) and
 README gives the installation command, drawing command, data definitions and
 individual-panel mapping. `figure/scripts/` contains data checks only.
 
-| Selected final figure | Drawing scripts and commands | Plot data |
-|---|---|---|
-| Cross-species radar + tracks, a–f | [radar_tracks/](figure/plotting/radar_tracks/README.md) | [radar_tracks](figure/data/radar_tracks/) |
-| Workflow, model and evaluation composite, a–n | [combined_v2/](figure/plotting/combined_v2/README.md) | [combined_v2](figure/data/combined_v2/) |
-| CPM deciles with grouped strands, a–c | [deciles_final/](figure/plotting/deciles_final/README.md) | [deciles](figure/data/deciles/) |
-| Regional correlation and mean signal, a–f | [region_signal_final/](figure/plotting/region_signal_final/README.md) | [summaries](figure/data/region_signal_final/) + [windows](figure/data/regional/) |
+| Figure | Content | Drawing scripts and commands | Plot data |
+|---|---|---|---|
+| **Figure 1** | Workflow, model and evaluation, a–n | [figure1/](figure/plotting/figure1/README.md) | [figure1](figure/data/figure1/) |
+| **Figure 2** | Cross-species radar + tracks, a–f | [figure2/](figure/plotting/figure2/README.md) | [figure2](figure/data/figure2/) |
+| **Figure S1** | Regional correlation and mean signal, a–f | [figureS1/](figure/plotting/figureS1/README.md) | [summary](figure/data/figureS1/) + [shared windows](figure/data/regional/) |
+| **Figure S2** | CPM deciles with grouped strands, a–c | [figureS2/](figure/plotting/figureS2/README.md) | [figureS2](figure/data/figureS2/) |
 
 The [figure gallery](figure/preview/README.md) displays the complete selected
 figures inline and links their original PDFs. The
@@ -187,31 +187,22 @@ no GPU, model weights or raw sequencing files. Workflow/model schematic panels
 use the preserved author-supplied vector artwork; see the combined figure guide
 for that source boundary.
 
-### Redraw the supporting R figures
+### Redraw the final figures
 
-Install **R 4.2.1 or later with Cairo support**. No extra CRAN packages are needed.
-From the repository root:
-
-```bash
-Rscript --vanilla figure/plotting/run_all.R
-```
-
-This runs correlations, extended tracks, regional correlation bars and CPM
-deciles. For the four selected final layouts and panel exports, use the separate
-entries in the table above.
-
-For the Python ROC/PR figure:
+Use a separate Python 3.12 plotting environment and the dependencies specified
+in the [plotting guide](figure/plotting/README.md#environment). Figure 2 also
+requires R 4.2.1 or later with Cairo. Install Arial locally; font binaries are
+not redistributed. From the repository root:
 
 ```bash
-python -m pip install -r figure/requirements.txt -c reproducibility/requirements-acceptance-lock.txt
-python figure/plotting/roc_pr/plot_publication_roc_pr.py --font-family "DejaVu Sans"
+python figure/plotting/reproduce_all.py --font-dir "C:/Windows/Fonts"
 ```
 
-Use an installed font: Arial is requested for publication figures; DejaVu Sans
-or Liberation Sans can be used as fallbacks. For R, set `GROSEQ_FONT_FAMILY` as
-described in the plotting guide. Generated PDFs, PNGs and tables go to
-**`figure/results/`**. Plot-only reproduction uses the supplied data and does not
-require trained weights or the original FASTQ/BAM files.
+Use the directory containing your Arial fonts on other systems, and supply
+`--rscript` if needed. The command generates the four final layouts and their
+individual panels under **`figure/results/`**. It uses the supplied inputs
+without model inference or weight downloads. The original PDF filenames are
+preserved; the containing directory identifies the manuscript figure number.
 
 The [figure methods](figure/docs/publication-figures.md) define all quantities:
 positive CPM windows are grouped into deciles independently by species and
@@ -250,23 +241,28 @@ folders are excluded from version control.
 
 ## Reproducibility
 
-After installing the Python dependencies above, the plotting dependencies, R
-with Cairo and an available font, run the complete check:
+After installing the model validation dependencies in the
+[installation guide](docs/acceptance.md), run:
 
 ```bash
-python check_installation.py --font "DejaVu Sans" --require-isolated-env
+python check_installation.py --require-isolated-env
 ```
 
-It checks dependencies and tests, verifies input identities and all 193,508 test
-windows, checks decile data, downloads or verifies all three weights,
-runs the 72 real DNA examples, and generates the four supporting R figure families plus
-Python ROC/PR. A first run downloads approximately **930 MB** of weights.
-If `Rscript` is not on PATH, add `--rscript "FULL/PATH/TO/Rscript"`.
+The default checks dependencies and software tests, verifies input identities
+and all 193,508 test windows, checks decile data, downloads or verifies the three
+weights, and runs the 72 real DNA examples. A first run downloads approximately
+**930 MB** of weights.
+
+Figure drawing is optional: add `--figures --figure-python /path/to/plotting/python`
+and `--font-dir /path/to/Arial/fonts` to also regenerate Figures 1, 2, S1 and S2.
+The separate plotting interpreter avoids mixing the model validation lock with
+the final-figure dependencies. To draw figures only, use the plotting command
+above.
 
 Successful completion prints:
 
 ```text
-PASS: all acceptance checks completed; 72 real DNA sequences / 144 strand scores checked.
+PASS: model and input checks completed; 72 real DNA sequences / 144 strand scores checked.
 ```
 
 The command exits with code 0, and `reproducibility/acceptance/summary.json`

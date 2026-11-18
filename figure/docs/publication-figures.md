@@ -1,8 +1,8 @@
-# Selected figure definitions
+# Definitions for Figures 1, 2, S1 and S2
 
 All primary figures refer to repeat-retained `strand_seiplant_v1`, with 14 Arabidopsis, **5 wheat**, and 3 maize SRX libraries. The complete formal held-out test windows contain 45,066 / 98,656 / 49,786 records. The two prediction columns always retain genomic plus/minus order.
 
-The experimental libraries also supplied the training labels. These figures evaluate held-out genomic windows/chromosomes; they are not independent-library validation or cross-species transfer experiments.
+The experimental libraries also supplied training labels. Figures 1, S1 and S2 evaluate each species' own model on held-out genomic windows/chromosomes; this is not independent-library validation. Figure 2 additionally evaluates cross-species model transfer; see its [methods and input definitions](../plotting/figure2/README.md).
 
 ## Experimental signal versus training target
 
@@ -10,13 +10,13 @@ The regression target used for model training is the confidence-weighted experim
 
 The x values in the current correlation figures are a different diagnostic measurement: count eligible aligned SE/read-1 **5-prime endpoints** within the same 1,024-bp window, normalize each SRX by its own full-library eligible endpoint count (CPM), then average SRX CPMs equally. Plot `log2(1 + mean CPM)`. This is not RPKM, per-base coverage, a mean of 128-bp display bins, or the mean of separately logged SRX CPMs.
 
-The correlation y values are `log2(1 + predicted score)`. Pearson r is computed on the displayed transformed pairs; Spearman rho uses their ranks. Ordinary least squares is refitted on the actual plotted population. The primary default retains every test window. Optional score thresholds define a conditional subset and must not replace complete-test evaluation or be selected for a higher test-set correlation.
+The correlation y values are `log2(1 + predicted score)`. Pearson r is computed on the displayed transformed pairs; Spearman rho uses their ranks. Figure 1 ordinary least squares is refitted on all displayed test windows. No prediction-score threshold is applied to the final evaluation figures.
 
-## Current R figures
+## Regional signals and tracks
 
-See [R plotting entry points and settings](../plotting/README.md). The shared regional tables include exact coordinates, region assignments, raw mean CPM, raw prediction scores, and transformed values. They preserve source numeric precision and original row identity. Counts label windows, not biological replicates.
+See [the numbered plotting entry points and settings](../plotting/README.md). The shared regional tables include exact coordinates, region assignments, raw mean CPM, raw prediction scores, and transformed values. They preserve source numeric precision and original row identity. Counts label windows, not biological replicates.
 
-Track example coordinates are explicitly recorded with their inputs. Wheat and maize use the updated, right-extended 80-kb displays; Arabidopsis uses 40 kb. These loci were selected for experimental peaks and visible agreement. Whole-test correlations/ROC metrics, rather than selected loci, quantify general performance.
+Track example coordinates are explicitly recorded with their inputs. Figure 1 uses 80-kb displays for wheat and maize and 40 kb for Arabidopsis. Figure 2 has three separate 100-kb examples. These loci were selected for experimental peaks and agreement. Whole-test correlations/ROC metrics, rather than selected loci, quantify general performance.
 
 ## ROC/PR: positive-label definition
 
@@ -26,7 +26,7 @@ The committed NPZ inputs contain `chrom`, `start0`, `end0`, `predicted` (n x 2),
 
 ## HiLearn areas and curve display
 
-`figure/plotting/roc_pr/plot_publication_roc_pr.py` calls `ROC_plot` and `PR_curve` from the unchanged, installed **HiLearn 0.2.2** module. The source SHA-256 is checked. The module is loaded directly to avoid importing unrelated optional HiLearn models, while remaining a normal external dependency rather than a vendored copy.
+`figure/plotting/figure1/roc_pr/plot_publication_roc_pr.py` calls `ROC_plot` and `PR_curve` from the unchanged, installed **HiLearn 0.2.2** module. The source SHA-256 is checked. The module is loaded directly to avoid importing unrelated optional HiLearn models, while remaining a normal external dependency rather than a vendored copy.
 
 Each call resets the NumPy seed to **42**. When there are more than 2,000 unique prediction scores, HiLearn selects up to 2,000 score thresholds, evaluating every threshold on **all** records. This is threshold subsampling, not sample subsampling. The native PR display adds (recall, precision) endpoints (1, 0) and (0, 1); these are display conventions, not observed sample precision.
 
@@ -36,11 +36,11 @@ The ROC chance reference is the grey diagonal. The native HiLearn PR diagonal op
 
 ## Runtime and fonts
 
-R figures require standard R and Cairo, with Arial available for the selected typography. The Python ROC/PR dependencies are in `figure/requirements.txt`; `--font-family` and `--font-file` allow an installed font choice. Fonts are not redistributed. The actual family is written in the reproduction record. Default ordinary text is 7 pt and panel letters are 8 pt. PDF/SVG exports preserve editable vector elements; inspect the regenerated output at its final publication size.
+Figure 2 requires standard R and Cairo; Figures 1, S1 and S2 use their documented Python environments. Arial is required for the selected typography. The Python ROC/PR dependencies are in `figure/requirements.txt`; `--font-family` and `--font-file` allow an installed font choice. Fonts are not redistributed. The actual family is written in the reproduction record. Default ordinary text is 7 pt and panel letters are 8 pt. PDF/SVG exports preserve editable vector elements; inspect the regenerated output at its final publication size.
 
 ## CPM deciles
 
-`figure/plotting/deciles/` redraws the supplied group statistics. For each
+`figure/plotting/figureS2/` redraws the supplied group statistics. For each
 species and strand separately, CPM=0 forms a separate group and positive CPM
 windows are sorted into ten equal-count groups (sizes differ by at most one).
 Ties are resolved by chromosome, start0, end0 and original window index; tied
@@ -51,7 +51,7 @@ Intervals are the 2.5/97.5 percentiles of 1,000 chromosome-stratified paired
 100-kb block-bootstrap replicates, with seed 20261110. Occupied physical blocks
 are sampled with replacement within chromosomes; one draw supplies weights
 for both strands and all groups. Original rank groups remain fixed. The
-replicate arrays and definitions are included. Rerendering does not resample.
+replicate arrays and definitions are included. Redrawing does not resample.
 The grouped layout keeps strands separate; Q1 in opposite strands need not
 cover the same absolute CPM interval. Bootstrap intervals describe uncertainty
 conditional on the fixed model/test population, not biological replicates or

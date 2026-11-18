@@ -1,117 +1,80 @@
 # GROPlant figures and results
 
+## Selected final figures
+
+The manuscript figure number is also the directory name under `plotting/`,
+`data/` and `preview/`. Start with the row for the figure you want to reproduce.
+
+| Figure | Content | Drawing scripts and commands | Plot data | Original PDF |
+|---|---|---|---|---|
+| **Figure 1** | Workflow, model, genomic tracks, scatter and ROC/PR; a–n | [figure1/](plotting/figure1/README.md) | [figure1/](data/figure1/) | [A4 PDF](preview/figure1/GROseq_combined_v2_A4.pdf) |
+| **Figure 2** | Cross-species radar and genomic tracks; a–f | [figure2/](plotting/figure2/README.md) | [figure2/](data/figure2/) | [A4 PDF](preview/figure2/GROseq_radar_tracks_with_legend_A4.pdf) |
+| **Figure S1** | Regional correlation and mean experimental signal; a–f | [figureS1/](plotting/figureS1/README.md) | [summary](data/figureS1/) + [shared windows](data/regional/) | [A4 PDF](preview/figureS1/region_signal_six_panels_A4.pdf) |
+| **Figure S2** | CPM deciles with separately estimated strands; a–c | [figureS2/](plotting/figureS2/README.md) | [figureS2/](data/figureS2/) | [A4 PDF](preview/figureS2/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) |
+
+[Complete figure previews](preview/README.md) ·
+[Entry filenames, run commands and panel export](plotting/README.md#selected-final-figures-script-index)
+
+The original PDF filenames are retained for provenance; their folder names
+identify the manuscript numbers. Each entry exports the full figure and separate
+panels. Figure 1 a/b use the exact author-provided vector PDF; the complete
+original program that created those schematic primitives was not recovered.
+
 ## Folder guide
 
 | Location | Contents |
 |---|---|
-| `preview/` | Selected final PDFs and ready-to-view previews |
-| `data/` | Frozen plotting tables, arrays and supporting window-level data |
-| `plotting/` | Figure-specific entry points, settings, panel mappings and methods |
-| `scripts/` | Input-verification tools only; drawing programs are under `plotting/` |
+| `plotting/figure1, figure2, figureS1, figureS2/` | The four final drawing modules, settings and panel mappings |
+| `data/figure1, figure2, figureS1, figureS2/` | Corresponding frozen plotting inputs |
+| `data/regional/` | Shared full-window data for S1/S2 and consistency checks; not an extra figure |
+| `preview/figure1, figure2, figureS1, figureS2/` | Original PDFs, complete previews and reference records |
+| `scripts/` | Input-verification tools only |
 | `docs/` | Quantity definitions and statistical conventions |
 | `reproducibility/` | Recorded software environment |
-| `requirements.txt` | Dependencies for the shared Python tools; final modules have their own dependency files |
-| `results/` (local only) | Newly regenerated outputs; created at runtime and excluded from Git |
+| `results/` (local only) | Regenerated outputs, excluded from Git |
 
-## Selected final figures
+Figure 1 also retains [ROC/PR reconstruction](plotting/figure1/roc_pr/README.md)
+from [complete truth labels and scores](data/figure1/roc_inputs/). This is a
+supporting numerical check within Figure 1, not a fifth figure.
 
-To locate a plotting script, use the figure-to-directory table below. The
-[script index with entry filenames and commands](plotting/README.md#selected-final-figures-script-index)
-also explains how to export each panel. All drawing entry points live under
-`plotting/`; `scripts/` is for checking data.
+These results use **`strand_seiplant_v1`**, repeats retained, Arabidopsis /
+wheat / maize = **14 / 5 / 3 SRX**, covering **193,508** held-out test windows.
+Plotting does not need model weights, FASTQ/BAM files, a genome FASTA or a GPU.
 
-| Figure | Code and reproduction commands | Plot inputs | Original result |
-|---|---|---|---|
-| Cross-species radar + tracks | [radar_tracks](plotting/radar_tracks/README.md) | [data](data/radar_tracks/) | [PDF](preview/radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf) |
-| Workflow, model, tracks, scatter and ROC/PR; a–n | [combined_v2](plotting/combined_v2/README.md) | [data](data/combined_v2/) | [PDF](preview/combined_v2/GROseq_combined_v2_A4.pdf) |
-| CPM deciles, grouped strands; a–c | [deciles_final](plotting/deciles_final/README.md) | [reused data](data/deciles/) | [PDF](preview/deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) |
-| Regional correlation and mean CPM; a–f | [region_signal_final](plotting/region_signal_final/README.md) | [summary](data/region_signal_final/) + [windows](data/regional/) | [PDF](preview/region_signal_final/region_signal_six_panels_A4.pdf) |
+## Reproduce
 
-Each final entry generates the complete figure and separate panels. These entries
-are separate from the four-family R runner. The combined figure's schematic
-panels a/b use the exact author-provided vector PDF; the complete original program
-that created those schematic primitives was not recovered.
+Use the [plotting guide](plotting/README.md) for the exact commands and a separate
+Python 3.12 plotting environment. Figure 2 also uses standard R with Cairo.
+Install the module requirements and locally available Arial fonts as documented;
+font binaries are not redistributed.
 
-This folder keeps the frozen result data, figure previews and plotting scripts
-together. The data describe **`strand_seiplant_v1`**, repeats retained,
-Arabidopsis / wheat / maize = **14 / 5 / 3 SRX**, covering all **193,508** formal
-held-out test windows. Plot-only reproduction does not require trained weights,
-FASTQ/BAM files, a full reference genome or a GPU.
+To draw all four final figures after setup, run from the repository root:
 
-## Where to look
-
-| Content | Location |
-| --- | --- |
-| Ready-to-view result figures | [preview/README.md](preview/README.md) |
-| Selected final cross-species radar + tracks, full figure and panels a-f | [plotting/radar_tracks/README.md](plotting/radar_tracks/README.md) |
-| Exact inputs for the final radar/track figure | [data/radar_tracks/](data/radar_tracks/) |
-| Full window values and region assignments | [data/regional/](data/regional/) |
-| Selected genomic tracks | [data/tracks/](data/tracks/) |
-| ROC/PR inputs and reference metrics | [data/roc/](data/roc/) |
-| CPM-decile estimates, intervals and saved bootstrap draws | [data/deciles/](data/deciles/) |
-| Every figure's script, data and run command | [plotting/README.md](plotting/README.md) |
-| Python ROC/PR curves | [plotting/roc_pr/](plotting/roc_pr/) |
-| Custom BAM/score comparison | [plotting/bam_comparison/](plotting/bam_comparison/) |
-| Input checks | [scripts/](scripts/) |
-| Quantity definitions and statistical conventions | [docs/publication-figures.md](docs/publication-figures.md) |
-
-The four R families are complete-test correlations, extended tracks, regional
-correlations and CPM-decile correlations.
-The selected final cross-species radar/track composite has a separate entry point;
-its eight plotting inputs and original A4 reference PDF are now included.
-The decile default places both strands side by side in each species panel.
-
-## Redraw the results
-
-Run commands from the **repository root**. Install R 4.2.1 or later with Cairo
-support; the R plots use standard R packages only. Use Arial for the requested
-publication typography, or set `GROSEQ_FONT_FAMILY` to another installed font.
-
-```bash
-Rscript --vanilla figure/plotting/run_all.R
+```sh
+python figure/plotting/reproduce_all.py --font-dir "C:/Windows/Fonts"
 ```
 
-For the selected final radar composite (not included in the four-family runner):
-
-```bash
-Rscript --vanilla figure/plotting/radar_tracks/plot_radar_tracks_composite.R
-Rscript --vanilla figure/plotting/radar_tracks/plot_components.R --component all
-python figure/scripts/verify_radar_tracks_inputs.py
-```
-
-For the Python ROC/PR figure:
-
-```bash
-python -m pip install -r figure/requirements.txt
-python figure/plotting/roc_pr/plot_publication_roc_pr.py --font-family "DejaVu Sans"
-```
-
-Choose an installed font appropriate for your system. The shared
-[installation guide](../docs/acceptance.md) explains fonts, R paths and the
-tested environment. Plotting settings and individual commands are in the
-[R plotting guide](plotting/README.md).
-
-Regenerated PDFs, PNGs and numerical tables go to **`figure/results/`**. This
-local output directory is created by the scripts and excluded from Git;
-the original data and previews remain versioned in `data/` and `preview/`.
-Rerunning a plot replaces its generated outputs for the same settings.
+Use `--rscript` if Rscript is not on PATH. Individual entries remain available
+in each module README. Generated files go to `figure/results/`, leaving the
+versioned inputs and original previews unchanged.
 
 ## Check the data
 
-After installing the Python dependencies, run from the repository root:
-
-```bash
+```sh
 python figure/scripts/verify_publication_inputs.py
+python figure/scripts/verify_selected_final_inputs.py
+python figure/scripts/verify_radar_tracks_inputs.py
 python figure/scripts/verify_decile_inputs.py
 ```
 
-These checks verify file identities and full-window consistency, and reproduce
-the decile estimates and intervals. Frozen bootstrap draws are supplied
-for verification; redrawing the decile figure does not resample them.
-The [model folder](../model/README.md) separately contains the weights and
-real-DNA inference workflow. The root `check_installation.py` runs both sets of
-checks together.
+The checks verify file identities, full-window consistency, the radar/track
+inputs and the decile estimates/intervals. Plotting S1 also independently checks
+its regional summaries against every window. Frozen bootstrap draws are supplied;
+redrawing S2 does not resample them.
 
-Plotting code uses MIT. Original project-produced tables, bootstrap arrays and
-figures use CC BY 4.0 with attribution **GROPlant contributors**; see the
-[shared license scope](../docs/licensing.md).
+The [installation guide](../docs/acceptance.md) distinguishes model validation
+from optional figure reproduction. The [figure methods](docs/publication-figures.md)
+define the plotted quantities.
+
+Code uses MIT. Project-produced data and figures use CC BY 4.0 with attribution
+**GROPlant contributors**; see [license scope](../docs/licensing.md).
