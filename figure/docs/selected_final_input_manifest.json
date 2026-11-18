@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "figure/data/combined_v2/curves/arabidopsis.HiLearn_curves.npz",
+      "sha256": "4199896819a1d53e4b2ead9670814cc4f261f0957de55a3182b3e359166e4830",
+      "bytes": 97095,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/curves/maize.HiLearn_curves.npz",
+      "sha256": "95d8cf202f7134cfc284e6922c213c15e6819a9dab9cf1ec75952b13daec71d6",
+      "bytes": 93445,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/curves/wheat.HiLearn_curves.npz",
+      "sha256": "5b99f5d74fc65678fcb7a47d0bfed9b4179a016fda275218ec0bfa26326491bc",
+      "bytes": 92319,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/test_windows/arabidopsis.all_test_windows.npz",
+      "sha256": "c4baf8dfd4c31b456e0e936b8f81bc54815abf685a30d797e6f822a3efd378da",
+      "bytes": 3668249,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/test_windows/correlation_and_OLS.tsv",
+      "sha256": "f751f2e30fa7211d6a6f162fb5c53c9a0d61fe1b1e3500891455b63c39b9a7e3",
+      "bytes": 847,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/test_windows/maize.all_test_windows.npz",
+      "sha256": "5341ca78e9e1a686be9b9e80e599229fce2bd7ed58ffa6088291b86a87dee441",
+      "bytes": 1816317,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/test_windows/wheat.all_test_windows.npz",
+      "sha256": "1634a33e6a30f947c7d54bbc4d3f850f598627de0a356953266fdfd3fbf651e5",
+      "bytes": 3608391,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/tracks/arabidopsis.selected_track.npz",
+      "sha256": "632ba81d646458589c78976f5dff06b1f30325d5770693c53e37b1ab452106d5",
+      "bytes": 16118,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/tracks/maize.selected_track.npz",
+      "sha256": "02d178e73a1f4428f3a7838fcc1a9773910bdc9d7827bb7921a31e6920c4c34e",
+      "bytes": 16838,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/tracks/selected_regions.tsv",
+      "sha256": "24289d2065d1486c35e8201d1e607549618fd4d0c2f8fc1921253cef9dfddea8",
+      "bytes": 1105,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/combined_v2/tracks/wheat.selected_track.npz",
+      "sha256": "8986f540deebf5f75ac65cc3d1f58fb86b1c74eaa4bfdf4f298f386ccf1fb5a8",
+      "bytes": 19560,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/deciles/arabidopsis.block_bootstrap.npz",
+      "sha256": "6508daa6c1c9b82456e862de45de20f7133db0c47499c28ed344c719396efe59",
+      "bytes": 157064,
+      "kind": "supporting"
+    },
+    {
+      "path": "figure/data/deciles/group_statistics.csv",
+      "sha256": "cf9893592cb5d972ca02f5a3248e8e21b84a0048277b568e7ce51abe26ca48cb",
+      "bytes": 15404,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/deciles/maize.block_bootstrap.npz",
+      "sha256": "3eb7066c92ce339da4dd8350d450c73174ab06145daccf55c8d9f52ad4a0233c",
+      "bytes": 161411,
+      "kind": "supporting"
+    },
+    {
+      "path": "figure/data/deciles/overall_correlation_reference.csv",
+      "sha256": "7bce5c192a73da2649e4625ad6686280ecbdd044f3897c7c69b4b9ce5dc4d799",
+      "bytes": 466,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/deciles/wheat.block_bootstrap.npz",
+      "sha256": "00bcaca10aafa242a6e2415a20246bbb8e7f254b9ec9c0276204f5a4e94bff39",
+      "bytes": 203648,
+      "kind": "supporting"
+    },
+    {
+      "path": "figure/data/deciles/zero_signal_prediction_summary.csv",
+      "sha256": "42e967507c4d59036b243d3d7c66eb720431a5fd32e328be4f4bd666068bfc14",
+      "bytes": 978,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/region_signal_final/association_across_eight_categories.tsv",
+      "sha256": "4dec1b40374977df2942efa450de7d9c7cb0081f29e5f226701238adbdd41154",
+      "bytes": 915,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/region_signal_final/previous_regional_correlations.tsv",
+      "sha256": "9f2005554177f75fa8b228bd99a594c93fb821eef866c3f3e8db10a9c8de1ea5",
+      "bytes": 7317,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/region_signal_final/region_definition.json",
+      "sha256": "cd45d7854a7f758898c7e429945bc8a613226587a6a95b1a19b4e5723eebe853",
+      "bytes": 11126,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/region_signal_final/regional_correlation_and_mean_signal.tsv",
+      "sha256": "2462dda21c40180db07a3ae8722dc995335402559739a7447c4ebdfb08670cad",
+      "bytes": 9861,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/regional/arabidopsis.regional_plot_data.tsv.gz",
+      "sha256": "12c75e481c8b04ae939084641f886320ca49c82dc62aae17c4db858ed22c840c",
+      "bytes": 3517982,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/regional/maize.regional_plot_data.tsv.gz",
+      "sha256": "7cbf889c0cdd73cf543590dafd7cfab760946d88a20038869bca9a5952edf8f3",
+      "bytes": 3439335,
+      "kind": "input"
+    },
+    {
+      "path": "figure/data/regional/wheat.regional_plot_data.tsv.gz",
+      "sha256": "100b8a9720750b99d9c3a0b6b1fe44466725444d310605e0ccdff36a1cd24795",
+      "bytes": 6516908,
+      "kind": "input"
+    },
+    {
+      "path": "figure/plotting/combined_v2/assets/source_figure1_workflow_model.pdf",
+      "sha256": "1e351185c1ab85cc4eaa937dec7abd9131002c1560a6166f80b61ccb45269676",
+      "bytes": 222040,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/plotting/combined_v2/assets/source_figure2_tracks_correlations.pdf",
+      "sha256": "f2e3c877ec46e5f83db358aa1a0c8ab796e3d0dc531edae0e8d09de071013c21",
+      "bytes": 2430633,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/plotting/combined_v2/provenance/original_build_final.py",
+      "sha256": "6a5a481be4c6f6c584f9ff7766afad1008a98e4117e84483ee423653e23c17d9",
+      "bytes": 28470,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/combined_v2/provenance/original_placements.json",
+      "sha256": "c7bb5b7baedd7b8b831f9c732528dbe6b1a1d3b467031673c83e72ee078489a0",
+      "bytes": 2686,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/combined_v2/provenance/original_reproduce_layout_v2.py",
+      "sha256": "a39db815d31bfd266a423c5e1607cc5c71e78e834d4886fa133185c0fd8f071a",
+      "bytes": 12699,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/combined_v2/provenance/original_revision_checks.json",
+      "sha256": "6249a0483218cc4100a86e86d41d77e95d7b7a4ddd1d7b2e9e91d29765771316",
+      "bytes": 1703,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/combined_v2/provenance/original_validation_report.json",
+      "sha256": "95e8badc1ce6d9333accfb37a8bd5a741e72622489e5c74d325d3553102ccd96",
+      "bytes": 1356,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/deciles_final/provenance/build_grouped_strands.py",
+      "sha256": "96cb90d27fbdf099f2848128f4fcb1aaf92558d7c8621628670dd582fecb2d21",
+      "bytes": 11650,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/deciles_final/provenance/plot_grouped_strands.R",
+      "sha256": "c35da4a233f5945dc4515f22238663aeed2bf5931252ae7d7deac43dc4aa1c08",
+      "bytes": 9797,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/region_signal_final/provenance/original_build_one_page.py",
+      "sha256": "508a67e80a924802dd94dcf1c9206cc7c1045b9ac49c9880a4fab25fcc52b0ac",
+      "bytes": 11928,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/region_signal_final/provenance/original_config.R",
+      "sha256": "076d1065a2ee5b7e2876a4c175747f9852f80a4ac42b7665c617f579d75eb50e",
+      "bytes": 560,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/plotting/region_signal_final/provenance/original_run_one_page.R",
+      "sha256": "88ebfc0f34b05861f9abae6ee88cdf30f4d8ae325a7a9b7dfc89bea620843a02",
+      "bytes": 14524,
+      "kind": "original_source"
+    },
+    {
+      "path": "figure/preview/combined_v2/GROseq_combined_A4_preview.png",
+      "sha256": "51755f166dc79d7cd4f39dbe698c3726b510dc52c8610095bb68d2e6fd42bc10",
+      "bytes": 399208,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/combined_v2/GROseq_combined_v2_A4.pdf",
+      "sha256": "3015283a98a4bbf10f035c0d80ba88b56285f2b5d9c032897f0e2e2ba787dae9",
+      "bytes": 1416939,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/combined_v2/GROseq_combined_v2_artwork_180x238mm.pdf",
+      "sha256": "f01f29ebf46b9b9e79830293a2f54655db7b24884946180f350278b0e43b3c19",
+      "bytes": 1416341,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/combined_v2/figure_legend_EN.txt",
+      "sha256": "60ec2f4b43efc460c53b6a6b38ee2095eba4e5218e8b1e3143295fe18c289e80",
+      "bytes": 1542,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf",
+      "sha256": "65d56c06a1eba51c04345642a13d2ba27d763778d2c161367e01966af3888f69",
+      "bytes": 233814,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/region_signal_final/region_signal_six_panels_183x170mm.pdf",
+      "sha256": "5ab4491734ab5f099ff7cea45863c6b64d12aaf9b28f489b33bde2052602cebb",
+      "bytes": 71379,
+      "kind": "reference"
+    },
+    {
+      "path": "figure/preview/region_signal_final/region_signal_six_panels_A4.pdf",
+      "sha256": "21f991f26c78a23c79e87fa7a90ffa93d10b1ca4cf3c67643b5f95e862c836a1",
+      "bytes": 211792,
+      "kind": "reference"
+    }
+  ]
+}

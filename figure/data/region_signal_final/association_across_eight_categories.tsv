@@ -1,0 +1,7 @@
+species	strand	n_region_categories	pearson_mean_signal_vs_regional_r	spearman_mean_signal_vs_regional_r	scope
+arabidopsis	plus	8	0.6770017238026085	0.7142857142857144	descriptive relationship across eight category summaries; no significance test
+arabidopsis	minus	8	0.7513715602055937	0.7619047619047621	descriptive relationship across eight category summaries; no significance test
+wheat	plus	8	0.5430777708148639	0.6190476190476191	descriptive relationship across eight category summaries; no significance test
+wheat	minus	8	0.019548521907579663	0.28571428571428575	descriptive relationship across eight category summaries; no significance test
+maize	plus	8	0.5879256177110773	0.5952380952380953	descriptive relationship across eight category summaries; no significance test
+maize	minus	8	0.7145045611867396	0.7380952380952381	descriptive relationship across eight category summaries; no significance test

@@ -14,6 +14,8 @@ used to reproduce the research figures.
 [Real DNA test set](model/examples/real_dna/README.md) ·
 [Figures and plotting](figure/README.md)
 
+[Selected final figures: PDFs, plotting code and exact data](figure/README.md#selected-final-figures)
+
 ## Schematic Diagram
 
 ![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](figure/preview/groplant_framework.png)

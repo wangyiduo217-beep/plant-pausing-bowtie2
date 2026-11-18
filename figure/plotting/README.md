@@ -1,5 +1,17 @@
 # Reproduce the publication plots
 
+## Selected final layouts
+
+Use the dedicated entry for the exact selected final version:
+
+- [Workflow/model/evaluation composite, a–n](combined_v2/README.md): numeric source redraw plus final assembly.
+- [CPM deciles, a–c](deciles_final/README.md): original selected Python layout; reuses the existing decile data.
+- [Regional correlation and mean signal, a–f](region_signal_final/README.md): original selected Python layout, full-window checks and an R alternative.
+- [Cross-species radar and tracks, a–f](radar_tracks/README.md).
+
+The requirements and commands below describe the older six R families. Final
+Python modules list their own dependencies, font requirements and panel mappings.
+
 These scripts reproduce the current **`strand_seiplant_v1`** results with repeat sequences retained. The species are *Arabidopsis thaliana*, *Triticum aestivum* and *Zea mays*, with **14, 5 and 3 SRX libraries**, respectively. Their complete held-out test sets contain **45,066, 98,656 and 49,786 windows**. The wheat results here use the original five libraries, not a three-library retraining. N50 model results are not included.
 
 ## Requirements

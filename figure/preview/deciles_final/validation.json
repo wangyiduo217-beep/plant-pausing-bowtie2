@@ -1,0 +1,397 @@
+{
+  "state": "passed",
+  "statistics_recomputed": false,
+  "strand_data_pooled": false,
+  "source_data": {
+    "group_statistics.csv": {
+      "sha256": "cf9893592cb5d972ca02f5a3248e8e21b84a0048277b568e7ce51abe26ca48cb",
+      "byte_identical": true
+    },
+    "zero_signal_prediction_summary.csv": {
+      "sha256": "42e967507c4d59036b243d3d7c66eb720431a5fd32e328be4f4bd666068bfc14",
+      "byte_identical": true
+    },
+    "overall_correlation_reference.csv": {
+      "sha256": "7bce5c192a73da2649e4625ad6686280ecbdd044f3897c7c69b4b9ce5dc4d799",
+      "byte_identical": true
+    },
+    "high_minus_low_correlation_difference.csv": {
+      "sha256": "c15ed034f102de2add5d8e2bc87cfc073cdc6b52498047049ecc9301ce0563f5",
+      "byte_identical": true
+    }
+  },
+  "bootstrap_arrays": {
+    "arabidopsis.block_bootstrap.npz": {
+      "sha256": "6508daa6c1c9b82456e862de45de20f7133db0c47499c28ed344c719396efe59",
+      "byte_identical": true,
+      "arrays": {
+        "pearson_r": {
+          "shape": [
+            1000,
+            2,
+            11
+          ],
+          "dtype": "float64",
+          "array_identical": true
+        },
+        "block_labels": {
+          "shape": [
+            235
+          ],
+          "dtype": "<U5",
+          "array_identical": true
+        },
+        "block_chromosome": {
+          "shape": [
+            235
+          ],
+          "dtype": "<U1",
+          "array_identical": true
+        },
+        "group_names": {
+          "shape": [
+            11
+          ],
+          "dtype": "<U3",
+          "array_identical": true
+        },
+        "strand_order": {
+          "shape": [
+            2
+          ],
+          "dtype": "<U5",
+          "array_identical": true
+        },
+        "block_bp": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "B": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "root_seed": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        }
+      }
+    },
+    "wheat.block_bootstrap.npz": {
+      "sha256": "00bcaca10aafa242a6e2415a20246bbb8e7f254b9ec9c0276204f5a4e94bff39",
+      "byte_identical": true,
+      "arrays": {
+        "pearson_r": {
+          "shape": [
+            1000,
+            2,
+            11
+          ],
+          "dtype": "float64",
+          "array_identical": true
+        },
+        "block_labels": {
+          "shape": [
+            19054
+          ],
+          "dtype": "<U7",
+          "array_identical": true
+        },
+        "block_chromosome": {
+          "shape": [
+            19054
+          ],
+          "dtype": "<U2",
+          "array_identical": true
+        },
+        "group_names": {
+          "shape": [
+            11
+          ],
+          "dtype": "<U3",
+          "array_identical": true
+        },
+        "strand_order": {
+          "shape": [
+            2
+          ],
+          "dtype": "<U5",
+          "array_identical": true
+        },
+        "block_bp": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "B": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "root_seed": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        }
+      }
+    },
+    "maize.block_bootstrap.npz": {
+      "sha256": "3eb7066c92ce339da4dd8350d450c73174ab06145daccf55c8d9f52ad4a0233c",
+      "byte_identical": true,
+      "arrays": {
+        "pearson_r": {
+          "shape": [
+            1000,
+            2,
+            11
+          ],
+          "dtype": "float64",
+          "array_identical": true
+        },
+        "block_labels": {
+          "shape": [
+            1717
+          ],
+          "dtype": "<U6",
+          "array_identical": true
+        },
+        "block_chromosome": {
+          "shape": [
+            1717
+          ],
+          "dtype": "<U1",
+          "array_identical": true
+        },
+        "group_names": {
+          "shape": [
+            11
+          ],
+          "dtype": "<U3",
+          "array_identical": true
+        },
+        "strand_order": {
+          "shape": [
+            2
+          ],
+          "dtype": "<U5",
+          "array_identical": true
+        },
+        "block_bp": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "B": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        },
+        "root_seed": {
+          "shape": [],
+          "dtype": "int64",
+          "array_identical": true
+        }
+      }
+    }
+  },
+  "PDF_checks": [
+    {
+      "file": "GROseq_CPM_deciles_grouped_strands_183x115mm.pdf",
+      "page_mm": [
+        182.9999999999947,
+        114.99999999999861
+      ],
+      "visible_fonts": [
+        "DDQKPB+Arial-ItalicMT",
+        "DPBEYU+ArialMT",
+        "HPCJUS+Arial-BoldMT"
+      ],
+      "sizes_pt": [
+        7.0,
+        8.0
+      ],
+      "all_glyphs_inside_page": true,
+      "font_resources": [
+        {
+          "name": "/DPBEYU+ArialMT",
+          "embedded": true
+        },
+        {
+          "name": "/HPCJUS+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/DDQKPB+Arial-ItalicMT",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "file": "GROseq_CPM_deciles_grouped_strands_A4.pdf",
+      "page_mm": [
+        210.00000333333335,
+        297.0000127777778
+      ],
+      "visible_fonts": [
+        "AAAAAA+Arial-BoldMT",
+        "AAAAAA+ArialMT",
+        "DDQKPB+Arial-ItalicMT",
+        "DPBEYU+ArialMT",
+        "HPCJUS+Arial-BoldMT"
+      ],
+      "sizes_pt": [
+        7.0,
+        8.0
+      ],
+      "all_glyphs_inside_page": true,
+      "font_resources": [
+        {
+          "name": "/Helvetica",
+          "embedded": false
+        },
+        {
+          "name": "/DPBEYU+ArialMT",
+          "embedded": true
+        },
+        {
+          "name": "/HPCJUS+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/AAAAAA+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/DDQKPB+Arial-ItalicMT",
+          "embedded": true
+        },
+        {
+          "name": "/AAAAAA+ArialMT",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "file": "panel_a_arabidopsis.pdf",
+      "page_mm": [
+        70.00000000000222,
+        105.00000000000334
+      ],
+      "visible_fonts": [
+        "BUXCSJ+Arial-BoldMT",
+        "ENZYGR+Arial-ItalicMT",
+        "GULCJJ+ArialMT"
+      ],
+      "sizes_pt": [
+        7.0,
+        8.0
+      ],
+      "all_glyphs_inside_page": true,
+      "font_resources": [
+        {
+          "name": "/GULCJJ+ArialMT",
+          "embedded": true
+        },
+        {
+          "name": "/BUXCSJ+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/ENZYGR+Arial-ItalicMT",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "file": "panel_b_wheat.pdf",
+      "page_mm": [
+        70.00000000000222,
+        105.00000000000334
+      ],
+      "visible_fonts": [
+        "CXZFDQ+Arial-BoldMT",
+        "ELKCZV+Arial-ItalicMT",
+        "GULCJJ+ArialMT"
+      ],
+      "sizes_pt": [
+        7.0,
+        8.0
+      ],
+      "all_glyphs_inside_page": true,
+      "font_resources": [
+        {
+          "name": "/GULCJJ+ArialMT",
+          "embedded": true
+        },
+        {
+          "name": "/CXZFDQ+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/ELKCZV+Arial-ItalicMT",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "file": "panel_c_maize.pdf",
+      "page_mm": [
+        70.00000000000222,
+        105.00000000000334
+      ],
+      "visible_fonts": [
+        "DLTFYD+Arial-ItalicMT",
+        "DQNUSJ+Arial-BoldMT",
+        "GULCJJ+ArialMT"
+      ],
+      "sizes_pt": [
+        7.0,
+        8.0
+      ],
+      "all_glyphs_inside_page": true,
+      "font_resources": [
+        {
+          "name": "/GULCJJ+ArialMT",
+          "embedded": true
+        },
+        {
+          "name": "/DQNUSJ+Arial-BoldMT",
+          "embedded": true
+        },
+        {
+          "name": "/DLTFYD+Arial-ItalicMT",
+          "embedded": true
+        }
+      ]
+    }
+  ],
+  "point_values": {
+    "count": 60,
+    "r_CI_n_and_offsets_identical_to_selected_original": true,
+    "standalone_panels_identical_to_full_figure": true
+  },
+  "render_comparison": {
+    "renderer": "Poppler pdftoppm",
+    "dpi": 160,
+    "image_shape": [
+      1871,
+      1323,
+      3
+    ],
+    "pixel_identical": true,
+    "changed_pixels": 0,
+    "maximum_channel_difference": 0,
+    "mean_channel_difference": 0.0
+  },
+  "standalone_CLI": {
+    "executed_from_foreign_working_directory": true,
+    "panel": "b",
+    "points": 20,
+    "matches_complete_figure": true,
+    "automatic_Arial_discovery_passed": true,
+    "only_requested_panel_PDF_emitted": true
+  },
+  "visual_review": "Full A4 and all three standalone PDF pages were rendered with Poppler and visually inspected; no clipping, overlapping labels or missing glyphs."
+}

@@ -1,5 +1,15 @@
 # Current figure previews
 
+## Additional selected final PDFs
+
+- [Workflow, model and evaluation composite](combined_v2/GROseq_combined_v2_A4.pdf) — [code/data guide](../plotting/combined_v2/README.md).
+- [CPM decile grouped-strand figure](deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) — [code/data guide](../plotting/deciles_final/README.md).
+- [Six-panel regional correlation and mean signal](region_signal_final/region_signal_six_panels_A4.pdf) — [code/data guide](../plotting/region_signal_final/README.md).
+
+These are the unchanged author-selected originals. Regenerated files go to the
+local `figure/results/` directory. Individual panel exports are available through
+each module's documented entry point.
+
 ## GROPlant framework
 
 ![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](groplant_framework.png)

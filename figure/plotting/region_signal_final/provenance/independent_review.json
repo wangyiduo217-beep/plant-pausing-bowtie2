@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "scope": "Independent read-only numerical, provenance, paths and component audit; no drawing repeated.",
+  "source_inputs": [
+    {
+      "file": "figure/data/regional/arabidopsis.regional_plot_data.tsv.gz",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/region_signal_final/association_across_eight_categories.tsv",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/regional/maize.regional_plot_data.tsv.gz",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/region_signal_final/previous_regional_correlations.tsv",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/region_signal_final/regional_correlation_and_mean_signal.tsv",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/regional/wheat.regional_plot_data.tsv.gz",
+      "sha256_matches_original_delivery": true
+    },
+    {
+      "file": "figure/data/region_signal_final/region_definition.json",
+      "sha256_matches_original_delivery": true
+    }
+  ],
+  "archived_sources": [
+    {
+      "file": "original_build_one_page.py",
+      "byte_identical_to_original": true
+    },
+    {
+      "file": "original_run_one_page.R",
+      "byte_identical_to_original": true
+    },
+    {
+      "file": "original_config.R",
+      "byte_identical_to_original": true
+    }
+  ],
+  "all_48_rows_independently_recomputed": true,
+  "total_windows": 193508,
+  "recompute_max_absolute_errors": {
+    "n_windows": 0,
+    "pearson_r": 0,
+    "spearman_rho": 0,
+    "mean_cpm": 0,
+    "sd_cpm": 0,
+    "median_cpm": 0,
+    "zero_count": 0,
+    "zero_fraction": 0,
+    "mean_log2p1_cpm": 0,
+    "log2p1_mean_cpm": 0
+  },
+  "paths": {
+    "python_figure_root_resolves_to": "figure",
+    "python_input_path_correct": true,
+    "r_per_window_data_path_correct": true,
+    "r_summary_path_correct": true,
+    "r_portability_diff_only_three_path_statements": true
+  },
+  "method": {
+    "pearson_log2p1_vs_log2p1": true,
+    "mean_cpm_raw_arithmetic_includes_zeros": true,
+    "all_193508_original_test_windows_both_strands": true,
+    "midpoint_categories_not_whole_peak_overlap": true,
+    "no_new_statistics_or_significance_tests": true,
+    "original_category_assignments_frozen": true
+  },
+  "independent_panel_count": 6,
+  "panels": [
+    {
+      "filename": "a_arabidopsis_plus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    },
+    {
+      "filename": "b_arabidopsis_minus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    },
+    {
+      "filename": "c_wheat_plus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    },
+    {
+      "filename": "d_wheat_minus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    },
+    {
+      "filename": "e_maize_plus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    },
+    {
+      "filename": "f_maize_minus.pdf",
+      "pages": 1,
+      "both_axes_present": true
+    }
+  ],
+  "necessary_fixes": [
+    {
+      "issue": "pypdf 7 removes reader-page merge API used by original plotting script",
+      "requirements_line": "pypdf>=6,<7",
+      "resolved": true,
+      "fix": "Constrain to pypdf<7 or pin verified6.21.4."
+    }
+  ],
+  "minor_notes": [
+    "R header comment still says ../data/*.regional_plot_data.tsv.gz; the actual executable path is correctly ../../data/regional.",
+    "Single-panel exported PDFs preserve plotted axes and values; species/strand identification is in filenames/panel_map rather than all shared header labels.",
+    "This audit did not execute the R alternative; its only modifications are correct portable input/output paths."
+  ]
+}

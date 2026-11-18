@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "complete_figure_comparisons": [
+    {
+      "name": "region_signal_six_panels_A4",
+      "identical_at_144dpi": true,
+      "changed_pixels": 0
+    },
+    {
+      "name": "region_signal_six_panels_183x170mm",
+      "identical_at_144dpi": true,
+      "changed_pixels": 0
+    }
+  ],
+  "panels": [
+    {
+      "panel": "a_arabidopsis_plus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    },
+    {
+      "panel": "b_arabidopsis_minus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    },
+    {
+      "panel": "c_wheat_plus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    },
+    {
+      "panel": "d_wheat_minus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    },
+    {
+      "panel": "e_maize_plus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    },
+    {
+      "panel": "f_maize_minus.pdf",
+      "pages": 1,
+      "text_within_page": true
+    }
+  ],
+  "all_48_summary_rows_recomputed": true,
+  "total_windows": 193508
+}

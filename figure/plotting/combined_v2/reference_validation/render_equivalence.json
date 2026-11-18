@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "dpi": 150,
+  "original_shape": [
+    1241,
+    1754,
+    3
+  ],
+  "reproduced_shape": [
+    1241,
+    1754,
+    3
+  ],
+  "changed_channel_values": 0,
+  "total_channel_values": 6530142,
+  "max_abs_channel_error": 0
+}

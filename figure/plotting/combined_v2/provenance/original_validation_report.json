@@ -1,0 +1,53 @@
+{
+  "page_count": 1,
+  "page_mm": [
+    209.99999406602646,
+    297.0000023735894
+  ],
+  "visible_font_sizes_pt": [
+    5.25,
+    5.264,
+    5.5,
+    5.75,
+    5.896,
+    6.0,
+    7.0,
+    8.0
+  ],
+  "font_names": [
+    "Arial Regular",
+    "Arial-BoldMT",
+    "Arial-ItalicMT",
+    "ArialMT"
+  ],
+  "min_font_pt": 5.25,
+  "max_font_pt": 8.0,
+  "roc_checks": [
+    {
+      "species": "arabidopsis",
+      "auroc": 0.8361396751050627,
+      "pr_auc": 0.733418591904548,
+      "vertices_unchanged": true
+    },
+    {
+      "species": "wheat",
+      "auroc": 0.9070427094535543,
+      "pr_auc": 0.7950871811138163,
+      "vertices_unchanged": true
+    },
+    {
+      "species": "maize",
+      "auroc": 0.8776964810801111,
+      "pr_auc": 0.748215801446615,
+      "vertices_unchanged": true
+    }
+  ],
+  "sources_sha256": {
+    "C:\\Users\\70896\\Desktop\\文献-计算\\pausing\\all_pdf\\Figure 1. drawing-1.pdf": "1e351185c1ab85cc4eaa937dec7abd9131002c1560a6166f80b61ccb45269676",
+    "C:\\Users\\70896\\Desktop\\文献-计算\\pausing\\all_pdf\\Figure 2. GROseq_v1_tracks_OLS_correlations_A4.pdf": "f2e3c877ec46e5f83db358aa1a0c8ab796e3d0dc531edae0e8d09de071013c21"
+  },
+  "caption_words": 221,
+  "caption_lines": 8,
+  "source_scatter_and_tracks_reused_as_pdf_objects": true,
+  "data_recalculated": false
+}

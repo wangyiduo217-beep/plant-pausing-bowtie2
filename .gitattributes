@@ -4,3 +4,14 @@ figure/data/frequency/*.csv -text
 # Preserve the exact checked final-figure input bytes across platforms.
 figure/data/radar_tracks/*.csv -text
 figure/plotting/radar_tracks/provenance/original_plot_radar_tracks_composite.R -text
+
+# Preserve original figure input/provenance bytes (including historical CRLF).
+*.pdf binary
+figure/data/combined_v2/test_windows/*.tsv -text
+figure/data/combined_v2/tracks/*.tsv -text
+figure/data/region_signal_final/*.tsv -text
+figure/data/region_signal_final/region_definition.json -text
+figure/plotting/combined_v2/provenance/original_* -text
+figure/plotting/deciles_final/provenance/* -text
+figure/plotting/region_signal_final/provenance/original_* -text
+figure/preview/combined_v2/figure_legend_EN.txt -text

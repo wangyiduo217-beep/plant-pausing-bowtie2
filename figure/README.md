@@ -1,5 +1,32 @@
 # GROPlant figures and results
 
+## Folder guide
+
+| Location | Contents |
+|---|---|
+| `preview/` | Selected final PDFs and ready-to-view previews |
+| `data/` | Frozen plotting tables, arrays and supporting window-level data |
+| `plotting/` | Figure-specific entry points, settings, panel mappings and methods |
+| `scripts/` | Shared/legacy Python plotting and input-verification tools |
+| `docs/` | Quantity definitions and statistical conventions |
+| `reproducibility/` | Recorded software environment |
+| `requirements.txt` | Dependencies for the shared Python tools; final modules have their own dependency files |
+| `results/` (local only) | Newly regenerated outputs; created at runtime and excluded from Git |
+
+## Selected final figures
+
+| Figure | Code and reproduction commands | Plot inputs | Original result |
+|---|---|---|---|
+| Cross-species radar + tracks | [radar_tracks](plotting/radar_tracks/README.md) | [data](data/radar_tracks/) | [PDF](preview/radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf) |
+| Workflow, model, tracks, scatter and ROC/PR; a–n | [combined_v2](plotting/combined_v2/README.md) | [data](data/combined_v2/) | [PDF](preview/combined_v2/GROseq_combined_v2_A4.pdf) |
+| CPM deciles, grouped strands; a–c | [deciles_final](plotting/deciles_final/README.md) | [reused data](data/deciles/) | [PDF](preview/deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) |
+| Regional correlation and mean CPM; a–f | [region_signal_final](plotting/region_signal_final/README.md) | [summary](data/region_signal_final/) + [windows](data/regional/) | [PDF](preview/region_signal_final/region_signal_six_panels_A4.pdf) |
+
+Each final entry generates the complete figure and separate panels. These entries
+are separate from the older six-family R runner. The combined figure's schematic
+panels a/b use the exact author-provided vector PDF; the complete original program
+that created those schematic primitives was not recovered.
+
 This folder keeps the frozen result data, figure previews and plotting scripts
 together. The data describe **`strand_seiplant_v1`**, repeats retained,
 Arabidopsis / wheat / maize = **14 / 5 / 3 SRX**, covering all **193,508** formal

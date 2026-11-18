@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "inputs": [
+    {
+      "file": "test_windows/arabidopsis.all_test_windows.npz",
+      "bytes": 3668249,
+      "sha256": "c4baf8dfd4c31b456e0e936b8f81bc54815abf685a30d797e6f822a3efd378da",
+      "source": "outputs/GROseq_旧版三物种信号相关性_20261108/data/arabidopsis.all_test_windows.npz",
+      "description": "All original held-out windows; both strands, original predictions, CPM and per-SRX endpoint counts."
+    },
+    {
+      "file": "tracks/arabidopsis.selected_track.npz",
+      "bytes": 16118,
+      "sha256": "632ba81d646458589c78976f5dff06b1f30325d5770693c53e37b1ab452106d5",
+      "source": "outputs/GROseq_extended_tracks_20261110/data/arabidopsis.selected_track.npz",
+      "description": "All selected 128-bp display bins; experimental counts and unchanged original model predictions."
+    },
+    {
+      "file": "test_windows/wheat.all_test_windows.npz",
+      "bytes": 3608391,
+      "sha256": "1634a33e6a30f947c7d54bbc4d3f850f598627de0a356953266fdfd3fbf651e5",
+      "source": "outputs/GROseq_旧版三物种信号相关性_20261108/data/wheat.all_test_windows.npz",
+      "description": "All original held-out windows; both strands, original predictions, CPM and per-SRX endpoint counts."
+    },
+    {
+      "file": "tracks/wheat.selected_track.npz",
+      "bytes": 19560,
+      "sha256": "8986f540deebf5f75ac65cc3d1f58fb86b1c74eaa4bfdf4f298f386ccf1fb5a8",
+      "source": "outputs/GROseq_extended_tracks_20261110/data/wheat.selected_track.npz",
+      "description": "All selected 128-bp display bins; experimental counts and unchanged original model predictions."
+    },
+    {
+      "file": "test_windows/maize.all_test_windows.npz",
+      "bytes": 1816317,
+      "sha256": "5341ca78e9e1a686be9b9e80e599229fce2bd7ed58ffa6088291b86a87dee441",
+      "source": "outputs/GROseq_旧版三物种信号相关性_20261108/data/maize.all_test_windows.npz",
+      "description": "All original held-out windows; both strands, original predictions, CPM and per-SRX endpoint counts."
+    },
+    {
+      "file": "tracks/maize.selected_track.npz",
+      "bytes": 16838,
+      "sha256": "02d178e73a1f4428f3a7838fcc1a9773910bdc9d7827bb7921a31e6920c4c34e",
+      "source": "outputs/GROseq_extended_tracks_20261110/data/maize.selected_track.npz",
+      "description": "All selected 128-bp display bins; experimental counts and unchanged original model predictions."
+    },
+    {
+      "file": "test_windows/correlation_and_OLS.tsv",
+      "bytes": 847,
+      "sha256": "f751f2e30fa7211d6a6f162fb5c53c9a0d61fe1b1e3500891455b63c39b9a7e3",
+      "source": "outputs/GROseq_旧版三物种信号相关性_20261108/data/correlation_and_OLS.tsv",
+      "description": "Legacy raw-score correlations used only as source-consistency checks; plotted log-score metrics are recalculated."
+    },
+    {
+      "file": "tracks/selected_regions.tsv",
+      "bytes": 1105,
+      "sha256": "24289d2065d1486c35e8201d1e607549618fd4d0c2f8fc1921253cef9dfddea8",
+      "source": "outputs/GROseq_extended_tracks_20261110/selection/selected_regions.tsv",
+      "description": "Exact original selected display coordinates and selection metadata."
+    }
+  ],
+  "original_script_sha256": "6a5a481be4c6f6c584f9ff7766afad1008a98e4117e84483ee423653e23c17d9"
+}

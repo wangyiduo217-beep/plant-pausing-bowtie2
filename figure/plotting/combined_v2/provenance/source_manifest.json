@@ -1,0 +1,62 @@
+[
+  {
+    "path": "figure/plotting/combined_v2/assets/source_figure1_workflow_model.pdf",
+    "sha256": "1e351185c1ab85cc4eaa937dec7abd9131002c1560a6166f80b61ccb45269676",
+    "bytes": 222040
+  },
+  {
+    "path": "figure/plotting/combined_v2/assets/source_figure2_tracks_correlations.pdf",
+    "sha256": "f2e3c877ec46e5f83db358aa1a0c8ab796e3d0dc531edae0e8d09de071013c21",
+    "bytes": 2430633
+  },
+  {
+    "path": "figure/data/combined_v2/curves/arabidopsis.HiLearn_curves.npz",
+    "sha256": "4199896819a1d53e4b2ead9670814cc4f261f0957de55a3182b3e359166e4830",
+    "bytes": 97095
+  },
+  {
+    "path": "figure/data/combined_v2/curves/wheat.HiLearn_curves.npz",
+    "sha256": "5b99f5d74fc65678fcb7a47d0bfed9b4179a016fda275218ec0bfa26326491bc",
+    "bytes": 92319
+  },
+  {
+    "path": "figure/data/combined_v2/curves/maize.HiLearn_curves.npz",
+    "sha256": "95d8cf202f7134cfc284e6922c213c15e6819a9dab9cf1ec75952b13daec71d6",
+    "bytes": 93445
+  },
+  {
+    "path": "figure/preview/combined_v2/GROseq_combined_v2_A4.pdf",
+    "sha256": "3015283a98a4bbf10f035c0d80ba88b56285f2b5d9c032897f0e2e2ba787dae9",
+    "bytes": 1416939
+  },
+  {
+    "path": "figure/preview/combined_v2/GROseq_combined_v2_artwork_180x238mm.pdf",
+    "sha256": "f01f29ebf46b9b9e79830293a2f54655db7b24884946180f350278b0e43b3c19",
+    "bytes": 1416341
+  },
+  {
+    "path": "figure/preview/combined_v2/GROseq_combined_A4_preview.png",
+    "sha256": "51755f166dc79d7cd4f39dbe698c3726b510dc52c8610095bb68d2e6fd42bc10",
+    "bytes": 399208
+  },
+  {
+    "path": "figure/preview/combined_v2/figure_legend_EN.txt",
+    "sha256": "60ec2f4b43efc460c53b6a6b38ee2095eba4e5218e8b1e3143295fe18c289e80",
+    "bytes": 1542
+  },
+  {
+    "path": "figure/plotting/combined_v2/provenance/original_validation_report.json",
+    "sha256": "95e8badc1ce6d9333accfb37a8bd5a741e72622489e5c74d325d3553102ccd96",
+    "bytes": 1356
+  },
+  {
+    "path": "figure/plotting/combined_v2/provenance/original_placements.json",
+    "sha256": "c7bb5b7baedd7b8b831f9c732528dbe6b1a1d3b467031673c83e72ee078489a0",
+    "bytes": 2686
+  },
+  {
+    "path": "figure/plotting/combined_v2/provenance/original_revision_checks.json",
+    "sha256": "6249a0483218cc4100a86e86d41d77e95d7b7a4ddd1d7b2e9e91d29765771316",
+    "bytes": 1703
+  }
+]

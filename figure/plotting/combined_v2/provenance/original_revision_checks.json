@@ -1,0 +1,80 @@
+{
+  "a4_page_count": 1,
+  "all_actual_fonts_embedded": true,
+  "fonts": [
+    {
+      "font": "TZMHOF+ArialMT",
+      "type": "TrueType",
+      "embedded_bytes": 38493
+    },
+    {
+      "font": "MVAQGO+Arial-BoldMT",
+      "type": "TrueType",
+      "embedded_bytes": 22907
+    },
+    {
+      "font": "RKJZSO+ArialMT",
+      "type": "Type0",
+      "embedded_bytes": 9267
+    },
+    {
+      "font": "ITBCGS+Arial-ItalicMT",
+      "type": "TrueType",
+      "embedded_bytes": 9922
+    },
+    {
+      "font": "AAAAAA+Arial-BoldMT",
+      "type": "TrueType",
+      "embedded_bytes": 31309
+    },
+    {
+      "font": "AAAAAA+ArialMT",
+      "type": "TrueType",
+      "embedded_bytes": 56445
+    },
+    {
+      "font": "FPOLBO+ArialMT",
+      "type": "Type0",
+      "embedded_bytes": 41611
+    },
+    {
+      "font": "SMFFHD+Arial-BoldMT",
+      "type": "Type0",
+      "embedded_bytes": 16449
+    },
+    {
+      "font": "DDQKPB+Arial-ItalicMT",
+      "type": "Type0",
+      "embedded_bytes": 12304
+    },
+    {
+      "font": "RBNGTU+Arial Regular",
+      "type": "Type0",
+      "embedded_bytes": 54399
+    },
+    {
+      "font": "AAAAAA+Arial-BoldMT",
+      "type": "TrueType",
+      "embedded_bytes": 31309
+    },
+    {
+      "font": "AAAAAA+ArialMT",
+      "type": "TrueType",
+      "embedded_bytes": 56445
+    }
+  ],
+  "all_visible_text_within_page": true,
+  "panel_letters": "a-n",
+  "roc_panels_mm": [
+    24,
+    24
+  ],
+  "three_complete_black_roc_frames_verified": 3,
+  "diagram_outer_border_pt": 0.75,
+  "module_outline_pt": 0.65,
+  "all_reported_metrics_unchanged": true,
+  "font_size_range_pt": [
+    5.25,
+    8.0
+  ]
+}
