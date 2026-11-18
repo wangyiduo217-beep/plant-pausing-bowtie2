@@ -1,16 +1,57 @@
 # Reproduce the publication plots
 
-## Selected final layouts
+## Selected final figures: script index
 
-Use the dedicated entry for the exact selected final version:
+**All drawing entry points are under `figure/plotting/`.** Find the result in
+this table, then open its linked module README for dependencies and commands.
+The sibling `figure/scripts/` folder contains input checks only.
 
-- [Workflow/model/evaluation composite, a–n](combined_v2/README.md): numeric source redraw plus final assembly.
-- [CPM deciles, a–c](deciles_final/README.md): original selected Python layout; reuses the existing decile data.
-- [Regional correlation and mean signal, a–f](region_signal_final/README.md): original selected Python layout, full-window checks and an R alternative.
-- [Cross-species radar and tracks, a–f](radar_tracks/README.md).
+| Selected result | Script directory and entry filename | Numeric data | Panels |
+|---|---|---|---|
+| Radar + genomic tracks | [radar_tracks/](radar_tracks/README.md): `plot_radar_tracks_composite.R`; `plot_components.R` | [data/radar_tracks/](../data/radar_tracks/) | a–c: radar; d–f: tracks |
+| Workflow/model/evaluation composite | [combined_v2/](combined_v2/README.md): `build_source_panels.py`, then `build_combined_v2.py` | [data/combined_v2/](../data/combined_v2/) | a/b: artwork; c/g/k: tracks; d/e, h/i, l/m: scatter; f/j/n: ROC/PR |
+| CPM deciles, grouped strands | [deciles_final/](deciles_final/README.md): `run_deciles_final.py` | [data/deciles/](../data/deciles/) | a/b/c: Arabidopsis/wheat/maize |
+| Regional correlation and mean signal | [region_signal_final/](region_signal_final/README.md): `build_region_signal.py` | [summaries](../data/region_signal_final/) + [windows](../data/regional/) | a/b, c/d, e/f: plus/minus for Arabidopsis, wheat, maize |
 
-The requirements and commands below describe the older six R families. Final
-Python modules list their own dependencies, font requirements and panel mappings.
+Run from the repository root after installing each module's documented
+dependencies and fonts:
+
+```sh
+# Radar + tracks: full figure and all separate panels
+Rscript --vanilla figure/plotting/radar_tracks/plot_radar_tracks_composite.R
+Rscript --vanilla figure/plotting/radar_tracks/plot_components.R --component all
+
+# Workflow/model/evaluation: redraw numeric panels, then assemble and export a–n
+python figure/plotting/combined_v2/build_source_panels.py
+python figure/plotting/combined_v2/build_combined_v2.py --source-figure2 figure/results/combined_v2_source/GROseq_v1_tracks_OLS_correlations_A4.pdf
+
+# CPM deciles: full figure and separate panels a–c
+python figure/plotting/deciles_final/run_deciles_final.py
+
+# Regional signal: full figure and separate panels a–f
+python figure/plotting/region_signal_final/build_region_signal.py
+```
+
+For one radar/track panel, replace `--component all` with `--component a`
+(or b–f). For one decile panel, add `--panel a` (or b/c). The combined and
+regional-signal entries automatically export all separate panels; they do not
+have a single-panel selection flag. Outputs are under
+`figure/results/<module>/`; the full radar PDF is in its `figures/` subfolder.
+
+The combined figure's a/b panels reuse the exact vector asset in
+`combined_v2/assets/`; its complete original artwork creation program was not
+recovered. All numeric panel inputs and their redraw programs are included.
+Original historical programs in `provenance/` are source records, while the
+entry files above resolve portable paths.
+
+[View all complete figures and PDFs](../preview/README.md).
+
+## Supporting R figures
+
+The sections below describe four supporting R figure families. Their batch
+entry `run_all.R` is separate from the four selected final layouts above.
+Final Python modules list their own dependencies, font requirements and panel
+mappings.
 
 These scripts reproduce the current **`strand_seiplant_v1`** results with repeat sequences retained. The species are *Arabidopsis thaliana*, *Triticum aestivum* and *Zea mays*, with **14, 5 and 3 SRX libraries**, respectively. Their complete held-out test sets contain **45,066, 98,656 and 49,786 windows**. The wheat results here use the original five libraries, not a three-library retraining. N50 model results are not included.
 
@@ -22,7 +63,7 @@ These scripts reproduce the current **`strand_seiplant_v1`** results with repeat
 
 The defaults use 7 pt ordinary text, 8 pt panel letters and 600 dpi PNG exports. Both a 183 mm wide figure and an A4 proof are exported. The PDFs retain vector graphics.
 
-## Run all six R figure families
+## Run all four R figure families
 
 From the repository root:
 
@@ -38,14 +79,14 @@ source("figure/plotting/run_all.R", encoding = "UTF-8")
 
 When the working directory is elsewhere, source the **full path** to `run_all.R`. Every input and output path is resolved relative to the scripts, not the working directory. Outputs are written under `figure/results/`, which is excluded from version control. Existing output files for the same settings are replaced when a plot is rerun.
 
-ROC/PR has a separate Python entry point, `figure/scripts/plot_publication_roc_pr.py`; it is not run by this R entry point.
+ROC/PR has a separate Python entry point, `figure/plotting/roc_pr/plot_publication_roc_pr.py`; it is not run by this R entry point.
 
 ## Individual figure families
 
 The selected final **cross-species radar and track composite** is additionally
 available in [radar_tracks/](radar_tracks/README.md). Its dedicated commands recreate
 the A4 figure with caption, separate artwork, and panels a-f from eight supplied
-input files. It is intentionally separate from the legacy six-family `run_all.R`.
+input files. It is intentionally separate from the four-family `run_all.R`.
 
 ```sh
 Rscript --vanilla figure/plotting/radar_tracks/plot_radar_tracks_composite.R
@@ -57,14 +98,12 @@ Rscript --vanilla figure/plotting/radar_tracks/plot_components.R --component all
 | `correlations/` | `run_plots.R` | `figure/results/correlations/` | All formal test windows, two strands, density-colored points and an OLS line |
 | `tracks/` | `run_tracks.R` | `figure/results/tracks/` | The current extended track examples alongside the complete-test correlations |
 | `regional_bars/` | `run_regional_bars.R` | `figure/results/regional_bars/` | Region-specific Pearson correlation by strand; Spearman is configurable |
-| `dual_axis_violins/` | `run_dual_axis_violins.R` | `figure/results/dual_axis_violins/` | Experimental and predicted distributions grouped within each region, with independent y-axes |
 | `deciles/` | `run_decile_correlations.R` | `figure/results/deciles/` | Separate plus/minus Pearson estimates and 95% block-bootstrap intervals within nonzero CPM deciles; grouped strands by default |
-| `frequency/` | `run_signal_frequency.R` | `figure/results/frequency/` | Complete experimental-signal frequencies, including zeros, with linear-percent and log-y exports |
 
 For example:
 
 ```r
-source("figure/plotting/dual_axis_violins/run_dual_axis_violins.R",
+source("figure/plotting/regional_bars/run_regional_bars.R",
        encoding = "UTF-8")
 ```
 
@@ -115,12 +154,6 @@ The eight categories are upstream 1-3 kb, upstream <1 kb, 5-prime UTR, CDS, intr
 
 Bars are single coefficients from one frozen model per species, with n denoting genomic windows. No biological-replicate dots or uncertainty bars are invented. Fewer than three observations or zero variance produces NA rather than a correlation of zero. The scripts check recalculated current values against the frozen reference tables.
 
-### Dual-axis violins
-
-Each species occupies one page with separate positive- and negative-strand panels. Green experimental violins use the **left axis**, `log2(1 + mean SRX CPM)`, displayed from 0 to 4. Orange predicted violins use the **right axis**, `log2(1 + score)`, from 0 to 1. These are different quantities; equal plotted heights across colors do not mean equal absolute signal.
-
-All observations are used to calculate the histogram-based, reflected Gaussian density and the median/interquartile interval. Only the final experimental viewport is clipped to 0-4; high values are not discarded before density estimation. Arrows report the percentage of experimental windows above 4 within that region. A white dot marks the median and a thick line marks the interquartile interval. No min-max scaling or low-prediction filtering is applied. Full-support shape coordinates and recalculated summaries are exported for checking.
-
 ## Data and reproducibility
 
 ### CPM deciles and grouped strands
@@ -149,24 +182,19 @@ The default grouped export is 183 x 115 mm, the six-panel export 183 x 183 mm;
 each also has a separate A4 proof with its explanatory caption. No page scaling
 changes the 7-pt text or 8-pt panel letters.
 
-### Experimental signal frequency
-
-The frequency entry reads the complete shared regional window tables and
-independently recomputes 48 fixed bins per species/strand panel. The x value is
-`log2(1 + mean SRX CPM)`, the bin width is 0.25, and the range is 0-12. The y value
-is each bin's window count divided by all windows in the panel, times 100%.
-All windows and experimental zeros are retained. The first bin includes low
-positive values as well as zeros; the exact zero count is separately annotated.
-The recomputed table is checked against the archived 288-bin reference.
-
-The default also exports `true_signal_frequency_logY_detail`, with unchanged
-percentages and denominators and a logarithmic y axis. Empty bins are not drawn
-on the log axis. Set `MAKE_LOG_Y <- FALSE` in its `config.R` to skip that view.
-Both variants export a 183 x 165 mm figure and an A4 captioned proof, as PDF and
-600-dpi PNG.
-
 ### Shared data
 
-The three complete regional tables are stored once in `figure/data/regional/` and shared by correlations, regional bars, violins and signal-frequency plots. The small extended-track tables are in `figure/data/tracks/`; frozen decile summaries/draws and frequency references are in `figure/data/deciles/` and `figure/data/frequency/`. Those directories contain schemas, relative filenames and SHA-256 manifests. They contain actual frozen plotting inputs, not simulated or subsampled examples. BAM/FASTQ files, genome FASTA files, model checkpoints, font binaries and machine-specific execution logs are not required to reproduce these plots and are not included here.
+The three complete regional tables are stored once in `figure/data/regional/` and shared by correlations, regional bars, the final regional-signal figure and decile verification. The small extended-track tables are in `figure/data/tracks/`; frozen decile summaries and draws are in `figure/data/deciles/`. Those directories contain schemas, relative filenames and SHA-256 manifests. They contain actual frozen plotting inputs, not simulated or subsampled examples. BAM/FASTQ files, genome FASTA files, model checkpoints, font binaries and machine-specific execution logs are not required to reproduce these plots and are not included here.
 
 The scientific data and plotting methods are preserved from the current result scripts. Migration changes are limited to project-relative input/output paths, a shared input representation, configurable installed fonts, current zero-minimum defaults and the all-figure entry point. Generated settings, fitted coordinates, retained row indices and recomputed statistics accompany the outputs. The release's default R workflow is checked from an external working directory in a fresh R process.
+
+## Other Python plotting tools
+
+| Use | Drawing scripts | Inputs |
+|---|---|---|
+| Recompute HiLearn ROC/PR from full truth labels and scores | [roc_pr/](roc_pr/README.md) | [data/roc/](../data/roc/) |
+| Custom BAM coverage versus model-score comparison | [bam_comparison/](bam_comparison/README.md) | User-provided BAM and prediction files |
+
+The BAM tool is a separate custom coverage diagnostic; it is not the endpoint
+CPM workflow used in the selected final figures. Input checks remain in
+[`figure/scripts/`](../scripts/).

@@ -21,7 +21,7 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 SPECS = [("arabidopsis", "Arabidopsis", 45066, 14),
          ("wheat", "Wheat", 98656, 5), ("maize", "Maize", 49786, 3)]
 HILEARN_SHA256 = "d5d591457564af8567eaa8cbed135fd6dea001854070b6b29fd34434bf6ade01"

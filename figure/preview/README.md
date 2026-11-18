@@ -1,73 +1,79 @@
 # Current figure previews
 
-## Additional selected final PDFs
+Each selected figure is shown in full below. Open its PDF to inspect fine text;
+follow **Drawing scripts** to find the complete-figure and individual-panel
+commands. The [script index](../plotting/README.md#selected-final-figures-script-index)
+also maps every figure to its inputs and entry files.
 
-- [Workflow, model and evaluation composite](combined_v2/GROseq_combined_v2_A4.pdf) — [code/data guide](../plotting/combined_v2/README.md).
-- [CPM decile grouped-strand figure](deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) — [code/data guide](../plotting/deciles_final/README.md).
-- [Six-panel regional correlation and mean signal](region_signal_final/region_signal_six_panels_A4.pdf) — [code/data guide](../plotting/region_signal_final/README.md).
+These are the unchanged author-selected references. Regenerated files go to
+the local `figure/results/` directory.
 
-These are the unchanged author-selected originals. Regenerated files go to the
-local `figure/results/` directory. Individual panel exports are available through
-each module's documented entry point.
+## Cross-species radar and genomic tracks
 
-## GROPlant framework
+[![Complete cross-species radar and track composite, panels a–f](radar_tracks/GROseq_radar_tracks_with_legend_preview.png)](radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf)
 
-![GROPlant framework: plant GRO-seq data workflow and the complete DNA-to-score model architecture](groplant_framework.png)
+[Original A4 PDF with caption](radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf) ·
+[183 × 210 mm artwork PDF](radar_tracks/GROseq_radar_tracks_artwork_183x210mm.pdf) ·
+[Drawing scripts](../plotting/radar_tracks/README.md) ·
+[Plot data](../data/radar_tracks/README.md)
 
-Panels a and b from the author-supplied `Figure 1. GROseq_combined_v2_A4.pdf`, rendered together at 300 dpi with their original labels and artwork. Panel a illustrates the biological data workflow: Arabidopsis, wheat and maize; nascent transcription by RNA polymerase II; and plus/minus-strand GRO-seq signals from single-end reads or read 1. Panel b shows the complete sequence model: a 1,024-bp one-hot DNA input, convolutional and residual blocks, fixed B-spline pooling and a regression head that produces two raw 0–1 window scores, one per strand.
+Panels a–c combine pooled Pearson r, micro AUROC and P85 micro Jaccard without
+normalization. Panels d–f show the three selected 100-kb genomic examples.
 
-[Source checksum and extraction details](groplant_framework.source.json) record the original PDF and the exact crop. This preview is extracted from the supplied figure; the plotting commands below do not regenerate it.
+## Workflow, model and evaluation composite
 
-## Evaluation previews
+[![Complete workflow, model and evaluation composite, all panels a–n and caption](combined_v2/GROseq_combined_A4_preview.png)](combined_v2/GROseq_combined_v2_A4.pdf)
 
-### Selected final cross-species radar and genomic tracks
+[Original A4 PDF with caption](combined_v2/GROseq_combined_v2_A4.pdf) ·
+[Drawing scripts and panel mapping](../plotting/combined_v2/README.md) ·
+[Plot data](../data/combined_v2/)
 
-![Final cross-species radar and track composite](radar_tracks/GROseq_radar_tracks_with_legend_preview.png)
-
-[Original final A4 PDF with caption](radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf) ·
-[183 x 210 mm artwork PDF](radar_tracks/GROseq_radar_tracks_artwork_183x210mm.pdf) ·
-[Reproduce the full figure or individual panels](../plotting/radar_tracks/README.md) ·
-[Exact plotting inputs](../data/radar_tracks/README.md)
-
-Panels a-c combine pooled Pearson r, micro AUROC and P85 micro Jaccard without
-normalization. Panels d-f retain the three selected 100-kb genomic examples.
-These reference PDFs are the original selected files; rerunning the scripts writes
-to `figure/results/radar_tracks/` and does not overwrite these references.
-
-The following results use repeat-retained `strand_seiplant_v1`, Arabidopsis / wheat / maize = 14 / 5 / 3 SRX. The full editable result figures are regenerated under `figure/results/`.
-
-## Complete-test correlations
-
-![Complete-test correlations](correlations.png)
-
-## HiLearn native ROC and PR curves
-
-![HiLearn ROC and PR](roc_pr.png)
-
-Native PR AUC is not AP. See the figure definitions and the separately stored exact metrics.
-
-## Paired dual-axis violins (Arabidopsis example)
-
-![Paired violins](arabidopsis_dual_axis_violins.png)
-
-The entry point produces all three species, with both strands. Green reads against the left axis; orange against the independent right axis. Zooming does not discard high-tail observations.
+The complete figure includes the GRO-seq workflow (a), model architecture (b),
+three genomic track groups (c, g, k), six strand-specific scatter panels
+(d/e, h/i, l/m), and pooled-strand ROC/PR curves (f, j, n).
+The a/b schematic is preserved vector artwork under the drawing module's
+`assets/` directory; numeric panels can be redrawn from their supplied data.
+The module exports all 14 panels separately.
 
 ## CPM deciles with grouped strands
 
-![Strand-specific CPM-decile correlations](deciles_grouped.png)
+[![Complete selected CPM-decile figure](deciles_final/GROseq_CPM_deciles_grouped_strands_A4.png)](deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf)
 
-The plus/minus strands remain separately ranked and calculated. Points and 95%
-intervals use the original frozen statistics; this layout does not pool strands.
-See `figure/data/deciles/README.md` for the definitions and draw archives.
+[Original A4 PDF](deciles_final/reference/GROseq_CPM_deciles_grouped_strands_A4.pdf) ·
+[Drawing scripts and panels a–c](../plotting/deciles_final/README.md) ·
+[Plot data](../data/deciles/README.md)
 
-## Experimental signal frequencies
+The plus/minus strands remain separately ranked and calculated. Points and
+95% intervals use the frozen statistics; the layout does not pool strands.
 
-![Complete experimental signal frequencies](signal_frequency.png)
+## Regional correlation and mean signal
 
-All formal test windows, including zeros, contribute to each panel's denominator.
-The first bin also contains low positive values; exact zeros are annotated.
+[![Complete six-panel regional correlation and mean-signal figure](region_signal_final/preview.png)](region_signal_final/region_signal_six_panels_A4.pdf)
 
-![Experimental signal frequencies with logarithmic y axis](signal_frequency_logY.png)
+[Original A4 PDF](region_signal_final/region_signal_six_panels_A4.pdf) ·
+[Drawing scripts and panels a–f](../plotting/region_signal_final/README.md) ·
+[Summary data](../data/region_signal_final/) ·
+[Full window data](../data/regional/README.md)
 
-This detail view changes only the y-axis display. Counts, percentages and total
-window denominators are identical to the linear-percent view.
+Bars show region-specific Pearson correlations; the independent right axis
+shows mean experimental CPM. Each species has separate plus/minus panels.
+
+## Supporting evaluation previews
+
+These use repeat-retained `strand_seiplant_v1`, with Arabidopsis / wheat / maize
+= 14 / 5 / 3 SRX libraries.
+
+### Complete-test correlations
+
+![Complete-test correlations](correlations.png)
+
+[Drawing scripts](../plotting/correlations/) · [Data](../data/regional/README.md)
+
+### HiLearn native ROC and PR curves
+
+![HiLearn ROC and PR](roc_pr.png)
+
+[Drawing scripts](../plotting/roc_pr/README.md) · [Data](../data/roc/)
+
+Native PR AUC is not average precision (AP). The figure definitions and stored
+exact metrics distinguish them.

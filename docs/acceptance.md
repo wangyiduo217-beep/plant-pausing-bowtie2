@@ -1,7 +1,7 @@
 # Installation and reproduction checks for GROPlant
 
 This check covers the workflows distributed with the repository: pretrained
-CPU inference, all six R figure families, HiLearn ROC/PR, and the identities and
+CPU inference, all four R figure families, HiLearn ROC/PR, and the identities and
 scientific values of the bundled inputs. It does not retrain the models or
 process the original FASTQ/BAM collections. All commands below run from the
 repository root and use the `model/` and `figure/` layout introduced in 0.4.0.
@@ -97,10 +97,10 @@ The check runs these steps and stops at the first failure:
 1. Installed dependency consistency (`pip check`).
 2. Software unit tests.
 3. File identities and all 193,508 formal test-window inputs.
-4. All 60 nonzero decile estimates, saved bootstrap intervals and 288 frequency bins.
+4. All 60 nonzero decile estimates and saved bootstrap intervals.
 5. Download and verify the three pretrained checkpoint files.
 6. Actually predict all 72 real DNA windows (144 strand scores) on CPU.
-7. Check R/Cairo and generate the six R figure families.
+7. Check R/Cairo and generate the four R figure families.
 8. Generate ROC/PR using the unchanged HiLearn 0.2.2 implementation.
 
 Successful completion prints:
@@ -119,13 +119,12 @@ that summary. The isolated-environment flag is recorded in the summary.
 | --- | --- |
 | Checkpoints | `model/results/strand_seiplant_v1/<species>/model/best.pt` |
 | Real DNA predictions and per-species comparison JSON | `model/results/pretrained_example/` |
-| Six R figure families | `figure/results/correlations/`, `tracks/`, `regional_bars/`, `dual_axis_violins/`, `deciles/`, `frequency/` |
+| Four R figure families | `figure/results/correlations/`, `tracks/`, `regional_bars/`, `deciles/` |
 | ROC/PR figures and metrics | `figure/results/roc_pr/` |
 | Complete acceptance summary and step logs | `reproducibility/acceptance/` |
 
 The R output contains A4 proofs and 183-mm-wide vector PDFs plus 600-dpi PNGs.
-The default decile layout groups both strands in three species panels; the
-frequency module also creates a logarithmic-y detail view. The optional
+The default decile layout groups both strands in three species panels. The optional
 six-panel decile layout is described in `figure/plotting/README.md` and
 was checked separately.
 
@@ -134,8 +133,11 @@ CPU predictions are compared against unchanged historical answers using
 The examples check functionality and are not representative performance
 estimates. The R decile plot reads frozen estimates and intervals; 1,000 saved
 bootstrap replicates are supplied for verification, and no resampling is needed
-to redraw the plot. The frequency plot
-independently recomputes its bins from all raw window values.
+to redraw the plot.
+
+The four selected final layouts have separate reproduction entries and panel
+exports in the [figure-to-script index](../figure/plotting/README.md#selected-final-figures-script-index).
+They are not automatically run by `check_installation.py` or `run_all.R`.
 
 ## Verification record
 

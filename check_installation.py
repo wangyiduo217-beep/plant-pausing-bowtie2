@@ -67,12 +67,12 @@ def main():
         ('dependency_consistency', [python,'-m','pip','check']),
         ('software_tests', [python,'-m','unittest','discover','-s',str(root/'model/tests'),'-v']),
         ('complete_publication_inputs', [python,str(root/'figure/scripts/verify_publication_inputs.py')]),
-        ('decile_and_frequency_inputs', [python,str(root/'figure/scripts/verify_decile_inputs.py')]),
+        ('decile_inputs', [python,str(root/'figure/scripts/verify_decile_inputs.py')]),
         ('pretrained_downloads_and_checksums', [python,str(root/'model/scripts/download_pretrained.py'),'--species','all']),
         ('all_real_dna_cpu_predictions', [python,str(root/'model/scripts/check_pretrained_example.py'),'--species','all','--device','cpu','--threads','2','--force']),
         ('R_cairo_available', [rscript,'--vanilla','-e','stopifnot(capabilities("cairo")); cat(R.version.string, " Cairo=TRUE\\n")']),
-        ('six_R_figure_families', [rscript,'--vanilla',str(root/'figure/plotting/run_all.R')]),
-        ('HiLearn_ROC_PR', [python,str(root/'figure/scripts/plot_publication_roc_pr.py'),'--font-family',args.font]),
+        ('four_R_figure_families', [rscript,'--vanilla',str(root/'figure/plotting/run_all.R')]),
+        ('HiLearn_ROC_PR', [python,str(root/'figure/plotting/roc_pr/plot_publication_roc_pr.py'),'--font-family',args.font]),
     ]
     started_all = time.monotonic()
     for name, command in commands:

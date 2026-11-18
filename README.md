@@ -37,8 +37,8 @@ study figure. See the [model methods](model/docs/publication-model.md) and
   plus/minus scores learned from experimental-consensus overlap targets.
 - **A runnable real DNA test:** 72 sequences, genomic coordinates, reference
   assembly identities and archived predictions for checking a new installation.
-- **Reproducible results:** complete held-out evaluation inputs, six R figure
-  families and Python ROC/PR plotting, including CPM-decile and signal-frequency plots.
+- **Reproducible results:** four selected final figures with panel exports,
+  complete held-out evaluation inputs, four supporting R figure families and Python ROC/PR plotting.
 - **Documented training:** source code, selected configurations, sample accessions,
   chromosome splits and methods for preparing labels, training and genome scanning.
 
@@ -168,19 +168,26 @@ the [processing guide](model/docs/legacy-pipeline-guide.md) and
 
 ## Plotting Code
 
-The selected final **cross-species radar and genomic-track figure** now includes
-its [complete plotting scripts and individual-panel commands](figure/plotting/radar_tracks/README.md),
-[eight exact input files](figure/data/radar_tracks/README.md), and
-[original A4 PDF](figure/preview/radar_tracks/GROseq_radar_tracks_with_legend_A4.pdf).
-It can be redrawn without models, a GPU or raw sequencing files.
+**Find a figure, then open its folder under `figure/plotting/`.** Each folder's
+README gives the installation command, drawing command, data definitions and
+individual-panel mapping. `figure/scripts/` contains data checks only.
 
-The [figure gallery](figure/preview/README.md) includes correlation, ROC/PR,
-paired-violin, CPM-decile and signal-frequency previews. The
-[plotting guide](figure/plotting/README.md) provides editable settings and individual
-entry points for all six R families: correlations, tracks, regional correlations,
-paired violins, decile correlations and signal frequencies.
+| Selected final figure | Drawing scripts and commands | Plot data |
+|---|---|---|
+| Cross-species radar + tracks, a–f | [radar_tracks/](figure/plotting/radar_tracks/README.md) | [radar_tracks](figure/data/radar_tracks/) |
+| Workflow, model and evaluation composite, a–n | [combined_v2/](figure/plotting/combined_v2/README.md) | [combined_v2](figure/data/combined_v2/) |
+| CPM deciles with grouped strands, a–c | [deciles_final/](figure/plotting/deciles_final/README.md) | [deciles](figure/data/deciles/) |
+| Regional correlation and mean signal, a–f | [region_signal_final/](figure/plotting/region_signal_final/README.md) | [summaries](figure/data/region_signal_final/) + [windows](figure/data/regional/) |
 
-### Redraw the figures
+The [figure gallery](figure/preview/README.md) displays the complete selected
+figures inline and links their original PDFs. The
+[script index](figure/plotting/README.md#selected-final-figures-script-index)
+lists the exact entry filenames and run commands. Plot-only reproduction needs
+no GPU, model weights or raw sequencing files. Workflow/model schematic panels
+use the preserved author-supplied vector artwork; see the combined figure guide
+for that source boundary.
+
+### Redraw the supporting R figures
 
 Install **R 4.2.1 or later with Cairo support**. No extra CRAN packages are needed.
 From the repository root:
@@ -189,11 +196,15 @@ From the repository root:
 Rscript --vanilla figure/plotting/run_all.R
 ```
 
+This runs correlations, extended tracks, regional correlation bars and CPM
+deciles. For the four selected final layouts and panel exports, use the separate
+entries in the table above.
+
 For the Python ROC/PR figure:
 
 ```bash
 python -m pip install -r figure/requirements.txt -c reproducibility/requirements-acceptance-lock.txt
-python figure/scripts/plot_publication_roc_pr.py --font-family "DejaVu Sans"
+python figure/plotting/roc_pr/plot_publication_roc_pr.py --font-family "DejaVu Sans"
 ```
 
 Use an installed font: Arial is requested for publication figures; DejaVu Sans
@@ -204,8 +215,7 @@ require trained weights or the original FASTQ/BAM files.
 
 The [figure methods](figure/docs/publication-figures.md) define all quantities:
 positive CPM windows are grouped into deciles independently by species and
-strand, with zeros reported separately; frequency plots include all windows and
-provide both linear- and logarithmic-y views. Decile intervals use supplied
+strand, with zeros reported separately. Decile intervals use supplied
 frozen bootstrap results. HiLearn's native trapezoidal PR AUC and separately
 saved exact average precision (AP) are distinct metrics.
 
@@ -222,9 +232,9 @@ model/
   docs/                    Model methods and usage guides
 figure/
   data/                    Frozen evaluation and plotting inputs
-  plotting/                Six R figure families and editable settings
-  scripts/                 Python plotting and input checks
-  preview/                 Framework image and result previews
+  plotting/                All drawing entry points, settings and panel mappings
+  scripts/                 Input-verification tools only
+  preview/                 Complete final figures, original PDFs and supporting previews
   docs/                    Figure definitions and statistical methods
 check_installation.py       Complete installation and reproduction check
 reproducibility/            Dependency lock, file hashes and acceptance outputs
@@ -248,8 +258,8 @@ python check_installation.py --font "DejaVu Sans" --require-isolated-env
 ```
 
 It checks dependencies and tests, verifies input identities and all 193,508 test
-windows, checks decile/frequency data, downloads or verifies all three weights,
-runs the 72 real DNA examples, and generates the six R figure families plus
+windows, checks decile data, downloads or verifies all three weights,
+runs the 72 real DNA examples, and generates the four supporting R figure families plus
 Python ROC/PR. A first run downloads approximately **930 MB** of weights.
 If `Rscript` is not on PATH, add `--rscript "FULL/PATH/TO/Rscript"`.
 

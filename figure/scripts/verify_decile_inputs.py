@@ -1,4 +1,4 @@
-"""Verify rank deciles, frozen bootstrap intervals and complete signal frequencies.
+"""Verify rank deciles and frozen bootstrap intervals.
 
 Uses repository data only. Recomputes ranks and point estimates, but reads the
 existing 1,000 bootstrap draws rather than rerunning the complete bootstrap.
@@ -34,18 +34,12 @@ def close(actual, expected, label, tolerance=1e-12):
 
 
 def check_repository(root, reconstruct=False):
-    deciles, frequencies = root / "figure/data/deciles", root / "figure/data/frequency"
+    deciles = root / "figure/data/deciles"
     rows = table(deciles / "group_statistics.csv")
     groups = {(r["species"], r["strand"], int(r["group_id"])): r for r in rows}
     require(len(rows) == len(groups) == 66, "Expected 66 unique group rows")
-    rows = table(frequencies / "true_signal_frequency_bins.csv")
-    bins = {(r["species"], r["strand"], int(r["bin_index"])): r for r in rows}
-    require(len(rows) == len(bins) == 288, "Expected 48 frequency bins per panel")
-    rows = table(frequencies / "frequency_summary.csv")
-    summaries = {(r["species"], r["strand"]): r for r in rows}
-    require(len(rows) == len(summaries) == 6, "Expected six frequency summaries")
     report = dict(passed=False, test_windows=0, nonzero_groups=60,
-                  valid_bootstrap_replicates_per_group=1000, frequency_panels=6,
+                  valid_bootstrap_replicates_per_group=1000,
                   max_point_error=0.0, max_CI_error=0.0,
                   first_three_bootstrap_draws_reconstructed=reconstruct,
                   max_reconstructed_bootstrap_error=0.0, species=[])
@@ -114,26 +108,7 @@ def check_repository(root, reconstruct=False):
                     low, high = np.percentile(bootstrap[:,si,gi], [2.5,97.5])
                     report["max_CI_error"] = max(report["max_CI_error"], close(low,row["ci95_low"],species+": CI low",1e-14), close(high,row["ci95_high"],species+": CI high",1e-14))
                     require(int(row["bootstrap_valid"]) == 1000 and int(row["bootstrap_invalid"]) == 0, species+": bootstrap count")
-                require(np.all(x < 12), species+": tail exceeds documented range")
-                # Explicit interval assignment includes every zero and positive.
-                counts_by_bin = np.bincount(np.floor(x/.25).astype(int), minlength=48)
-                require(len(counts_by_bin) == 48 and counts_by_bin.sum() == n, species+": omitted windows")
-                frequency = counts_by_bin*100.0/n
-                close(frequency.sum(), 100.0, species+": frequency sum")
-                for bi, count in enumerate(counts_by_bin, 1):
-                    row = bins[species,strand,bi]
-                    require(int(row["window_count"]) == int(count) and int(row["n_total"]) == n, species+": bin count")
-                    close((bi-1)/4, row["left_log2p1_cpm"], species+": bin left")
-                    close(bi/4, row["right_log2p1_cpm"], species+": bin right")
-                    close(frequency[bi-1], row["frequency_percent"], species+": bin percentage")
-                summary, zero = summaries[species,strand], int((c == 0).sum())
-                require(int(summary["n_windows"]) == n and int(summary["n_zero"]) == zero and int(summary["n_positive"]) == n-zero, species+": zero count")
-                require(int(summary["n_in_first_bin"]) == int(counts_by_bin[0]) and int(summary["n_positive_in_first_bin"]) == int(counts_by_bin[0])-zero, species+": first bin")
-                close(summary["zero_percent"],100*zero/n,species+": zero percentage")
-                close(summary["first_bin_percent"],frequency[0],species+": first-bin percentage")
-                close(summary["max_log2p1_cpm"],x.max(),species+": tail")
-                species_report["strands"][strand] = dict(n_zero=zero,nonzero_group_counts=counts,
-                    frequency_count_sum=int(counts_by_bin.sum()),frequency_percent_sum=float(frequency.sum()),
+                species_report["strands"][strand] = dict(n_zero=int((c == 0).sum()),nonzero_group_counts=counts,
                     max_log2p1_cpm=float(x.max()))
             if reconstruct:
                 rng = np.random.default_rng(seeds[species_index])

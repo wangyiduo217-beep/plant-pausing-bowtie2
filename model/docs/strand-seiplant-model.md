@@ -139,7 +139,7 @@ weight. Observed coverage and predictions are summarized over the same 128-bp pr
 segments:
 
 ```bash
-python figure/scripts/plot_bam_vs_prediction.py model/configs/example_y_labels.json \
+python figure/plotting/bam_comparison/plot_bam_vs_prediction.py model/configs/example_y_labels.json \
   model/configs/example_strand_model.json --species arabidopsis_thaliana \
   --chrom 3 --start 9141194 --end 9207074 --output figure/results/legacy/arabidopsis_bam_vs_prediction
 ```
@@ -210,7 +210,7 @@ It writes the standard track names, so a later chromosome or whole-genome run mu
 ## Plot observed and predicted tracks
 
 ```bash
-python figure/scripts/plot_strand_tracks.py model/configs/example_strand_model.json \
+plant-pausing-model plot model/configs/example_strand_model.json \
   --species arabidopsis_thaliana --chrom 3 \
   --start 9000000 --end 9100000 \
   --output figure/results/legacy/arabidopsis_chr3
